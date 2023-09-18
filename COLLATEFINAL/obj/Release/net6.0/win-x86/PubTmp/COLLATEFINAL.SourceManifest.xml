@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="E:\[Summer Semester] BSCpE 3-1 Files\Web and Mobile Systems\COLLATEFINAL\COLLATEFINAL\COLLATEFINAL\obj\Release\net6.0\win-x86\PubTmp\Out\" />
+  <dbfullsql path="E:\[Summer Semester] BSCpE 3-1 Files\Web and Mobile Systems\COLLATEFINAL\COLLATEFINAL\COLLATEFINAL\obj\Release\net6.0\win-x86\PubTmp\EFSQLScripts\COLLATEFINAL.Data.ApplicationDbContext.sql" />
+</sitemanifest>

@@ -1,0 +1,55 @@
+﻿@page
+@model ResendEmailConfirmationModel
+@{
+    ViewData["Title"] = "Resend email confirmation";
+}
+
+<div class="container p-5">
+
+    <div class="card o-hidden border-0 shadow-lg m-3">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="~/Logo PNG.png" alt="Logo">
+                            </a>
+                        </div>
+
+                        <br>
+                        <br>
+                        <form method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-floating">
+                                <input asp-for="Input.Email" class="form-control" aria-required="true" />
+                                <label asp-for="Input.Email" class="form-label"></label>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="w-100 btn btn-lg btn-primary">Resend</button>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" asp-area="Identity" asp-page="/Account/Login">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,294 @@
+﻿@model COLLATEFINAL.Models.EventsModel
+
+@{
+    ViewData["Title"] = "Edit";
+    ViewData["ActivePage"] = ManageSidebar.Events;
+
+}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <partial name="_ManageSidebar" />
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+
+
+
+
+
+
+
+
+                    <!-- Nav Item - User Information -->
+                    <partial name="_LoginPartialProfileUser" />
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <partial name="_Notification" />
+                <ul class="breadcrumb">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+                    <li class="text-dark">Events</li>
+                </ul>
+
+                <h1>Edit</h1>
+
+                <div class="card shadow">
+                    <div class="card-header bg-success py-3 text-center">
+                        <h6 class="m-0 font-weight-bold text-light text-center">Events</h6>
+                    </div>
+
+                    <div class="card-body p-3">
+                        <form enctype="multipart/form-data" asp-action="Edit">
+
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input asp-for="Id" hidden />
+                            <input asp-for="ImageUrl" class="form-control" hidden/>
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Category" class="control-label"></label><span class="float-right" id="characterCountCat"></span>
+                                        <select asp-for="Category" class="form-control" asp-items="@ViewBag.category"></select>
+                                        <span asp-validation-for="Category" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Title" class="control-label"></label><span class="float-right" id="characterCountTitle"></span>
+                                        <input asp-for="Title" id="inputFieldTitle" class="form-control" />
+                                        <span asp-validation-for="Title" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <label asp-for="Objectives" class="control-label"></label><span class="float-right" id="characterCountObj"></span>
+                                    <textarea asp-for="Objectives" id="myTextAreaObj" class="form-control" rows="8"></textarea>
+                                    <span asp-validation-for="Objectives" class="text-danger"></span>
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <label asp-for="Content" class="control-label"></label><span class="float-right" id="characterCountContent"></span>
+                                    <textarea asp-for="Content" id="myTextAreaContent" class="form-control" rows="8"></textarea>
+                                    <span asp-validation-for="Content" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="PostedDate" class="control-label"></label>
+                                        <input asp-for="PostedDate" class="form-control" />
+                                        <span asp-validation-for="PostedDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="CoverImage" class="control-label"></label>
+                                        <div class="custom-file">
+                                            <input asp-for="CoverImage" class="custom-file-input" id="FLCoverImage" accept="image/png, image/jpeg"
+                                                   onChange="document.getElementById('CoverImagePrv').src = window.URL.createObjectURL(this.files[0])">
+                                            <label class="custom-file-label" for="FLCoverImage">Choose File</label>
+                                        </div>
+
+                                        <span asp-validation-for="CoverImage" class="text-danger"></span>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-2">
+                                    <label asp-for="IsDone" class="control-label"></label>
+
+                                    <div class="custom-control custom-checkbox small">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck" asp-for="IsDone">
+                                        <label asp-for="IsDone" class="text-dark custom-control-label" for="customCheck">
+                                            Is Done?
+                                        </label>
+                                    </div>
+
+                                </div>
+                                
+                                
+                            </div>
+
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6 text-center">
+                                    <img id="CoverImagePrv" src="@Url.Content($"~/Uploads/Events/{@Model.ImageUrl}")" alt="Cover Image" style="border:1px; width:300px; height:300px;" />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="IFrame" class="control-label"></label>
+                                        <label>NOTE: When inserting embedded video replace the height and width to <strong>class="col-12" height="480"</strong>else type <strong>"none"</strong></label>
+                                        <textarea asp-for="IFrame" id="myTextAreaIFrame" class="form-control" rows="8"></textarea>
+                                        <span asp-validation-for="IFrame" class="text-danger"></span>
+                                        <span class="float-right" id="characterCountIFrame"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+                            <div class="float-left">
+                                <a asp-action="List">Back to List</a>
+
+                            </div>
+
+                            <div class="float-right">
+                                <input type="submit" value="Update" class="btn btn-primary" />
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <partial name="_Footer" />
+
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/CustomScripts.js"></script>
+    <script>
+        var datetimeField = document.getElementById("myDateTimeField");
+
+        // Get the current date and time
+        var now = new Date();
+
+        // Set the value of the datetime field
+        datetimeField.value = now.toISOString().slice(0, 16);
+
+    </script>
+    <script>
+        var input2 = document.getElementById("inputFieldTitle");
+        var textarea = document.getElementById("myTextAreaObj");
+        var textarea1 = document.getElementById("myTextAreaContent");
+        var textarea2 = document.getElementById("myTextAreaIFrame");
+        var characterCount = document.getElementById("characterCountObj");
+        var characterCount1 = document.getElementById("characterCountContent");
+        var characterCount2 = document.getElementById("characterCountIFrame");
+        var characterCount4 = document.getElementById("characterCountTitle");
+
+        input2.addEventListener("input", function () {
+            var input = input2.value;
+
+            var count = input.length;
+            if (input.length > 200) {
+                input.value = textField.value.slice(0, 200);
+            }
+            characterCount4.textContent = "(" + count + "/" + "200" + ")";
+        });
+        textarea.addEventListener("input", function () {
+            var input = textarea.value;
+
+            var count = input.length;
+            if (input.length > 2000) {
+                input.value = textField.value.slice(0, 2000);
+            }
+            characterCount.textContent = "(" + count + "/" + "2000" + ")";
+        });
+        textarea1.addEventListener("input", function () {
+            var input = textarea1.value;
+            var count = input.length;
+            if (input.length > 51000) {
+                input.value = textField.value.slice(0, 5000);
+            }
+            characterCount1.textContent = "(" + count + "/" + "5000" + ")";
+        });
+        textarea2.addEventListener("input", function () {
+            var input = textarea2.value;
+            var count = input.length;
+            if (input.length > 1000) {
+                input.value = textField.value.slice(0, 1000);
+            }
+            characterCount2.textContent = "(" + count + "/" + "1000" + ")";
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

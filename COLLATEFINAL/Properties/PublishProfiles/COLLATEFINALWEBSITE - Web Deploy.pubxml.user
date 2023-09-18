@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAuxR0O7LroEuW6xMah3K4kQAAAAACAAAAAAAQZgAAAAEAACAAAACJwFxfEOtWsGa9+Fh9Om3SgkJyfQMLenNUzXKMLKPBzQAAAAAOgAAAAAIAACAAAADW6+X5EiVyvHoarUnE6xus58OnwCDIf0vZi60YYZfOe4AAAACwOeKIx/6xmIqLq6aOTomB/TaHkum12h3SiansIkdSU0oBGVg+iPxTHPXuZ54K/PCnoFBAlb+m6Jdf8ROc3sS7fHJnEObPxNYo8C6oNP+dUpIXmP+xSgzTNAFj6UiMC/PKKT6TQ/tWKO6GlfD5AMf2PET7KF3ulGofQplmxBedjkAAAAA2zwzN70Dhud9/Y187cwP34u6rzNIpSusKN2UIeIAXn/dYpBNmlbS5rQc7LJ3pEl8xX6ilWJaASiQMS6PX836E</EncryptedPassword>
+    <History>False|2023-01-05T08:44:04.0222632Z;False|2022-11-30T03:10:25.0734500+08:00;True|2022-09-23T14:25:04.5524237+08:00;True|2022-09-08T08:05:22.4926427+08:00;True|2022-09-08T07:44:30.3798288+08:00;True|2022-09-07T15:13:43.3395067+08:00;True|2022-09-07T14:46:44.7329778+08:00;True|2022-09-07T14:44:21.0020710+08:00;True|2022-09-07T14:31:37.7194482+08:00;False|2022-09-07T14:27:28.1091796+08:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=tcp:collatefinaldb.database.windows.net,1433%3bInitial Catalog=collatefinaldb%3bPersist Security Info=False%3bUser ID=admin-sql%3bPassword=P%40ssw0rd%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="COLLATEFINAL.Data.ApplicationDbContext">
+      <Value>Server=tcp:collatefinaldb.database.windows.net,1433%3bInitial Catalog=collatefinaldb%3bPersist Security Info=False%3bUser ID=admin-sql%3bPassword=P%40ssw0rd%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

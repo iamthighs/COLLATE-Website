@@ -1,0 +1,126 @@
+﻿@using COLLATEFINAL.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppIdentityUser> SignInManager
+@inject UserManager<AppIdentityUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+
+<style>
+    
+</style>
+
+
+<li class="nav-item dropdown no-arrow">
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+        
+
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            @if (User.IsInRole("Administrator"))
+            {
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                
+                   [Admin] <strong>@(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)</strong>
+                </span>
+            }
+            else if (User.IsInRole("Student"))
+            {
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+
+                    [Student] <strong>@(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)</strong>
+                </span>
+
+            }
+            else if (User.IsInRole("Faculty"))
+            {
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+
+                    [Faculty] <strong>@(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)</strong>
+                </span>
+
+            }
+            else if (User.IsInRole("sceneOfficer"))
+            {
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+
+                    [SCENE Officer] <strong>@(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)</strong>
+                </span>
+
+            }
+            <img class="img-profile rounded-circle" src="~/UserImages/@(User.FindFirst("UserProfile").Value)">
+        </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+             aria-labelledby="userDropdown">
+            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    
+}
+else
+{
+    <li class="nav-item dropdown no-arrow mx-1">
+        <a class="nav-link text-primary" asp-area="Identity" asp-page="/Account/Register">
+            <i class="fas fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
+            <span class="mr-2 d-none d-lg-inline text-primary small">Register</span>
+
+        </a>
+    </li>
+    
+    <li class="nav-item dropdown no-arrow">
+        <a class="nav-link text-primary" asp-area="Identity" asp-page="/Account/Login">
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+            <span class="mr-2 d-none d-lg-inline text-primary0 small">Login</span>
+
+        </a>
+    </li>
+    
+    
+    
+
+        
+    
+    
+
+    
+}
+</li>
+
+
+

@@ -1,0 +1,80 @@
+﻿@inject SignInManager<AppIdentityUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+
+
+<ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+<!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="" asp-controller="Home" asp-action="Index">
+        <div class="sidebar-brand-icon">
+            <img src="~/Logo PNG1.png" style="height:30px; width:70px" alt="Logo">
+        </div>
+                
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Profile -->
+    <li class="nav-item @ManageNavPages.IndexNavClass(ViewContext)">
+                <a class="nav-link" id="profile" asp-page="./Index">
+            <i class="fas fa-fw fa-user-circle"></i>
+                    <span>Profile</span></a>
+            </li>
+    
+
+
+
+           
+             <!-- Nav Item - Password -->
+    <li class="nav-item @ManageNavPages.ChangePasswordNavClass(ViewContext)">
+                    <a class="nav-link" id="change-password" asp-page="./ChangePassword">
+            <i class="fas fa-fw fa-key"></i>
+                        <span>Password</span>
+                    </a>
+               </li>
+                 
+                
+                <!-- Nav Item - External Logins -->
+    @if (hasExternalLogins){
+        <li class="nav-item @ManageNavPages.ExternalLoginsNavClass(ViewContext)">
+                    <a class="nav-link " id="external-login" asp-page="./ExternalLogins">
+                <i class="fas fa-fw fa-sign-in-alt"></i>
+                        <span>External Logins</span>
+                    </a>
+                </li>
+    }
+
+
+
+
+
+                 <!-- Nav Item - Two-Factor Authentication -->
+    <li class="nav-item @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)">
+                    <a class="nav-link" id="two-factor" asp-page="./TwoFactorAuthentication">
+            <i class="fas fa-fw fa-shield-alt"></i>
+                        <span>Two-Factor Authentication</span>
+                    </a>
+                </li>
+                 <!-- Nav Item - Personal Data -->
+    <li class="nav-item @ManageNavPages.PersonalDataNavClass(ViewContext)">
+                    <a class="nav-link" id="personal-data" asp-page="./PersonalData">
+            <i class="fas fa-fw fa-user-lock"></i>
+                        <span>Personal Data</span>
+                    </a>
+                </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+            
+
+            
+</ul>

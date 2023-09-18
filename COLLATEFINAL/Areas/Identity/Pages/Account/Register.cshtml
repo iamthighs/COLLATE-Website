@@ -1,0 +1,267 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+<style>
+    .valid {
+        color: green;
+        font-size: 80%;
+    }
+
+    .invalid {
+        color: red;
+        font-size: 80%;
+    }
+</style>
+
+<div class="container p-3">
+
+    <div class="card o-hidden border-0 shadow-lg m-3">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="~/Logo PNG.png" alt="Logo">
+                            </a>
+                        </div>
+
+                        <br>
+                        <br>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <form class="user" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input asp-for="Input.First" class="form-control" id="inputFieldFN" maxlength="50" autocomplete="firstname" aria-required="true" placeholder="e.g Juan" />
+                                    <label class="text-dark" asp-for="Input.First"></label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input asp-for="Input.Last" class="form-control" id="inputFieldLN" maxlength="50" autocomplete="lastname" aria-required="true" placeholder="e.g Dela Cruz" />
+                                    <label class="text-dark" asp-for="Input.Last"></label>
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input asp-for="Input.Email" class="form-control" id="inputFieldEA" maxlength="100" autocomplete="username" aria-required="true" placeholder="e.g juandelacruz@gmail.com" />
+                                <label class="text-dark" asp-for="Input.Email"></label><span><p class="small mb-0 text-center" id="validationMessage"></p></span>
+                                
+                            </div>
+                            
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input asp-for="Input.Password" class="form-control" maxlength="50" autocomplete="new-password" aria-required="true" placeholder="e.g P@ssw0rd" id="password" />
+                                    <label class="text-dark" asp-for="Input.Password"></label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input asp-for="Input.ConfirmPassword" class="form-control" maxlength="50" autocomplete="new-password" aria-required="true" id="conpassword" />
+                                    <label class="text-dark" asp-for="Input.ConfirmPassword"></label>
+                                </div>
+                                
+                                <div class="col-sm-12 text-center">
+                                    <p class="small text-danger mb-0">Use 8 or more characters with a mix of letters, numbers & symbols</p>
+                                    <input type="checkbox" id="showPassword">
+                                    <label for="showPassword" class="small mb-0"> Show Password</label>
+                                    
+                                </div>
+                                
+                                <div class="col-sm-12 text-center">
+                                    <br />
+                                </div>
+                                
+                                <div class="col-sm-6 text-center">
+                                    <img id="CoverImagePrv" src="~/img/no-image.jpg" alt="Profile" style="border:2px; height:100px; width:100px;" />
+                                    <p class="text-center small text-dark">Upload Profile Picture</p>
+
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <input class="form-control text-center my-4" onChange="document.getElementById('CoverImagePrv').src = window.URL.createObjectURL(this.files[0])" name="ImageUrl" type="file" accept="image/png, image/jpeg" required />
+
+                                </div>
+                                
+                            </div>
+                            <div class="text-center">
+                                <span asp-validation-for="Input.First" class="text-danger"></span>
+                            </div>
+                            <div class="text-center">
+                                <span asp-validation-for="Input.Last" class="text-danger"></span>
+                            </div>
+                            <div class="text-center">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div class="text-center">
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="text-center">
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            
+                            <br />
+
+                            
+                            <button id="register-submit" type="submit" class="btn btn-success btn-user btn-block">Register Account</button>
+                            
+                            
+                            
+                        </form>
+                        <hr>
+                        @{
+                            if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                            {
+                                <div>
+                                </div>
+                            }
+                            else
+                            {
+                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                    <div class="text-center">
+                                        <p>
+                                        <p class="text-dark text-center">Continue with:</p>
+
+
+
+                                            @foreach (var provider in Model.ExternalLogins)
+                                            {
+                                                if (provider.Name == "Google")
+                                                {
+
+                                                <button type="submit" class="btn btn-inline-block btn-google" value="@provider.Name"
+                                                        title="Log in using your @provider.DisplayName account" name="provider">
+
+                                                    <i class="fab fa-google fa-align-center social-icon" style=""></i>
+                                                </button>
+
+                                                }
+                                                else if (provider.Name == "Facebook")
+                                                {
+
+                                                <button class="btn-inline-block btn btn-facebook" type="submit" value="@provider.Name"
+                                                        title="Log in using your @provider.DisplayName account" name="provider">
+
+                                                    <i class="fab fa-facebook-f fa-align-center social-icon"></i>
+                                                </button>
+
+                                                }
+                                            }
+                                        </p>
+                                    </div>
+                                </form>
+                            }
+                        }
+                        <div class="text-center">
+                            <a class="small" id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" asp-area="Identity" asp-page="/Account/Login">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Get references to the HTML elements
+        var emailInput = document.getElementById("inputFieldEA");
+        var validationMessage = document.getElementById("validationMessage");
+
+        // Function to validate the email
+        function validateEmail() {
+            var email = emailInput.value.trim();
+
+            // Create a regular expression pattern to match email addresses with "@@gmail.com" domain
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@@gmail\.com$/;
+
+            if (emailPattern.test(email)) {
+                validationMessage.textContent = "Valid email address";
+                validationMessage.className = "valid";
+            } else {
+                validationMessage.textContent = "Invalid email address";
+                validationMessage.className = "invalid";
+            }
+        }
+
+        // Add an input event listener to the emailInput to validate the email as the user types
+        emailInput.addEventListener("input", validateEmail);
+    </script>
+    <script>
+        var input1 = document.getElementById("inputFieldFN");
+        var input2 = document.getElementById("inputFieldLN");
+        var input3 = document.getElementById("inputFieldEA");
+        var input4 = document.getElementById("password");
+        var input5 = document.getElementById("conpassword");
+        input1.addEventListener("input", function () {
+            var input = input1.value;
+
+            var count = input.length;
+            if (input.length > 50) {
+                input.value = textField.value.slice(0, 50);
+            }
+        });
+        input2.addEventListener("input", function () {
+            var input = input2.value;
+
+            var count = input.length;
+            if (input.length > 50) {
+                input.value = textField.value.slice(0, 50);
+            }
+        });
+        input3.addEventListener("input", function () {
+            var input = input3.value;
+
+            var count = input.length;
+            if (input.length > 100) {
+                input.value = textField.value.slice(0, 100);
+            }
+        });
+        input4.addEventListener("input", function () {
+            var input = input4.value;
+
+            var count = input.length;
+            if (input.length > 50) {
+                input.value = textField.value.slice(0, 50);
+            }
+        });
+        input5.addEventListener("input", function () {
+            var input = input5.value;
+
+            var count = input.length;
+            if (input.length > 50) {
+                input.value = textField.value.slice(0, 50);
+            }
+        });
+
+        
+    </script>
+    <script>
+
+        document.getElementById('showPassword').onclick = function () {
+            if (this.checked) {
+                document.getElementById('password').type = "text";
+                document.getElementById('conpassword').type = "text";
+            } else {
+                document.getElementById('password').type = "password";
+                document.getElementById('conpassword').type = "password";
+            }
+            
+        };
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

@@ -1,0 +1,364 @@
+﻿@using COLLATEFINAL.Models
+@model GameAndWebDevModel
+
+@{
+    ViewData["Title"] = "Details";
+    ViewData["ActivePage"] = ManageSidebar.GameAndWebDev;
+}
+<style>
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+    .img-circle {
+        border-radius: 50%;
+    }
+    .img-sm {
+        height: 1.875rem;
+        width: 1.875rem;
+    }
+
+        .img-sm + .img-push {
+            margin-left: 2.5rem;
+        }
+    .card-comments {
+        background-color: #f8f9fa;
+    }
+
+        .card-comments .card-comment {
+            border-bottom: 1px solid #e9ecef;
+            padding: 8px 0;
+        }
+
+            .card-comments .card-comment::after {
+                display: block;
+                clear: both;
+                content: "";
+            }
+
+            .card-comments .card-comment:last-of-type {
+                border-bottom: 0;
+            }
+
+            .card-comments .card-comment:first-of-type {
+                padding-top: 0;
+            }
+
+            .card-comments .card-comment img {
+                height: 1.875rem;
+                width: 1.875rem;
+                float: left;
+            }
+
+        .card-comments .comment-text {
+            color: #78838e;
+            margin-left: 40px;
+        }
+
+        .card-comments .username {
+            color: #495057;
+            display: block;
+            font-weight: 600;
+        }
+
+        .card-comments .text-muted {
+            font-size: 12px;
+            font-weight: 400;
+        }
+    div.scrollmenu {
+        background-color: white;
+        overflow: auto;
+        white-space: nowrap;
+    }
+
+        div.scrollmenu a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+        }
+
+            div.scrollmenu a:hover {
+                background-color: #777;
+            }
+</style>
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <partial name="_ManageSidebar" />
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+
+
+
+
+
+
+
+
+                    <!-- Nav Item - User Information -->
+                    <partial name="_LoginPartialProfileUser" />
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <ul class="breadcrumb">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+                    <li><a asp-area="" asp-controller="GameAndWebDev" asp-action="Index">Software Projects</a></li>
+                    <li class="text-dark">Details</li>
+                </ul>
+
+                @if (Model != null)
+                    {
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-4 d-none d-lg-block">
+                                    <img src="@Url.Content($"~/Uploads/SoftwareProjects/{Model.ImageUrl}")" style="max-height: 300px" class="card-img-top" alt="Model.Title" />
+                                    <br>
+                                    <br>
+                                    <div class="p-3">
+                                        <hr>
+                                        <h1 class="h4 text-gray-900 font-weight-bold mb-4">About this game</h1>
+
+                                        <h6 class="text-dark text-justify" style="text-indent:50px">
+                                            @Model.Description
+                                        </h6>
+                                        
+                                        
+
+                                    </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 font-weight-bold mb-4">@Model.Title</h1>
+                                    </div>
+                                    <form class="user">
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                                       placeholder="Published Date: @Model.PostedDate.ToString("MMM dd, yyyy")" disabled>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                                       placeholder="Year & Section: @Model.YearSec" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                                   placeholder="Developers: @Model.DevelopersName" disabled>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="password" class="form-control form-control-user"
+                                                       id="exampleInputPassword" placeholder="Team Name: @Model.GroupName" disabled>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                    <a href="@Model.GameLink" target="_blank" class="btn btn-primary btn-user btn-block">
+                                                    <i class="fas fa-download text-white-50"></i>  Try this Application
+                                                </a>
+                                            </div>
+                                        </div>
+                                        
+                                        <hr>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                                @Html.Raw(Model.VidLink)
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </form>
+                                    
+                                        
+                                </div>
+
+                            </div>
+                                
+                                
+                        </div>
+
+                        <div class="m-2">
+                            <form asp-action="Like">
+                                <input type="hidden" name="postId" value="@Model.Id" />
+                                <button type="submit" class="btn btn-primary"><i class="far fa-thumbs-up"></i> Like</button>
+                            </form>
+                        </div>
+
+                            
+                            
+                            
+                    </div>
+                        
+                        
+                        
+                </div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-xxl-12">
+                            <!-- Team members / people dashboard card example-->
+                            <div class="card mb-4">
+                                
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+
+                                    <div class="card-header">Comments
+                                        <span class="float-right">@Model.Likes.Count likes - @Model.Comments.Count comments</span>
+                                    </div>
+                                    <div class="card-body card-comments">
+
+                                        @if(Model.Comments.Any())
+                                        {
+                                            @foreach (var comment in Model.Comments)
+                                            {
+                                                <div class="card-comment">
+                                                    <!-- User image -->
+                                                    <img class="img-circle img-sm" src="~/UserImages/@comment.ImageUrl" alt="User Image">
+
+                                                    <div class="comment-text">
+                                                        <span class="username">
+                                                            @comment.UserId
+                                                            <span class="text-muted float-right">@comment.CurrentDateTime.ToString("d/M/yy h:mm tt")</span>
+                                                        </span><!-- /.username -->
+                                                        @comment.Content<span>.</span>
+                                                    </div>
+                                                    <!-- /.comment-text -->
+                                                </div>
+                                                <!-- /.card-comment -->
+                                                
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p>Be the first user to comment. Enter your thoughts about this project.</p>
+                                        }
+
+                                    </div>
+
+
+
+
+
+                                    <div class="card-footer card-comments">
+                                        <form asp-action="AddComment">
+
+                                            <div class="card-comment">
+                                                <!-- User image -->
+                                                <img class="img-circle img-sm" src="~/UserImages/@(User.FindFirst("UserProfile").Value)" alt="User Image">
+
+                                                <div class="comment-text">
+                                                    <input type="hidden" name="postId" value="@Model.Id" />
+                                                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment" name="content">
+                                                </div>
+                                                <!-- /.comment-text -->
+                                            </div>
+                                            
+                                            
+
+
+                                        </form>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        
+                    </div>
+                   
+                }
+                else
+                {
+                    <p>Software Project was not found</p>
+                }
+                <ul class="breadcrumb">
+                    <li><strong class="text-primary">See more available Software Projects:</strong></li>
+                </ul>
+                <div class="row">
+
+                    <div class="scrollmenu col-12">
+                        @for (int i = 0; i < ViewBag.CountSoftware; i++)
+                        {
+                            var item = (List<SelectListItem>)ViewBag.category;
+                            <a href="@Url.Action("GameAndWebDevDetail","Detail", new { id = item[i].Value, pageType = "GameAndWebDev"})" class="card col-3 p-0 m-3">
+                                <img src="@Url.Content($"~/Uploads/SoftwareProjects/{@item[i].Text}")" style="max-height: 200px" class="card-img-top" />
+
+                            </a>
+
+                                
+                            
+                            
+                        }
+                        
+                    </div>
+                        
+                    
+                
+                </div>
+                
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <partial name="_Footer" />
+
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+

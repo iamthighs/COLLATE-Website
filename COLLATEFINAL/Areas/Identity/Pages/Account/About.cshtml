@@ -1,0 +1,209 @@
+﻿    @page
+@model AboutModel
+
+@{
+    ViewData["Title"] = "About Us";
+    ViewData["ActivePage"] = ManageSidebar.About;
+
+}
+
+
+<!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+    <partial name="_ManageSidebar" />
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - User Information -->
+                        <partial name="_LoginPartialProfileUser" />
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <partial name="_Notification" />
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Page Heading -->
+                            <div class="mb-3 text-center">
+                                <h1 class="m-0 font-weight-bold text-success text-center">ABOUT US</h1>
+                            </div>
+                            <h6 class="text-dark text-justify" style="text-indent:50px">
+                                This group started during the year 1st of college composing of only 5 members until it grows and had a 2nd generation. We are mostly specialized with C Language, and applications that can be made using Kotlin and Unity. Consistent seeking for improvement, knowledge and skills are the best practices of our group.
+                            </h6>
+                        <div class="row text-center mb-3">
+                            <div class="col-lg-4 col-sm-4 p-1">
+                                <img class="lift-logo img-smlogo-modal rounded-circle ml-5" src="~/voltez-logo.png">
+                            </div>
+                            <div class="col-lg-4 col-sm-4 p-1">
+                                <img class="lift-logo img-smlogo-modal" src="~/img/logoscene.png">
+                            </div>
+                            <div class="col-lg-4 col-sm-4 p-1">
+                                <img class="lift-logo img-smlogo-modal rounded-circle mr-5" src="~/pup-logo.png">
+                            </div>
+                        </div>
+                        <a class="btn btn-warning btn-block text-dark font-weight-bold mb-3" data-toggle="modal" data-target="#feedbackModal">Send us your Feedback!</a>
+                        </div>
+                        <div class="col-lg-6 ">
+                        <div class="mb-3 text-center">
+                            <h3 class="m-0 font-weight-bold text-success text-center">MEET THE TEAM</h3>
+                        </div>
+                        <div class="row text-center">
+
+                            <div class="col-lg-4 col-sm-4 p-1">
+                                <img class="lift shadow img-smlogo-modal rounded-circle mb-3" src="~/about-us/tys.jpg">
+                                <h6 class="font-weight-bold">Reynaldo Cortez Jr.</h6>
+                                <p class="small">Software Developer</p>
+                            </div>
+                            <div class="col-lg-4 col-sm-4 p-1">
+                                <img class="lift shadow img-smlogo-modal rounded-circle mb-3" src="~/about-us/jolee.jpeg">
+                                <h6 class="font-weight-bold">Julie-An Adio</h6>
+                                <p class="small">UI/UX Designer</p>
+                            </div>
+                            <div class="col-lg-4 col-sm-4 p-1">
+                                <img class="lift shadow img-smlogo-modal rounded-circle mb-3" src="~/about-us/leix.jpeg">
+                                <h6 class="font-weight-bold">Leixander Gomez</h6>
+                                <p class="small">UI/UX Designer</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <h5 class="m-0 font-weight-bold text-success text-center">KEEP IN TOUCH</h5>
+                        </div>
+                        <div class="my-3 text-center">
+                            <a href="#" class="btn btn-facebook btn-circle btn-sm">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="btn btn-google btn-circle btn-sm">
+                                <i class="fab fa-google"></i>
+                            </a>
+                            <a href="#" class="btn btn-warning btn-circle btn-sm">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="btn btn-primary btn-circle btn-sm">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="btn btn-info btn-circle btn-sm">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+                    <partial name="_Footer" />
+
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Select "Logout" below if you are ready to end your current session.
+                    </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Feedback Modal-->
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-success font-weight-bold" id="exampleModalLabel">Send us your feedback</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form class="user" id="registerForm" method="post">
+
+            <div class="modal-body">
+                <div class="row">
+                    <partial name="_Notification" />
+                    <div class="col-2">
+                        <p class="my-1 text-center font-weight-bold">From:</p>
+                    </div>
+                    <div class="col-10">
+                        <input asp-for="Input.FullName" class="form-control mb-2" placeholder="Enter your email"/>
+                    </div>
+                    <div class="col-12">
+                        <textarea asp-for="Input.Feedback" class="form-control" rows="4" placeholder="Type your suggestions here..."></textarea>
+                    </div>
+                    
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/CustomScripts.js"></script>
+    
+}

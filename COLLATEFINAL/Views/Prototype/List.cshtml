@@ -1,0 +1,210 @@
+﻿@model PaginatedResult<PrototypeModel>
+
+@{
+    ViewData["Title"] = "List";
+    ViewData["ActivePage"] = ManageSidebar.Prototype;
+
+}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <partial name="_ManageSidebar" />
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+
+
+
+
+
+
+
+
+                    <!-- Nav Item - User Information -->
+                    <partial name="_LoginPartialProfileUser" />
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <partial name="_Notification" />
+                <ul class="breadcrumb">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+                    <li><a asp-area="" asp-controller="Subjects" asp-action="Index">Instructional Materials</a></li>
+                    <li class="text-dark">Content Management</li>
+                </ul>
+
+                @if (Model.TotalCount == 0)
+                {
+
+                    <div class="card">
+                        <div class="card-header">
+                            No Instructional Materials created yet
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Use the button below to create your first Instructional Material
+                            </h5>
+                            <a class="btn btn-primary" style="width:auto" asp-action="Create">
+                                Create New
+                            </a>
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <a class="btn btn-primary" asp-action="Create">Create New</a>
+                        </div>
+                        <div class="col-6">
+                            <form asp-action="List" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" name="s" class="form-control bg-light border-1 small" value="@Model.SearchKeyword" placeholder="Search for..."
+                                       aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    foreach (var user in Model.Result)
+                    {
+                        <div class="card shadow mb-3">
+                            <div class="card-header">
+                                Category: @user.Header
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@user.Title</h5>
+                            </div>
+                            <div class="card-footer">
+                                <form asp-action="Delete" asp-route-id="@user.Id" method="post">
+                                    <a asp-controller="Prototype" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary">Edit</a>
+                                    <span id="confirmDeleteSpan_@user.Id" style="display:none">
+                                        <span>Are you sure you want to delete?</span>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <a class="btn btn-primary"
+                                   onclick="confirmDelete('@user.Id', false)">No</a>
+                                    </span>
+                                    <span id="deleteSpan_@user.Id">
+                                        <a class="btn btn-danger"
+                                   onclick="confirmDelete('@user.Id', true)">Delete</a>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    }
+
+
+                    <nav>
+                        <ul class="pagination jusify-content-center">
+                            <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                                <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page - 1)">
+                                    Previous
+                                </a>
+                            </li>
+                            @for (var pageNumber = 1; pageNumber <= Model.TotalCount; pageNumber++)
+                            {
+                                if (pageNumber == Model.Page)
+                                {
+                                    <li class="page-item active">
+                                        <span class="page-link">@pageNumber</span>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@pageNumber">@pageNumber</a>
+                                    </li>
+                                }
+
+                            }
+                            <li class="page-item @(Model.Page == Model.TotalCount || Model.Page == 1 ? "disabled" : "")">
+                                <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page + 1)">
+                                    Next
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                }
+
+
+                
+                
+
+
+                
+
+                
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <partial name="_Footer" />
+
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/CustomScripts.js"></script>
+}

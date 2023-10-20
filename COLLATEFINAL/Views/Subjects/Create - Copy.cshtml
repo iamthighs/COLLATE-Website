@@ -1,0 +1,235 @@
+﻿@using COLLATEFINAL.Views.Shared
+@model COLLATEFINAL.Models.SubjectModel
+
+@{
+    ViewData["Title"] = "Create";
+    ViewData["ActivePage"] = ManageSidebar.Prototype;
+
+}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <partial name="_ManageSidebar" />
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+
+
+
+
+
+
+
+
+                    <!-- Nav Item - User Information -->
+                    <partial name="_LoginPartialProfileUser" />
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <partial name="_Notification" />
+                <ul class="breadcrumb">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+                    <li class="text-dark">Instructional Materials</li>
+                </ul>
+
+                <h1>Create</h1>
+
+                <div class="card shadow">
+                    <div class="card-header bg-success py-3 text-center">
+                        <h6 class="m-0 font-weight-bold text-light text-center">Instructional Materials</h6>
+                    </div>
+
+                    <div class="card-body p-3">
+                        <form enctype="multipart/form-data" asp-action="Create">
+
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Code" class="control-label"></label><span class="float-right" id="characterCountCode">(0/50)</span>
+                                        <input asp-for="Code" id="inputFieldCode" maxlength="50" class="form-control" />
+                                        <span asp-validation-for="Code" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Subject" class="control-label"></label><span class="float-right" id="characterCountSubj">(0/100)</span>
+                                        <input asp-for="Subject" id="inputFieldSubj" maxlength="100" class="form-control" />
+                                        <span asp-validation-for="Subject" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="PostedDate" class="control-label"></label>
+                                        <input asp-for="PostedDate" id="myDateTimeField" min="2011-01-01" max="2050-12-31" class="form-control" />
+                                    <span asp-validation-for="PostedDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="CoverImage" class="control-label"></label>
+                                        <div class="custom-file">
+                                            <input asp-for="CoverImage" class="custom-file-input" id="FLCoverImage" accept="image/png, image/jpeg"
+                                                   onChange="document.getElementById('CoverImagePrv').src = window.URL.createObjectURL(this.files[0])">
+                                            <label class="custom-file-label" for="FLCoverImage">Choose File</label>
+                                        </div>
+                                        <img id="CoverImagePrv" src="~/img/no_uploaded.png" alt="Cover Image" width="150"
+                                             height="130" style="border:1px; margin-top:20px; margin-left:120px;" />
+                                        <span asp-validation-for="CoverImage" class="text-danger"></span>
+
+                                    </div>
+
+                                </div>
+                        </div>
+
+                        
+
+
+
+                        
+
+
+
+
+
+
+                            <div class="float-left">
+                            <a asp-action="List">Back to List</a>
+
+                            </div>
+
+                        <div class="float-right">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+
+                        </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                
+
+                
+
+                
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <partial name="_Footer" />
+
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/CustomScripts.js"></script>
+
+    <script>
+        var datetimeField = document.getElementById("myDateTimeField");
+
+        // Get the current date and time
+        var now = new Date();
+
+        // Set the value of the datetime field
+        datetimeField.value = now.toISOString().slice(0, 16);
+
+    </script>
+    <script>
+        var input1 = document.getElementById("inputFieldCode");
+        var input2 = document.getElementById("inputFieldSubj");
+        var characterCount1 = document.getElementById("characterCountCode");
+        var characterCount2 = document.getElementById("characterCountSubj");
+
+
+        input1.addEventListener("input", function () {
+            var input = input1.value;
+
+            var count = input.length;
+            if (input.length > 50) {
+                input.value = textField.value.slice(0, 50);
+            }
+            characterCount1.textContent = "(" + count + "/" + "50" + ")";
+        });
+        input2.addEventListener("input", function () {
+            var input = input2.value;
+
+            var count = input.length;
+            if (input.length > 100) {
+                input.value = textField.value.slice(0, 100);
+            }
+            characterCount2.textContent = "(" + count + "/" + "100" + ")";
+        });
+        
+    </script>
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });  
+    </script>
+}

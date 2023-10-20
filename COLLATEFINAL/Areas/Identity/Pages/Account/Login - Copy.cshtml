@@ -1,0 +1,175 @@
+﻿@page
+@model Login1Model
+
+@{
+    ViewData["Title"] = "Log in";
+    
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+    .password-container {
+        position: relative;
+    }
+
+        .password-container input {
+            padding-right: 30px; /* Add extra space for the icon */
+        }
+
+        .password-container .icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+</style>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<div class="row m-5">
+
+    <div class="col-lg-7 d-none d-lg-block">
+        <div class="card shadow mb-4 p-5 bg-login-image">
+
+            <div class="card-body text-center">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card shadow mb-4 p-5">
+            <div class="text-center pl-3">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/Logo PNG.png" alt="Logo">
+                </a>
+            </div>
+
+            <br>
+            <br>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <form class="user" id="account" method="post">
+                
+                <div class="form-group">
+
+                    <input asp-for="Input.Email" class="form-control" id="inputFieldLN" maxlength="50" autocomplete="username" aria-required="true" />
+                    <label asp-for="Input.Email" class="text-dark form-label"></label>
+                </div>
+                <div class="password-container">
+                    <input asp-for="Input.Password" class="form-control" id="passwordInput" maxlength="20">
+                    <i class="icon fas fa-eye" id="showPasswordIcon"></i>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password" class="text-dark form-label"></label>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" asp-for="Input.RememberMe">
+                        <label asp-for="Input.RememberMe" class="text-dark custom-control-label" for="customCheck">
+                            Remember
+                            Me
+                        </label>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="text-center">
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <br />
+                <button id="login-submit" type="submit" class="btn btn-primary btn-user btn-block">Log in</button>
+                
+            </form>
+            <hr>
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                                <div>
+                                    
+                                </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div class="text-center">
+                            <p>
+                            <p class="text-dark text-center">Continue with:</p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    if (provider.Name == "Google")
+                                    {
+
+                                    <button type="submit" class="btn btn-inline-block btn-google" value="@provider.Name"
+                                            title="Log in using your @provider.DisplayName account" name="provider">
+
+                                        <i class="fab fa-google fa-align-center social-icon" style=""></i>
+                                    </button>
+
+                                    }
+                                    else if (provider.Name == "Facebook")
+                                    {
+
+                                    <button class="btn-inline-block btn btn-facebook" type="submit" value="@provider.Name"
+                                            title="Log in using your @provider.DisplayName account" name="provider">
+
+                                        <i class="fab fa-facebook-f fa-align-center social-icon"></i>
+                                    </button>
+
+                                    }
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+            
+            <div class="text-center">
+                <a class="small" id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
+            </div>
+            <div class="text-center">
+                <a class="small" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Create an Account!</a>
+            </div>
+            <div class="text-center">
+                <a class="small" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Get references to the HTML elements
+        var passwordInput = document.getElementById("passwordInput");
+        var showPasswordIcon = document.getElementById("showPasswordIcon");
+
+        // Add a click event listener to the showPasswordIcon
+        showPasswordIcon.addEventListener("click", function () {
+            // Toggle the input type between "password" and "text" based on icon class
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                showPasswordIcon.classList.remove("fa-eye");
+                showPasswordIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                showPasswordIcon.classList.remove("fa-eye-slash");
+                showPasswordIcon.classList.add("fa-eye");
+            }
+        });
+    </script>
+}

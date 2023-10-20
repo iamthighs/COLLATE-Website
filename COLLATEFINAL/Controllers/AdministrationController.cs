@@ -17,23 +17,25 @@ using System.Threading.Tasks;
 namespace COLLATEFINAL.Controllers
 {
     [Authorize (Roles = "Administrator")]
-    [Authorize (Policy = "AdministratorPolicy")]
     public class AdministrationController : BaseController
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<AppIdentityUser> userManager;
         private readonly ILogger<AdministrationController> logger;
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webhost;
 
         public AdministrationController(RoleManager<IdentityRole> roleManager,
                                         UserManager<AppIdentityUser> userManager,
                                         ILogger<AdministrationController> logger,
-                                        ApplicationDbContext context)
+                                        ApplicationDbContext context,
+                                        IWebHostEnvironment webhost)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
             this.logger = logger;
             _context = context;
+            _webhost = webhost;
         }
 
 
@@ -70,7 +72,7 @@ namespace COLLATEFINAL.Controllers
             {
                 if (await userManager.IsInRoleAsync(user, role.Name))
                 {
-                    model.Users.Add(user.UserName);
+                    model.Users.Add(user);
                 }
             }
 
@@ -424,10 +426,24 @@ namespace COLLATEFINAL.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListUsers()
+        public async Task<IActionResult> ListUsers()
         {
-            var users = userManager.Users;
-            return View(users);
+            var usersWithRoles = new List<UserWithRolesViewModel>();
+
+            foreach (var user in userManager.Users)
+            {
+                var roles = await userManager.GetRolesAsync(user);
+
+                var userWithRoles = new UserWithRolesViewModel
+                {
+                    User = user,
+                    Roles = roles
+                };
+
+                usersWithRoles.Add(userWithRoles);
+            }
+
+            return View(usersWithRoles);
         }
 
         [HttpGet]
@@ -452,8 +468,9 @@ namespace COLLATEFINAL.Controllers
                 Claims = userClaims.Select(c => c.Type + " : " + c.Value).ToList(),
                 Roles = userRoles,
                 FirstName = user.FirstName,
-                LastName = user.LastName
-                
+                LastName = user.LastName,
+                ImageUrl = user.ImageUrl
+
             };
 
             return View(model);
@@ -500,10 +517,18 @@ namespace COLLATEFINAL.Controllers
             }
             else
             {
-                user.Email = model.Email;
-                user.UserName = model.UserName;
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
+
+                string uniqueImg = UploadedFile(model);
+                user.ImageUrl = uniqueImg;
+
+                string imgext = Path.GetExtension(uniqueImg);
+                if (imgext == ".jpg" || imgext == ".png")
+                {
+                    await userManager.UpdateAsync(user);
+                    return RedirectToAction("ListUsers");
+                }
 
                 var result = await userManager.UpdateAsync(user);
 
@@ -519,6 +544,22 @@ namespace COLLATEFINAL.Controllers
 
                 return View(model);
             }
+        }
+
+        private string UploadedFile(EditUserViewModel user)
+        {
+            string uniqueFileName = user.ImageUrl;
+            if (user.CoverImage != null)
+            {
+                string uploadsFolder = Path.Combine(_webhost.WebRootPath, "UserImages");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + user.CoverImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    user.CoverImage.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
 
         [HttpGet]

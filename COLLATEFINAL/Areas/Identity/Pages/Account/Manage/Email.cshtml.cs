@@ -7,12 +7,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using COLLATEFINAL.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using COLLATEFINAL.Data;
 
 namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
 {
@@ -72,8 +72,6 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
             [EmailAddress]
             [Display(Name = "New email")]
             public string NewEmail { get; set; }
-
-            
         }
 
         private async Task LoadAsync(AppIdentityUser user)

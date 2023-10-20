@@ -20,6 +20,7 @@ namespace COLLATEFINAL.Data
         [Display(Name = "Profile Picture")]
         [NotMapped]
         public IFormFile? CoverImage { get; set; }
+        public DateTime JoinedDate { get; set; }
         public ICollection<EventsModel> EventsAttendance { get; set; } = new List<EventsModel>();
     }
 

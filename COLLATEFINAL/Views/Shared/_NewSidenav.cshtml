@@ -1,0 +1,101 @@
+﻿@using COLLATEFINAL.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppIdentityUser> SignInManager
+@inject UserManager<AppIdentityUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+<div id="layoutSidenav_nav">
+    <nav class="sidenav shadow-right sidenav-light">
+        <div class="sidenav-menu">
+            <div class="nav accordion" id="accordionSidenav">
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                {
+                    <div class="sidenav-menu-heading text-danger">Administration</div>
+                    <!-- Sidenav Link (List Roles)-->
+                    <a class="nav-link @ManageSidebar.RolesNavClass(ViewContext)" asp-area="" asp-controller="Administration" asp-action="ListRoles">
+                        <div class="nav-link-icon"><i data-feather="settings"></i></div>
+                        List Roles
+                    </a>
+                    <!-- Sidenav Link (List Users)-->
+                    <a class="nav-link @ManageSidebar.UsersNavClass(ViewContext)" asp-area="" asp-controller="Administration" asp-action="ListUsers">
+                        <div class="nav-link-icon"><i data-feather="users"></i></div>
+                        List Users
+                    </a>
+                }
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator") || User.IsInRole("Faculty") || User.IsInRole("sceneOfficer"))
+                {
+                    <div class="sidenav-menu-heading text-danger">Content Management</div>
+                    <!-- Sidenav Link (Instructional Materials)-->
+                    <a class="nav-link @ManageSidebar.CMSPrototypeNavClass(ViewContext)" asp-area="" asp-controller="Subjects" asp-action="List">
+                        <div class="nav-link-icon"><i data-feather="folder"></i></div>
+                        Instructional Materials
+                    </a>
+                    <!-- Sidenav Link (Software Projects)-->
+                    <a class="nav-link @ManageSidebar.CMSGameAndWebDevNavClass(ViewContext)" asp-area="" asp-controller="GameAndWebDev" asp-action="List">
+                        <div class="nav-link-icon"><i data-feather="code"></i></div>
+                        Software Projects
+                    </a>
+                    <!-- Sidenav Link (Research Papers)-->
+                    <a class="nav-link @ManageSidebar.CMSResearchPapersNavClass(ViewContext)" asp-area="" asp-controller="ResearchPapers" asp-action="List">
+                        <div class="nav-link-icon"><i data-feather="file-text"></i></div>
+                        Research Papers
+                    </a>
+                    <!-- Sidenav Link (Events)-->
+                    <a class="nav-link @ManageSidebar.CMSEventsNavClass(ViewContext)" asp-area="" asp-controller="Events" asp-action="List">
+                        <div class="nav-link-icon"><i data-feather="calendar"></i></div>
+                        Events
+                    </a>
+                }
+                <div class="sidenav-menu-heading">Overview</div>
+                <!-- Sidenav Link (Home)-->
+                <a class="nav-link @ManageSidebar.HomeNavClass(ViewContext)" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="nav-link-icon"><i data-feather="home"></i></div>
+                    Home
+                </a>
+                <!-- Sidenav Link (Dashboard)-->
+                <a class="nav-link @ManageSidebar.DashboardNavClass(ViewContext)" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                    <div class="nav-link-icon"><i data-feather="activity"></i></div>
+                    Dashboard
+                </a>
+                <!-- Sidenav Link (About)-->
+                <a class="nav-link @ManageSidebar.AboutNavClass(ViewContext)" asp-area="" asp-controller="Home" asp-action="About">
+                    <div class="nav-link-icon"><i data-feather="info"></i></div>
+                    About
+                </a>
+                
+                <div class="sidenav-menu-heading">Explore</div>
+                <!-- Sidenav Link (Instructional Materials)-->
+                <a class="nav-link @ManageSidebar.PrototypeNavClass(ViewContext)" asp-area="" asp-controller="Subjects" asp-action="Index">
+                    <div class="nav-link-icon"><i data-feather="folder"></i></div>
+                    Instructional Materials
+                </a>
+                <!-- Sidenav Link (Software Projects)-->
+                <a class="nav-link @ManageSidebar.GameAndWebDevNavClass(ViewContext)" asp-area="" asp-controller="GameAndWebDev" asp-action="Index">
+                    <div class="nav-link-icon"><i data-feather="code"></i></div>
+                    Software Projects
+                </a>
+                <!-- Sidenav Link (Research Papers)-->
+                <a class="nav-link @ManageSidebar.ResearchPapersNavClass(ViewContext)" asp-area="" asp-controller="ResearchPapers" asp-action="Index">
+                    <div class="nav-link-icon"><i data-feather="file-text"></i></div>
+                    Research Papers
+                </a>
+                <!-- Sidenav Link (Events)-->
+                <a class="nav-link @ManageSidebar.EventsNavClass(ViewContext)" asp-area="" asp-controller="Events" asp-action="Index">
+                    <div class="nav-link-icon"><i data-feather="calendar"></i></div>
+                    Events
+                </a>
+                
+            </div>
+        </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+        <!-- Sidenav Footer-->
+        <div class="sidenav-footer">
+            <div class="sidenav-footer-content">
+                <div class="sidenav-footer-subtitle">Logged in as:</div>
+                    <div class="sidenav-footer-title">@(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)</div>
+            </div>
+        </div>
+        }
+    </nav>
+</div>

@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\Logo PNG1.png"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Logo PNG1.svg",
+      "PackagePath": "staticwebassets\\Logo PNG1.svg"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\Lectures\\029942c8-eb4e-49cc-8544-e3a17f2ba687_CMPE 30114 (Data and Digital Communications)_Chapter 2.pdf",
       "PackagePath": "staticwebassets\\PDF\\Lectures\\029942c8-eb4e-49cc-8544-e3a17f2ba687_CMPE 30114 (Data and Digital Communications)_Chapter 2.pdf"
     },
@@ -31,6 +35,10 @@
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\Lectures\\100a7d78-c43f-41a4-bcfb-2153657e2138_Laboratory Activities (Intro to Packet Tracer).pdf",
       "PackagePath": "staticwebassets\\PDF\\Lectures\\100a7d78-c43f-41a4-bcfb-2153657e2138_Laboratory Activities (Intro to Packet Tracer).pdf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\Lectures\\1c0a03c4-57d1-4d8e-9d8d-26e631f5d25a_[4thYearFirstSem] Registration Certificate.pdf",
+      "PackagePath": "staticwebassets\\PDF\\Lectures\\1c0a03c4-57d1-4d8e-9d8d-26e631f5d25a_[4thYearFirstSem] Registration Certificate.pdf"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\Lectures\\810a686b-1131-4eca-9a7e-ca4ce0d61941_IM_CMPE 30153 (Fundamentals of Mixed Signals and Sensors).pdf",
@@ -47,6 +55,14 @@
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\Lectures\\b55217b1-6119-4d68-838e-5448fb39ae72_IM_CMPE 30114 (Data and Digital Communications).pdf",
       "PackagePath": "staticwebassets\\PDF\\Lectures\\b55217b1-6119-4d68-838e-5448fb39ae72_IM_CMPE 30114 (Data and Digital Communications).pdf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\Lectures\\d7d0371b-b3b0-45e4-b3aa-2e35f57f8d4a_RBCortezJr_Curriculum Vitae.pdf",
+      "PackagePath": "staticwebassets\\PDF\\Lectures\\d7d0371b-b3b0-45e4-b3aa-2e35f57f8d4a_RBCortezJr_Curriculum Vitae.pdf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\Lectures\\e550743c-4e8a-4ff4-bb4f-9ca9fc614ca9_RBCortezJr_AC Motors Application For Employment (AFE) Form 012023.pdf",
+      "PackagePath": "staticwebassets\\PDF\\Lectures\\e550743c-4e8a-4ff4-bb4f-9ca9fc614ca9_RBCortezJr_AC Motors Application For Employment (AFE) Form 012023.pdf"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\Lectures\\fc139051-cf4a-4606-bd7d-39b29224358c_CMPE 30114 (Data and Digital Communications)_Chapter 1.pdf",
@@ -77,6 +93,10 @@
       "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\2.pdf"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\21eb89fa-dbe1-4265-8d63-9618f661b6c9_1.pdf",
+      "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\21eb89fa-dbe1-4265-8d63-9618f661b6c9_1.pdf"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\3.pdf",
       "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\3.pdf"
     },
@@ -87,6 +107,10 @@
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\5.pdf",
       "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\5.pdf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\50180ebc-c63c-415e-93e5-a13ad7f8bef5_3.pdf",
+      "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\50180ebc-c63c-415e-93e5-a13ad7f8bef5_3.pdf"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\586b48f3-4730-4cf2-bf38-ab4adf0a5018_ADIO_B.docx",
@@ -111,6 +135,22 @@
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\94312198-c536-496b-909c-31f2428d315f_[Letter] Old Footages.docx",
       "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\94312198-c536-496b-909c-31f2428d315f_[Letter] Old Footages.docx"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\a1fabce0-600f-48a8-897a-33c5bed48685_9.pdf",
+      "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\a1fabce0-600f-48a8-897a-33c5bed48685_9.pdf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\a2e6c1da-926f-4620-ace5-6a43bd1f60e9_4.pdf",
+      "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\a2e6c1da-926f-4620-ace5-6a43bd1f60e9_4.pdf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\a7427cd8-74e2-4763-9122-f7b5d12f78ef_7.pdf",
+      "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\a7427cd8-74e2-4763-9122-f7b5d12f78ef_7.pdf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\ae03c239-8adb-427b-8410-5efd9d6ad056_2.pdf",
+      "PackagePath": "staticwebassets\\PDF\\ResearchPapers\\ae03c239-8adb-427b-8410-5efd9d6ad056_2.pdf"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\PDF\\ResearchPapers\\c972a027-482c-47a5-a16b-5dd3f55c13ca_-iSensor--Software-Wireframe---Wireframe-cc-Premium1684958025.pdf",
@@ -145,12 +185,24 @@
       "PackagePath": "staticwebassets\\Uploads\\Events\\2f4e31b1-727d-4c28-a286-b83a3b6eef46_3.jpg"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Events\\34788c6e-6043-465b-bd3f-55ff60a6d439_1.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\Events\\34788c6e-6043-465b-bd3f-55ff60a6d439_1.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Events\\3a591a24-5a6a-43e0-a2da-432be6db9cf5_3.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\Events\\3a591a24-5a6a-43e0-a2da-432be6db9cf5_3.jpg"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Events\\3eb769d3-5f7f-467b-9fb1-6ff62904d8a0_1.jpg",
       "PackagePath": "staticwebassets\\Uploads\\Events\\3eb769d3-5f7f-467b-9fb1-6ff62904d8a0_1.jpg"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Events\\54daf9b5-faaa-48bf-a51f-3c6037eaff31_1.jpg",
       "PackagePath": "staticwebassets\\Uploads\\Events\\54daf9b5-faaa-48bf-a51f-3c6037eaff31_1.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Events\\721c7934-060b-4d6a-a9a4-1c8d449cd323_2.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\Events\\721c7934-060b-4d6a-a9a4-1c8d449cd323_2.jpg"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Events\\7bc70820-dae4-42b5-89d8-057e2a209f83_3.jpg",
@@ -185,12 +237,28 @@
       "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\2.png"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\2d6cda96-13a9-4a75-8cd7-eb8f1cf0625a_3.png",
+      "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\2d6cda96-13a9-4a75-8cd7-eb8f1cf0625a_3.png"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\3.png",
       "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\3.png"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\32d58180-3eab-42f9-aaed-a06f7d99e15c_Sample128.png",
+      "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\32d58180-3eab-42f9-aaed-a06f7d99e15c_Sample128.png"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\4.png",
       "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\4.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\445b9e4a-c3c9-4a03-9d0c-02eabfee7b9d_9.png",
+      "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\445b9e4a-c3c9-4a03-9d0c-02eabfee7b9d_9.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\4bf2d7f7-dce4-49b3-9f28-fb9059c2f8f1_7.png",
+      "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\4bf2d7f7-dce4-49b3-9f28-fb9059c2f8f1_7.png"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\5.png",
@@ -205,6 +273,14 @@
       "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\7.png"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\72da9d4b-1ca7-4daf-a2e3-c1581a57f5ac_COLLATE.png",
+      "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\72da9d4b-1ca7-4daf-a2e3-c1581a57f5ac_COLLATE.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\75469e36-2f83-4e44-a9fb-70dc26dc1cdb_2.png",
+      "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\75469e36-2f83-4e44-a9fb-70dc26dc1cdb_2.png"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\8.png",
       "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\8.png"
     },
@@ -213,12 +289,24 @@
       "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\9.png"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\9210c558-c647-4754-885e-14a8d18af108_4.png",
+      "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\9210c558-c647-4754-885e-14a8d18af108_4.png"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\b7b8b49d-b790-4db2-a12b-c91be9dd3906_1.png",
       "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\b7b8b49d-b790-4db2-a12b-c91be9dd3906_1.png"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\ResearchPapers\\ce0544bb-4254-4e6f-8a0d-07ca1ef578b5_1.png",
+      "PackagePath": "staticwebassets\\Uploads\\ResearchPapers\\ce0544bb-4254-4e6f-8a0d-07ca1ef578b5_1.png"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\1.png",
       "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\1.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\1b1a9f34-67ba-4a99-b0c6-68ad368b4195_3.png",
+      "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\1b1a9f34-67ba-4a99-b0c6-68ad368b4195_3.png"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\2.png",
@@ -227,6 +315,18 @@
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\3.png",
       "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\3.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\30b65fdf-38f5-4d8a-ad40-0cc35781ce12_2.png",
+      "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\30b65fdf-38f5-4d8a-ad40-0cc35781ce12_2.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\397cc33f-b3a9-4895-a176-58ab3e80a538_3.png",
+      "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\397cc33f-b3a9-4895-a176-58ab3e80a538_3.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\3efc9455-997f-403e-bb49-42f17138562e_2.png",
+      "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\3efc9455-997f-403e-bb49-42f17138562e_2.png"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\4.png",
@@ -257,6 +357,26 @@
       "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\8.png"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\c8549f73-d77a-46fa-8f7a-8cd38f7e0748_COLLATE.png",
+      "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\c8549f73-d77a-46fa-8f7a-8cd38f7e0748_COLLATE.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\c9d21f09-038a-4b8a-b902-6206b274dff0_6.png",
+      "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\c9d21f09-038a-4b8a-b902-6206b274dff0_6.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\d2131154-375d-4201-8a28-3dd6c46d1b20_Sample128.png",
+      "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\d2131154-375d-4201-8a28-3dd6c46d1b20_Sample128.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\db3ba845-03dc-4e8f-a08c-e5d7d979813f_Sample128.png",
+      "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\db3ba845-03dc-4e8f-a08c-e5d7d979813f_Sample128.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\f0e455ee-371e-4495-93c6-c933f3c68bdc_1.png",
+      "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\f0e455ee-371e-4495-93c6-c933f3c68bdc_1.png"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\SoftwareProjects\\feb375e7-6a04-4c56-b69e-f021a662faf9_3.png",
       "PackagePath": "staticwebassets\\Uploads\\SoftwareProjects\\feb375e7-6a04-4c56-b69e-f021a662faf9_3.png"
     },
@@ -265,8 +385,12 @@
       "PackagePath": "staticwebassets\\Uploads\\Subjects\\08559e44-bc8d-4f19-8cc3-032506ec49f0_CMPE 30133.png"
     },
     {
-      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Subjects\\658d2833-ec6e-4446-b4ff-267f8ed01ae1_VOLTEZ 4.0.png",
-      "PackagePath": "staticwebassets\\Uploads\\Subjects\\658d2833-ec6e-4446-b4ff-267f8ed01ae1_VOLTEZ 4.0.png"
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Subjects\\1e7dd95c-7b86-4d91-8832-df9a5a59fa8c_CMPE 30153.png",
+      "PackagePath": "staticwebassets\\Uploads\\Subjects\\1e7dd95c-7b86-4d91-8832-df9a5a59fa8c_CMPE 30153.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Subjects\\6be2b9be-e951-421a-8900-8b7ff13d1a5f_CMPE 30133.png",
+      "PackagePath": "staticwebassets\\Uploads\\Subjects\\6be2b9be-e951-421a-8900-8b7ff13d1a5f_CMPE 30133.png"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Subjects\\8864aad2-5506-48bd-8195-f7e5713ca72f_CMPE 30153.png",
@@ -277,12 +401,20 @@
       "PackagePath": "staticwebassets\\Uploads\\Subjects\\96c86571-8b34-42e3-91f7-b0293732293e_CMPE 30114.png"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\Uploads\\Subjects\\cb48e9e9-4b80-4f83-8281-c87d8fe35842_CMPE 30114.png",
+      "PackagePath": "staticwebassets\\Uploads\\Subjects\\cb48e9e9-4b80-4f83-8281-c87d8fe35842_CMPE 30114.png"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\UserImages\\009680a7-51ce-4438-b7c4-ff643485a7a2_IMG_20230513_005413.jpg",
       "PackagePath": "staticwebassets\\UserImages\\009680a7-51ce-4438-b7c4-ff643485a7a2_IMG_20230513_005413.jpg"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\UserImages\\0bae1758-795b-42b1-b38e-66e9063bd647_COLLATE.png",
       "PackagePath": "staticwebassets\\UserImages\\0bae1758-795b-42b1-b38e-66e9063bd647_COLLATE.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\UserImages\\29047226-eac0-4197-b66e-6a46c21614e5_IMG_20230513_005413.jpg",
+      "PackagePath": "staticwebassets\\UserImages\\29047226-eac0-4197-b66e-6a46c21614e5_IMG_20230513_005413.jpg"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\UserImages\\2d21e3dd9c8e7724fbe19a2769c7f347.jpg",
@@ -295,6 +427,10 @@
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\UserImages\\46fdea97-2725-4555-a0c0-4c570249e8ef_COLLATE.png",
       "PackagePath": "staticwebassets\\UserImages\\46fdea97-2725-4555-a0c0-4c570249e8ef_COLLATE.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\UserImages\\72b5353d-1f4b-4990-b08b-b24e7f3243ee_VOLTEZ 4.0.png",
+      "PackagePath": "staticwebassets\\UserImages\\72b5353d-1f4b-4990-b08b-b24e7f3243ee_VOLTEZ 4.0.png"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\UserImages\\7d83f9a6-a1cf-462d-b2c9-6278e8b5cf95_VOLTEZ 4.0.png",
@@ -589,6 +725,10 @@
       "PackagePath": "staticwebassets\\js\\modernizr.custom.js"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\js\\qr.js",
+      "PackagePath": "staticwebassets\\js\\qr.js"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\js\\sb-admin-2.js",
       "PackagePath": "staticwebassets\\js\\sb-admin-2.js"
     },
@@ -829,8 +969,332 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\.gitignore",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib\\.gitignore"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\README.md",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib\\README.md"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\bower.json",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib\\bower.json"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\index-svg.html",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib\\index-svg.html"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\index.html",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib\\index.html"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\index.svg",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib\\index.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib\\jquery.min.js"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\qrcode.js",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib\\qrcode.js"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\lib\\qrcodelib\\qrcode.min.js",
+      "PackagePath": "staticwebassets\\lib\\qrcodelib\\qrcode.min.js"
+    },
+    {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\logoscene.png",
       "PackagePath": "staticwebassets\\logoscene.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\demo\\chart-area-demo.js",
+      "PackagePath": "staticwebassets\\new\\assets\\demo\\chart-area-demo.js"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\demo\\chart-bar-demo.js",
+      "PackagePath": "staticwebassets\\new\\assets\\demo\\chart-bar-demo.js"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\demo\\chart-pie-demo.js",
+      "PackagePath": "staticwebassets\\new\\assets\\demo\\chart-pie-demo.js"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-Black.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-Black.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-BlackItalic.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-BlackItalic.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-Bold.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-Bold.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-BoldItalic.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-BoldItalic.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-ExtraBold.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-ExtraBold.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-ExtraBoldItalic.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-ExtraBoldItalic.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-ExtraLight.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-ExtraLight.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-ExtraLightItalic.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-ExtraLightItalic.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-Light.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-Light.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-LightItalic.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-LightItalic.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-Medium.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-Medium.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-MediumItalic.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-MediumItalic.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-Regular.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-Regular.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-RegularItalic.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-RegularItalic.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-SemiBold.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-SemiBold.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-SemiBoldItalic.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-SemiBoldItalic.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-Thin.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-Thin.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\Metropolis-ThinItalic.otf",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\Metropolis-ThinItalic.otf"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\fonts\\metropolis\\SIL Open Font License.txt",
+      "PackagePath": "staticwebassets\\new\\assets\\fonts\\metropolis\\SIL Open Font License.txt"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\Tys-Barong.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\Tys-Barong.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\Tys-Formal.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\Tys-Formal.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\backgrounds\\bg-angles.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\backgrounds\\bg-angles.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\backgrounds\\bg-pattern-shapes.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\backgrounds\\bg-pattern-shapes.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\backgrounds\\bg-waves.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\backgrounds\\bg-waves.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\bg-scene.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\bg-scene.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\cards\\card-img-bottom.jpg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\cards\\card-img-bottom.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\cards\\card-img-left.jpg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\cards\\card-img-left.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\cards\\card-img-overlay.jpg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\cards\\card-img-overlay.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\cards\\card-img-right.jpg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\cards\\card-img-right.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\cards\\card-img-top.jpg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\cards\\card-img-top.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\demo-logo.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\demo-logo.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\demo-ocean-lg.jpg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\demo-ocean-lg.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\demo-ocean-sm.jpg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\demo-ocean-sm.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\pug.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\pug.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\demo\\user-placeholder.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\demo\\user-placeholder.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\favicon.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\favicon.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\400-error-bad-request.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\400-error-bad-request.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\401-error-unauthorized.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\401-error-unauthorized.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\403-error-forbidden.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\403-error-forbidden.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\404-error-with-a-cute-animal.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\404-error-with-a-cute-animal.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\404-error.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\404-error.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\500-internal-server-error.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\500-internal-server-error.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\503-error-service-unavailable.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\503-error-service-unavailable.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\504-error-gateway-timeout.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\504-error-gateway-timeout.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\CREDITS.md",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\CREDITS.md"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\at-work.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\at-work.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\browser-stats.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\browser-stats.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\data-report.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\data-report.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\problem-solving.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\problem-solving.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\processing.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\processing.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\profiles\\profile-1.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\profiles\\profile-1.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\profiles\\profile-2.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\profiles\\profile-2.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\profiles\\profile-3.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\profiles\\profile-3.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\profiles\\profile-4.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\profiles\\profile-4.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\profiles\\profile-5.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\profiles\\profile-5.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\profiles\\profile-6.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\profiles\\profile-6.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\statistics.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\statistics.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\team-spirit.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\team-spirit.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\tys-avatar-professional.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\tys-avatar-professional.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\illustrations\\windows.svg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\illustrations\\windows.svg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\tys-logo-512x512.png",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\tys-logo-512x512.png"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\assets\\img\\tys.jpg",
+      "PackagePath": "staticwebassets\\new\\assets\\img\\tys.jpg"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\css\\styles.css",
+      "PackagePath": "staticwebassets\\new\\css\\styles.css"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\js\\datatables\\datatables-simple-demo.js",
+      "PackagePath": "staticwebassets\\new\\js\\datatables\\datatables-simple-demo.js"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\js\\litepicker.js",
+      "PackagePath": "staticwebassets\\new\\js\\litepicker.js"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\js\\markdown.js",
+      "PackagePath": "staticwebassets\\new\\js\\markdown.js"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\js\\scripts.js",
+      "PackagePath": "staticwebassets\\new\\js\\scripts.js"
+    },
+    {
+      "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\new\\js\\toasts.js",
+      "PackagePath": "staticwebassets\\new\\js\\toasts.js"
     },
     {
       "Id": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\wwwroot\\plugins\\bootstrap-colorpicker\\css\\bootstrap-colorpicker.css",

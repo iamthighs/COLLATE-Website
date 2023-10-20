@@ -1,7 +1,7 @@
 ﻿@{
-    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
     {
-        Layout = (string)parentLayout;
+        Layout = parentLayout.ToString();
     }
     else
     {
@@ -9,100 +9,40 @@
     }
 }
 
+<partial name="_NewNavbar"/>
+<div id="layoutSidenav">
+    <partial name="_NewSidenav"/>
+        <div id="layoutSidenav_content">
+            <main>
+                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                        <div class="container-xl px-4">
+                            <div class="page-header-content">
+                                <div class="row align-items-center justify-content-between pt-3">
+                                    <div class="col-auto mb-3">
+                                        <h1 class="page-header-title">
+                                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                                            Change your account settings
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    
 
-
+                    <div class="container-xl px-4 mt-4">
+                        <partial name="_ManageNav" />
+                        <hr class="mt-0 mb-4" />
+                        @RenderBody()
+                    </div>
+                    
+             </main>
+                
+             <partial name="_NewFooter" />
+        </div>
+</div>
 
 
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }
-
-
-@{
-    ViewData["Title"] = "Profile";
-}
-<body id="page-top" class="bg-login-image">
-
-   
-<!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-
-           <partial name="_ManageNav" />
-
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-                    <div id="content">
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-            <!-- Sidebar Toggle (Topbar) -->
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                <i class="fa fa-bars"></i>
-            </button>
-
-
-            <!-- Topbar Navbar -->
-            <ul class="navbar-nav ml-auto">
-
-                
-
-
-
-
-
-                
-
-                <!-- Nav Item - User Information -->
-                <partial name="_LoginPartialProfileUser" />
-
-            </ul>
-
-        </nav>
-        <!-- End of Topbar -->
-        <!-- Area Chart -->
-        <div class="col-xl-12 col-l-12">
-
-            <div class="card shadow mb-4 p-3 bg-light">
-                
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Change your Account Settings</h6>
-                    
-                </div>
-                <div class="m-3">
-                @RenderBody()
-                </div>
-
-
-            </div>
-        </div>
-
-                    </div>
-            <!-- Footer -->
-            <partial name="_Footer" />
-
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-        
-</body>
-
-
-
-
-
-

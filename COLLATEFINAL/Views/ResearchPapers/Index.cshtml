@@ -8,94 +8,47 @@
     
 }
 
-
-<!-- Page Wrapper -->
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    <partial name="_ManageSidebar" />
-    <!-- End of Sidebar -->
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-                    
-
-
-
-
-
-                    
-
-                    <!-- Nav Item - User Information -->
-                    <partial name="_LoginPartialProfileUser" />
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                <ul class="breadcrumb">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-                    <li class="text-dark">Thesis</li>
-                </ul>
-
-                <div class="row">
-
-                    <div class="col-lg-12 mb-4">
-                        <!-- Overview -->
-                        <div class="card lift shadow mb-4">
-                            <div class="card-header bg-success py-3 text-center">
-                                <h6 class="m-0 font-weight-bold text-light text-center">Overview</h6>
-                            </div>
-                            <div class="card-body text-center">
-                                <h6 class="text-dark text-justify" style="text-indent:50px">
+<partial name="_NewNavbar" />
+<div id="layoutSidenav">
+    <partial name="_NewSidenav" />
+    <div id="layoutSidenav_content">
+        <main>
+            <!-- Main page content-->
+            <div class="container-xl px-4 mt-4">
+                <header class="card card-waves">
+                    <div class="card-body px-5 pt-5 pb-0">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-lg-8">
+                                <h1 class="text-primary">Research Papers</h1>
+                                <p class="lead mb-4">
                                     In this page, we are presenting the Research projects of Students of Computer Engineering with Natural Excellence organization that consist of their project proposal, research model and design, framework, and methodology. Our team specifically intends to provide a compilation of this engaging and innovative research projects to guide our fellow computer engineering students build their own research proposals. The whole process of research opens new doors of learning and literary growth so we are aiming to give them variety of ideas for the topics that they want to pursue. By comparing and contrasting the findings of other studies, it highlights how and in what ways their chosen research proposal differs from other research about the topic.
-                                </h6>
-                                
-                            </div>
-                            <div class="col-md-8 offset-md-2 mb-4">
-                                <form asp-action="Index" method="get">
-                                    <div class="input-group">
-                                        <input type="text" name="s" value="@Model.SearchKeyword" class="form-control form-control-lg" placeholder="Type keyword here...">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-lg btn-primary">
-                                                <i class="fa fa-search"></i>
-                                            </button>
+                                </p>
+                                <div class="shadow rounded">
+                                    <form asp-action="Index" method="get">
+                                        <div class="input-group input-group-joined input-group-joined-xl border-0">
+                                            <input class="form-control me-0" type="text" name="s" value="@Model.SearchKeyword" placeholder="Search..." aria-label="Search" autofocus />
+                                            <span class="input-group-text"><i data-feather="search"></i></span>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
+                            <div class="col-lg-4"><img class="img-fluid" src="/new/assets/img/illustrations/problem-solving.svg" /></div>
                         </div>
-
+                        <nav class="nav nav-borders">
+                            <a class="nav-link active ms-0" href="#!">Getting Started</a>
+                            <a class="nav-link" href="#!">Tutorials</a>
+                            <a class="nav-link" href="#!">Licensing</a>
+                            <a class="nav-link" href="#!">Terms &amp; Conditions</a>
+                            <a class="nav-link" href="#!">Support</a>
+                        </nav>
                     </div>
-                        
-                </div>
-
-                <!-- Content Row -->
+                </header>
+                <h4 class="mb-0 mt-5">Thesis</h4>
+                <hr class="mt-2 mb-4" />
                 <div class="row">
                     @if (Model.TotalCount == 0)
                     {
                         <div class="col-4 text-center">
-
-
                         </div>
                         <div class="col-4 text-center">
 
@@ -103,39 +56,192 @@
 
                         </div>
                         <div class="col-4 text-center">
-
-
                         </div>
                     }
                     else
                     {
-                        @foreach (var researchPaper in Model.Result)
+
+                        @foreach (var item in Model.Result)
                         {
-                            <div class="col-xl-4 col-md-4 mb-4">
-                                <a class="card lift shadow mb-4" href="@Url.Action("ResearchPapersDetail","Detail", new { id = researchPaper.Id, pageType = "ResearchPapers"})">
-                                    <img src="@Url.Content($"~/Uploads/ResearchPapers/{researchPaper.ImageUrl}")" style="max-height: 300px" class="card-img-top" alt="@researchPaper.Title" />
-                                    <h5 class="card-title p-3 cut-text font-weight-bold" style="max-height:40px; min-height:40px">@researchPaper.Title</h5>
-
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item cut-text" style="max-height:40px; min-height:40px">
-                                            @researchPaper.PostedDate.ToString("MMM dd, yyyy")
-                                        </li>
-                                    </ul>
-
-
-
-                                </a>
-
-                            </div>
-                            
+                            @if(item.Header == "Thesis")
+                            {
+                                <div class="col-lg-4 mb-4">
+                                    <!-- Knowledge base category card-->
+                                    <a class="card lift shadow-none rounded-xl" href="@Url.Action("ResearchPapersDetail","Detail", new { id = item.Id, pageType = "ResearchPapers"})">
+                                        <img class="card-img-top" src="@Url.Content($"~/Uploads/ResearchPapers/{item.ImageUrl}")" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-teal">
+                                                <i class="me-2" data-feather="file-text"></i>
+                                                @item.Title
+                                            </h5>
+                                        </div>
+                                        <div class="card-footer"><div class="small text-muted">@item.PostedDate.ToString("MMM dd, yyyy")</div></div>
+                                    </a>
+                                </div>
+                            }
                         }
-                        
                     }
-
-                    
                 </div>
 
+                <h4 class="mb-0 mt-5">Case Studies</h4>
+                <hr class="mt-2 mb-4" />
+                <div class="row">
+                    @if (Model.TotalCount == 0)
+                    {
+                        <div class="col-4 text-center">
+                        </div>
+                        <div class="col-4 text-center">
 
+                            <p>Your search - @Model.SearchKeyword - did not match any entry.</p>
+
+                        </div>
+                        <div class="col-4 text-center">
+                        </div>
+                    }
+                    else
+                    {
+
+                        @foreach (var item in Model.Result)
+                        {
+                            @if (item.Header == "Case Study")
+                            {
+                                <div class="col-lg-4 mb-4">
+                                    <!-- Knowledge base category card-->
+                                    <a class="card lift shadow-none rounded-xl" href="@Url.Action("ResearchPapersDetail","Detail", new { id = item.Id, pageType = "ResearchPapers"})">
+                                        <img class="card-img-top" src="@Url.Content($"~/Uploads/ResearchPapers/{item.ImageUrl}")" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-teal">
+                                                <i class="me-2" data-feather="file-text"></i>
+                                                @item.Title
+                                            </h5>
+                                        </div>
+                                        <div class="card-footer"><div class="small text-muted">@item.PostedDate.ToString("MMM dd, yyyy")</div></div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+
+                <h4 class="mb-0 mt-5">Hardware</h4>
+                <hr class="mt-2 mb-4" />
+                <div class="row">
+                    @if (Model.TotalCount == 0)
+                    {
+                        <div class="col-4 text-center">
+                        </div>
+                        <div class="col-4 text-center">
+
+                            <p>Your search - @Model.SearchKeyword - did not match any entry.</p>
+
+                        </div>
+                        <div class="col-4 text-center">
+                        </div>
+                    }
+                    else
+                    {
+
+                        @foreach (var item in Model.Result)
+                        {
+                            @if (item.Header == "Hardware")
+                            {
+                                <div class="col-lg-4 mb-4">
+                                    <!-- Knowledge base category card-->
+                                    <a class="card lift shadow-none rounded-xl" href="@Url.Action("ResearchPapersDetail","Detail", new { id = item.Id, pageType = "ResearchPapers"})">
+                                        <img class="card-img-top" src="@Url.Content($"~/Uploads/ResearchPapers/{item.ImageUrl}")" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-teal">
+                                                <i class="me-2" data-feather="file-text"></i>
+                                                @item.Title
+                                            </h5>
+                                        </div>
+                                        <div class="card-footer"><div class="small text-muted">@item.PostedDate.ToString("MMM dd, yyyy")</div></div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+
+                <h4 class="mb-0 mt-5">Software</h4>
+                <hr class="mt-2 mb-4" />
+                <div class="row">
+                    @if (Model.TotalCount == 0)
+                    {
+                        <div class="col-4 text-center">
+                        </div>
+                        <div class="col-4 text-center">
+
+                            <p>Your search - @Model.SearchKeyword - did not match any entry.</p>
+
+                        </div>
+                        <div class="col-4 text-center">
+                        </div>
+                    }
+                    else
+                    {
+
+                        @foreach (var item in Model.Result)
+                        {
+                            @if (item.Header == "Software")
+                            {
+                                <div class="col-lg-4 mb-4">
+                                    <!-- Knowledge base category card-->
+                                    <a class="card lift shadow-none rounded-xl" href="@Url.Action("ResearchPapersDetail","Detail", new { id = item.Id, pageType = "ResearchPapers"})">
+                                        <img class="card-img-top" src="@Url.Content($"~/Uploads/ResearchPapers/{item.ImageUrl}")" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-teal">
+                                                <i class="me-2" data-feather="file-text"></i>
+                                                @item.Title
+                                            </h5>
+                                        </div>
+                                        <div class="card-footer"><div class="small text-muted">@item.PostedDate.ToString("MMM dd, yyyy")</div></div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+
+                <h4 class="mb-0 mt-5">Others</h4>
+                <hr class="mt-2 mb-4" />
+                <div class="row">
+                    @if (Model.TotalCount == 0)
+                    {
+                        <div class="col-4 text-center">
+                        </div>
+                        <div class="col-4 text-center">
+
+                            <p>Your search - @Model.SearchKeyword - did not match any entry.</p>
+
+                        </div>
+                        <div class="col-4 text-center">
+                        </div>
+                    }
+                    else
+                    {
+
+                        @foreach (var item in Model.Result)
+                        {
+                            @if (item.Header == "Others")
+                            {
+                                <div class="col-lg-4 mb-4">
+                                    <!-- Knowledge base category card-->
+                                    <a class="card lift shadow-none rounded-xl" href="@Url.Action("ResearchPapersDetail","Detail", new { id = item.Id, pageType = "ResearchPapers"})">
+                                        <img class="card-img-top" src="@Url.Content($"~/Uploads/ResearchPapers/{item.ImageUrl}")" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-teal">
+                                                <i class="me-2" data-feather="file-text"></i>
+                                                @item.Title
+                                            </h5>
+                                        </div>
+                                        <div class="card-footer"><div class="small text-muted">@item.PostedDate.ToString("MMM dd, yyyy")</div></div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
 
                 <!-- Content Row -->
                 <div class="row">
@@ -182,51 +288,10 @@
 
                 </div>
 
-
             </div>
-            <!-- /.container-fluid -->
 
-        </div>
-        <!-- End of Main Content -->
-        <!-- Footer -->
-        <partial name="_Footer" />
-
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
+        </main>
+        <partial name="_NewFooter" />
     </div>
 </div>
-
-
-
-
-
-
-
 

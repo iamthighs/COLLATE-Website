@@ -1,0 +1,26 @@
+﻿@page
+@model NotFoundModel
+
+<div class="bg-img-cover" style="background-image: url('/new/assets/img/bg-scene.svg')">
+    <div id="layoutError">
+        <div id="layoutError_content">
+            <main>
+                <div class="container-xl px-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center mt-4">
+                                <img class="img-fluid p-4" src="~/new/assets/img/illustrations/404-error-with-a-cute-animal.svg" alt="" />
+                                <p class="text-light">The page you were looking for could not be located.</p>
+                                <a class="text-arrow-icon fw-bolder text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                                    <i class="ms-0 me-1" data-feather="arrow-left"></i>
+                                    Return to Home
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <partial name="_NewFooterV2"/>
+    </div>
+</div>

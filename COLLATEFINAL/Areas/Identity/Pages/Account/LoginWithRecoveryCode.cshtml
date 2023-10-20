@@ -4,25 +4,45 @@
     ViewData["Title"] = "Recovery code verification";
 }
 
-<h1>@ViewData["Title"]</h1>
-<hr />
-<p>
-    You have requested to log in with a recovery code. This login will not be remembered until you provide
-    an authenticator app code at log in or disable 2FA and log in again.
-</p>
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Input.RecoveryCode" class="form-control" autocomplete="off" />
-                <label asp-for="Input.RecoveryCode" class="form-label"></label>
-                <span asp-validation-for="Input.RecoveryCode" class="text-danger"></span>
-            </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-        </form>
+<div class="bg-img-cover" style="background-image: url('/new/assets/img/bg-scene.svg')">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container-xl px-4">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11">
+                            <div class="card my-5 rounded-xl">
+                                <div class="card-body p-5 text-center"><div class="h3 fw-light mb-0">@ViewData["Title"]</div></div>
+                                <hr class="my-0" />
+                                <div class="card-body p-5">
+                                    <p>
+                                        You have requested to log in with a recovery code. This login will not be remembered until you provide
+                                        an authenticator app code at log in or disable 2FA and log in again.
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <form method="post">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                                <div class="form-floating mb-3">
+                                                    <input asp-for="Input.RecoveryCode" class="form-control" autocomplete="off" placeholder="RecoveryCode" />
+                                                    <label asp-for="Input.RecoveryCode" class="form-label"></label>
+                                                    <span asp-validation-for="Input.RecoveryCode" class="text-danger"></span>
+                                                </div>
+                                                <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <partial name="_NewFooterV2" />
     </div>
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

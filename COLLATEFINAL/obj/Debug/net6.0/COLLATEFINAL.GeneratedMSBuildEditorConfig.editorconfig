@@ -48,6 +48,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2Nrb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Areas/Identity/Pages/Account/Login - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbiAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -220,88 +224,168 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRpb25cTWFuYWdlVXNlclJvbGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Administration/ProfileUser.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRpb25cUHJvZmlsZVVzZXIuY3NodG1s
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Dashboard/Index - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEluZGV4IC0gQ29weS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/EventsDetail - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXEV2ZW50c0RldGFpbCAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/EventsDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXEV2ZW50c0RldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/GameAndWebDevDetail - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXEdhbWVBbmRXZWJEZXZEZXRhaWwgLSBDb3B5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/GameAndWebDevDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXEdhbWVBbmRXZWJEZXZEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/Index - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXEluZGV4IC0gQ29weS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/PrototypeDetail - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXFByb3RvdHlwZURldGFpbCAtIENvcHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/PrototypeDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXFByb3RvdHlwZURldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/ResearchPapersDetail - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXFJlc2VhcmNoUGFwZXJzRGV0YWlsIC0gQ29weS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Detail/ResearchPapersDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsXFJlc2VhcmNoUGFwZXJzRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/Create - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXENyZWF0ZSAtIENvcHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/Details - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXERldGFpbHMgLSBDb3B5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/Edit - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEVkaXQgLSBDb3B5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/Index - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEluZGV4IC0gQ29weS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/List - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXExpc3QgLSBDb3B5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/RegisterForEvent - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXFJlZ2lzdGVyRm9yRXZlbnQgLSBDb3B5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Events/RegisterForEvent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXFJlZ2lzdGVyRm9yRXZlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/Create - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxDcmVhdGUgLSBDb3B5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/Delete - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxEZWxldGUgLSBDb3B5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/Edit - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxFZGl0IC0gQ29weS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/Index - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxJbmRleCAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/List - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxMaXN0IC0gQ29weS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/GameAndWebDev/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZUFuZFdlYkRldlxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Home/About - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dCAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Home/About.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Home/Index - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleCAtIENvcHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Home/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWFyY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Home/Terms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXJtcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Prototype/Create.cshtml]
@@ -356,28 +440,60 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdG90eXBlXExpc3RWaWRlb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/Create - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcQ3JlYXRlIC0gQ29weS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/Delete - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcRGVsZXRlIC0gQ29weS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/Edit - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcRWRpdCAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/Index - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcSW5kZXggLSBDb3B5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/List - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcTGlzdCAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/ResearchPapers/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZWFyY2hQYXBlcnNcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/Components/CreateRoleModal/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3JlYXRlUm9sZU1vZGFsXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/Components/EditRoleModal/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRWRpdFJvbGVNb2RhbFxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5vdEZvdW5kLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/_Footer.cshtml]
@@ -390,6 +506,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/_ManageSidebar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYW5hZ2VTaWRlYmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/_NewFooter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OZXdGb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/_NewFooterV2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OZXdGb290ZXJWMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/_NewNavbar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OZXdOYXZiYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/_NewSidenav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OZXdTaWRlbmF2LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Shared/_Notification.cshtml]
@@ -412,24 +544,48 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/Create - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcQ3JlYXRlIC0gQ29weS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/Edit - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcRWRpdCAtIENvcHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/EditLecsInSubj - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcRWRpdExlY3NJblN1YmogLSBDb3B5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/EditLecsInSubj.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcRWRpdExlY3NJblN1YmouY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/Index - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcSW5kZXggLSBDb3B5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/List - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcTGlzdCAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/SubjectsDetail - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdHNcU3ViamVjdHNEZXRhaWwgLSBDb3B5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/\[Summer Semester\] BSCpE 3-1 Files/Web and Mobile Systems/COLLATEFINAL/COLLATEFINAL/COLLATEFINAL/Views/Subjects/SubjectsDetail.cshtml]

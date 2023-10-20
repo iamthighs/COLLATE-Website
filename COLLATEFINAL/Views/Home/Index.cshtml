@@ -3,502 +3,120 @@
     ViewData["ActivePage"] = ManageSidebar.Home;
 }
 
-
-<style>
-    #set-1 {
-        background: #41ab6b;
-    }
-
-    * {box-sizing:border-box}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
-
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 10px;
-  width: 10px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-
-
-
-
-</style>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-
-<link rel="stylesheet" type="text/css" href="~/css/component.css" />
-<script src="~/js/modernizr.custom.js"></script>
-<partial name="_Notification" />
-<!-- Modal -->
-<div class="modal fade show" id="myModal" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-
-        <!-- Modal content-->
-        <div class="modal-content bg-modal-image">
-
-            <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+<partial name="_NewNavbar" />
+<div id="layoutSidenav">
+<partial name="_NewSidenav" />
+<div id="layoutSidenav_content">
+    <main>
+        <header class="py-10 mb-4 bg-img-cover" style="background-image: url('new/assets/img/bg-scene.svg')">
+            <div class="container-xl px-4">
+                <div class="text-center">
+                        <img src="~/Logo PNG1.png" style="height:100px" />
+                    <h1 class="text-white fw-bolder">Collection of Latest Laboratory Activities, Trainings & Engagements</h1>
+                    <p class="lead mb-0 text-white">A project website of SCENE organization designed to provide secure and efficient data management for Computer Engineering students.</p>
+                </div>
             </div>
-            <br />
-            <h6 class="modal-title text-success font-weight-bold text-center">Welcome to the</h6>
-
-            <h5 class="modal-title text-success font-weight-bold text-center">Collection Of Latest Laboratory Activities, Trainings, and Engagements</h5>
-            <br />
-            <p class="text-dark text-center">Kindly click or tap the relevant link to aid you in navigating our services.</p>
-            <div class="row p-3">
-                <div class="col-lg-6 mb-4 mt-5">
-                    <div class="text-center">
-                        <img class="lift-logo img-logo-modal" src="~/Logo PNG.png">
-                    </div>
-                    <br />
-                    <div class="row text-center">
-
-                        <div class="col-sm-12">
-                            <img class="lift img-smlogo-modal rounded-circle mb-3" src="~/VOLTEZ-4.0.png">
-                            <img class="lift img-smlogo-modal mb-3" src="~/img/logoscene.png">
-                            <img class="lift img-smlogo-modal rounded-circle mb-3" src="~/pup-logo.png">
+        </header>
+        <!-- Main page content-->
+        <div class="container-xl px-4">
+            <!-- Illustration dashboard card example-->
+            <div class="card shadow-none rounded-xl card-waves mb-4 mt-5">
+                <div class="card-body p-5">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-8">
+                            <h2 class="text-green fw-bolder">Students of Computer Engineering with Natural Excellence (SCENE)</h2>
+                            <p class="text-gray-700">SCENE is an organization in PUP-Paranaque that serves as the representatives of computer engineering students.</p>
+                            <p class="text-gray-700">It was formed way back in 2013 with its  first president, Mr. John Michael Dabu. Currently, SCENE has 200 students and managed by Prof. Engr. Marvin De Pedro, the Bachelor of Science in Computer Engineering Coordinator.</p>
+                            
                         </div>
-                        
+                        <div class="col-4 d-none d-lg-block mt-xxl-n4"><img class="img-fluid px-xl-4 text-center mt-xxl-n5" src="~/img/logoscene.png" style="max-height:300px"/></div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="d-flex mb-2">
-                        <a class="lift btn btn-success text-left flex-grow-1" data-dismiss="modal">
-                            <i class="fas fa-home text-white-50"></i>  View Homepage
-                        </a>
-                    </div>
-
-                    <div class="d-flex mb-2">
-                        <a class="lift btn btn-success text-left flex-grow-1" asp-area="" asp-controller="Dashboard" asp-action="Index">
-                            <i class="fas fa-tachometer-alt text-white-50"></i>  Dashboard
-                        </a>
-                    </div>
-                    <div class="d-flex mb-2">
-                        <a class="lift btn btn-success text-left flex-grow-1" asp-area="" asp-controller="Subjects" asp-action="Index">
-                            <i class="fas fa-cog text-white-50"></i>  Instructional Materials
-                        </a>
-                    </div>
-                    <div class="d-flex mb-2">
-                        <a class="lift btn btn-success text-left flex-grow-1" asp-area="" asp-controller="GameAndWebDev" asp-action="Index">
-                            <i class="fas fa-wrench text-white-50"></i>  Software Projects
-                        </a>
-                    </div>
-                    <div class="d-flex mb-2">
-                        <a class="lift btn btn-success text-left flex-grow-1" asp-area="" asp-controller="ResearchPapers" asp-action="Index">
-                            <i class="fas fa-folder text-white-50"></i>  Research Papers
-                        </a>
-                    </div>
-                    <div class="d-flex mb-2">
-                        <a class="lift btn btn-success text-left flex-grow-1" asp-area="" asp-controller="Events" asp-action="Index">
-                            <i class="fas fa-chart-area text-white-50"></i>  Events
-                        </a>
-                    </div>
-                    <div class="d-flex mb-2">
-                        <a class="lift btn btn-success text-left flex-grow-1" asp-area="" asp-controller="Home" asp-action="About">
-                            <i class="fas fa-info-circle text-white-50"></i>  About Us
-                        </a>
-                    </div>
-
-
                 </div>
             </div>
-            <div class="modal-footer">
-                <div class="float-right">
-                    <a href="#" class="btn btn-facebook btn-circle btn-sm">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="btn btn-google btn-circle btn-sm">
-                        <i class="fab fa-google"></i>
-                    </a>
-                    <a href="#" class="btn btn-warning btn-circle btn-sm">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="btn btn-primary btn-circle btn-sm">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-
+            <!-- Content Row -->
+            <div class="row">
+                <div class="col-lg-5 mb-4">
+                    <!-- Illustration card example-->
+                    <div class="card shadow-none rounded-xl mb-4">
+                        <div class="card-header text-center p-3">
+                            <h4 class="text-green fw-bolder">Vision</h4>
+                        </div>
+                        <div class="card-body text-center">
+                            <p class="mb-4">
+                                Students of Computer Engineering with Natural Excellence (SCENE) serves as beacon for Computer Engineering Students of PUP Paranaque, supports its members in improving their skills, experience, and knowledge as the age of technology continous to grow into the next generation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 mb-4">
+                    <div class="card shadow-none rounded-xl">
+                        <div class="card-header text-center p-3">
+                            <h4 class="text-green fw-bolder">Philosophy</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="timeline timeline-xs">
+                                <!-- Timeline Item 1-->
+                                <div class="timeline-item">
+                                    <div class="timeline-item-marker">
+                                        <div class="timeline-item-marker-indicator bg-green"></div>
+                                    </div>
+                                    <div class="timeline-item-content">
+                                        To represent the Computer Engineering Students of Polytechnic University of the Philippines - Paranaque Campus.
+                                    </div>
+                                </div>
+                                <!-- Timeline Item 2-->
+                                <div class="timeline-item">
+                                    <div class="timeline-item-marker">
+                                        <div class="timeline-item-marker-indicator bg-green"></div>
+                                    </div>
+                                    <div class="timeline-item-content">
+                                        To promote general welfare of its members.
+                                    </div>
+                                </div>
+                                <!-- Timeline Item 3-->
+                                <div class="timeline-item">
+                                    <div class="timeline-item-marker">
+                                        <div class="timeline-item-marker-indicator bg-green"></div>
+                                    </div>
+                                    <div class="timeline-item-content">
+                                        To act as liaison between the Computer Engineering Students on one hand and the campus (and the university as a whole) on the other hand and shall cooperate with the other organization such as Central Student Council and other Organizations.
+                                    </div>
+                                </div>
+                                <!-- Timeline Item 4-->
+                                <div class="timeline-item">
+                                    <div class="timeline-item-marker">
+                                        <div class="timeline-item-marker-indicator bg-green"></div>
+                                    </div>
+                                    <div class="timeline-item-content">
+                                        To promote educational, physical and social well being of its members.
+                                    </div>
+                                </div>
+                                <!-- Timeline Item 5-->
+                                <div class="timeline-item">
+                                    <div class="timeline-item-marker">
+                                        <div class="timeline-item-marker-indicator bg-green"></div>
+                                    </div>
+                                    <div class="timeline-item-content">
+                                        To acquaint its members on the new emerging technologies.
+                                    </div>
+                                </div>
+                                <!-- Timeline Item 6-->
+                                <div class="timeline-item">
+                                    <div class="timeline-item-marker">
+                                        <div class="timeline-item-marker-indicator bg-green"></div>
+                                    </div>
+                                    <div class="timeline-item-content">
+                                        To strengthen SCENE's linkages to other organization, not only in the University but also in the nation as a whole.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-    </div>
+        
+    </main>
+    <partial name="_NewFooter"/>
 </div>
-<!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-    <partial name="_ManageSidebar" />
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <partial name="_SearchBar" />
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        
-                        <partial name="_SearchBarMini" />
-
-                        
-
-                        
-
-                        <!-- Nav Item - User Information -->
-                        <partial name="_LoginPartialProfileUser" />
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                
-                    <!-- Page Heading -->
-                    <div class="mb-3 text-center">
-                        <h5 class="m-0 font-weight-bold text-success text-center">Collection Of Latest Laboratory Activities, Trainings, and Engagements</h5>
-                        
-                    </div>
-
-
-
-                
-
-
-
-
-                    <!-- Content Row -->
-                    <div class="row">
-                   
-                        <div class="col-xl-4 col-lg-5">
-                        <div class="card lift shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <!-- Card Body -->
-                            <div class="card-body">
-
-                                <div class="sidebar-brand-icon text-center">
-                                    <img src="~/img/logoscene.png" style="height:50px; width:50px" alt="Logo">
-                                    <h6 class="mt-1 text-dark font-weight-bold">Official Logo</h6>
-                                </div>
-                                <hr class="sidebar-divider my-3">
-                                <div class="mt-4 pb-2 text-center small">
-                                    <h6 class="m-0 text-dark text-justify" style="text-indent:50px"><strong>SCENE</strong> (Students of Computer Engineering with  Natural Excellence) is an organization in PUP-Paranaque that serves as the representatives of computer engineering students. </h6>
-                                    <br /><h6 class="m-0 text-dark text-justify" style="text-indent:50px">SCENE was formed way back in 2013 with its  first president, Mr. John Michael Dabu. Currently, SCENE has 200 students and managed by Prof. Engr. Marvin De Pedro, the Bachelor of Science in Computer Engineering Coordinator.</h6>
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                     <!-- Slider -->
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="card lift shadow mb-4">
-                            
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-area-slideshow">
-                                <!-- Full-width images with number and caption text -->
-                                <div class="mySlides">
-                                    
-                                    <img class="chart-area-slideshow" src="~/img/img1.jpg">
-                                    
-                                </div>
-
-                                <div class="mySlides">
-                                    
-                                        <img class="chart-area-slideshow" src="~/img/img17.jpg">
-                                    
-                                </div>
-
-                                <div class="mySlides">
-                                    
-                                        <img class="chart-area-slideshow" src="~/img/img16.jpg">
-                                    
-                                </div>
-
-                                <div class="mySlides">
-                                    
-                                        <img class="chart-area-slideshow" src="~/img/img6.jpg">
-                                    
-                                </div>
-
-                                <div class="mySlides">
-                                    
-                                        <img class="chart-area-slideshow" src="~/img/img7.jpg">
-                                    
-                                </div>
-
-                                <div class="mySlides">
-                                    
-                                        <img class="chart-area-slideshow" src="~/img/img13.jpg">
-                                    
-                                </div>
-
-                                <div class="mySlides">
-                                    
-                                        <img class="chart-area-slideshow" src="~/img/img15.jpg">
-                                    
-                                </div>
-
-                                <div class="mySlides">
-                                    
-                                        <img class="chart-area-slideshow" src="~/img/img4.jpg">
-                                    
-                                </div>
-
-                                 <div class="mySlides">
-                                    
-                                        <img class="chart-area-slideshow" src="~/img/img14.jpg">
-                                    
-                                </div>
-
-                                </div>
-                                <!-- The dots/circles -->
-
-                            </div>
-                            
-                        </div>
-                    </div>
-                    </div>
-
-               
-
-                    <!-- Content Row -->
-
-                    <div class="row">
-                        <div class="col-lg-6 mb-4">
-                        <!-- Vision -->
-                        <div class="card lift shadow mb-4">
-                            <div class="card-header bg-success py-3 text-center">
-                                <h6 class="m-0 font-weight-bold text-light text-center">Vision</h6>
-                            </div>
-                            <div class="card-body text-center">
-                                <h6 class="text-dark text-justify" style="text-indent:50px">
-                                    Students of Computer Engineering with Natural Excellence (SCENE) serves as beacon for Computer Engineering Students of PUP Paranaque, supports its members in improving their skills, experience, and knowledge as the age of technology continous to grow into the next generation.
-                                </h6>
-                                
-                            </div>
-
-                        </div>
-
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-
-
-
-                        <!-- Philosophy -->
-                        <div class="card lift shadow mb-4">
-                            <div class="card-header py-3 bg-success text-center">
-                                <h6 class="m-0 font-weight-bold text-light">Philosophy</h6>
-                            </div>
-                            <div class="card-body">
-                                <ul>
-                                <li>
-                                <h6 class="text-dark text-justify">
-                                To represent the Computer Engineering Students of Polytechnic University of the Philippines - Paranaque Campus.
-                                </h6>
-                                </li>
-                                <li>
-                                <h6 class="text-dark text-justify">
-                                    To promote general welfare of its members.
-                                </h6>
-                                </li>
-                                <li>
-                                <h6 class="text-dark text-justify">
-                                    To act as liaison between the Computer Engineering Students on one hand and the campus (and the university as a whole) on the other hand and shall cooperate with the other organization such as Central Student Council and other Organizations.
-                                </h6>
-                                </li>
-                                <li>
-                                <h6 class="text-dark text-justify">
-                                    To promote educational, physical and social well being of its members.
-                                </h6>
-                                </li>
-                                    <li>
-                                <h6 class="text-dark text-justify">
-                                    To acquaint its members on the new emerging technologies.
-                                </h6>
-                                </li>
-                                <li>
-                                <h6 class="text-dark text-justify">
-                                    To strengthen SCENE's linkages to other organization, not only in the University but also in the nation as a whole.
-                                </h6>
-                                </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                    </div>
-
-                
-
-                </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-            <partial name="_Footer" />
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    
-<a class="scroll-to-top rounded" data-toggle="modal" data-target="#myModal">
-    <i class="fas fa-desktop"></i>
-</a>
-
-    
-
-
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-    
-<script>
-    var hash = window.location.hash,
-        current = 0,
-        demos = Array.prototype.slice.call(document.querySelectorAll('#codrops-demos > a'));
-
-    if (hash === '') hash = '#set-1';
-    setDemo(demos[parseInt(hash.match(/#set-(\d+)/)[1]) - 1]);
-
-    demos.forEach(function (el, i) {
-        el.addEventListener('click', function () { setDemo(this); });
-    });
-
-    function setDemo(el) {
-        var idx = demos.indexOf(el);
-        if (current !== idx) {
-            var currentDemo = demos[current];
-            currentDemo.className = currentDemo.className.replace(new RegExp("(^|\\s+)" + 'current-demo' + "(\\s+|$)"), ' ');
-        }
-        current = idx;
-        el.className = 'current-demo';
-    }
-</script>
-
-<script>
-    $(document).ready(function () {
-        $('#myModal').modal('show');
-    });
-    let slideIndex = 0;
-    showSlides();
-
-    // Next/previous controls
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    // Thumbnail image controls
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides() {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1 }
-        slides[slideIndex - 1].style.display = "block";
-        setTimeout(showSlides, 3000); // Change image every 2 seconds
-    }
-</script>
-
-
-    
-
-
+</div>

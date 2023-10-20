@@ -3,18 +3,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using COLLATEFINAL.Data;
-using COLLATEFINAL.Models;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using COLLATEFINAL.Data;
 
 namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
 {
@@ -39,9 +34,8 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public string Username { get; set; }
-
         public string FirstName { get; set; }
-          
+
         public string LastName { get; set; }
 
         public string ImageUrl { get; set; }
@@ -67,19 +61,16 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public class InputModel
         {
-            
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
 
-            [Display(Name = "Student Number")]
-            public string StudentNumber { get; set; }
-
             public string NewFirstName { get; set; }
             public string NewLastName { get; set; }
-
-
-
         }
 
         private async Task LoadAsync(AppIdentityUser user)
@@ -88,20 +79,13 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
-            FirstName = user.FirstName;
-            LastName = user.LastName;
-            ImageUrl = user.ImageUrl;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber,
-                NewFirstName = user.FirstName,
-                NewLastName = user.LastName
-
+                PhoneNumber = phoneNumber
             };
         }
 
-        [HttpGet]
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -109,11 +93,11 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
             await LoadAsync(user);
             return Page();
         }
 
-        [HttpPost]
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -129,7 +113,6 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
@@ -139,10 +122,6 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
-
-
-
-           
 
             string uniqueImg = UploadedFile(user);
             user.ImageUrl = uniqueImg;
@@ -169,9 +148,6 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
                 TempData["error"] = "Uploaded file is not a jpg or png file!";
             }
             return RedirectToPage();
-
-
-
         }
 
         private string UploadedFile(AppIdentityUser user)

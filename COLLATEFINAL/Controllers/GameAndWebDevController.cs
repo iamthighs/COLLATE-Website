@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace COLLATEFINAL.Controllers
 {
-    [Authorize(Roles = "Administrator,sceneOfficer", Policy = "SoftwarePolicy")]
+    [Authorize(Roles = "Administrator,sceneOfficer")]
     public class GameAndWebDevController : BaseController
     {
 

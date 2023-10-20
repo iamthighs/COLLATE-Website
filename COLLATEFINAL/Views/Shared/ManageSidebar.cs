@@ -19,6 +19,8 @@ namespace  COLLATEFINAL.Views.Shared
         /// </summary>
         public static string Home => "Home";
         public static string About => "About";
+        public static string ListRoles => "ListRoles";
+        public static string ListUsers => "ListUsers";
 
         public static string Administration => "Administration";
 
@@ -52,12 +54,34 @@ namespace  COLLATEFINAL.Views.Shared
         /// </summary>
         public static string Events => "Events";
 
+        public static string CMSPrototype => "CMSPrototype";
+
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
+        public static string CMSGameAndWebDev => "CMSGameAndWebDev";
+
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
+        public static string CMSResearchPapers => "CMSResearchPapers";
+
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
+        public static string CMSEvents => "CMSEvents";
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public static string HomeNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, Home);
         public static string AboutNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, About);
+        public static string RolesNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, ListRoles);
+        public static string UsersNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, ListUsers);
 
         public static string AdminNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, Administration);
 
@@ -91,7 +115,27 @@ namespace  COLLATEFINAL.Views.Shared
         /// </summary>
         public static string EventsNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, Events);
 
-       
+        public static string CMSPrototypeNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, CMSPrototype);
+
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
+        public static string CMSGameAndWebDevNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, CMSGameAndWebDev);
+
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
+        public static string CMSResearchPapersNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, CMSResearchPapers);
+
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
+        public static string CMSEventsNavClass(ViewContext viewContext) => SidebarNavClass(viewContext, CMSEvents);
+
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.

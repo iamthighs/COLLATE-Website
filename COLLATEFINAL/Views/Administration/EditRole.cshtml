@@ -2,171 +2,175 @@
 
 @{
     ViewData["Title"] = "Edit Role";
+    ViewData["ActivePage"] = ManageSidebar.ListRoles;
 }
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-<!-- Page Wrapper -->
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    <partial name="_ManageSidebar" />
-    <!-- End of Sidebar -->
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-
-
-
-
-
-
-
-
-                    <!-- Nav Item - User Information -->
-                    <partial name="_LoginPartialProfileUser" />
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                <partial name="_Notification" />
-                <ul class="breadcrumb">
-                    <li><a asp-area="" asp-controller="Administration" asp-action="ListRoles">Administration</a></li>
-                    <li class="text-dark">Edit Role</li>
-                </ul>
-
-                <h1>Edit Role</h1>
-                <hr />
-                <form method="post" class="mt-3">
-                    <div class="form-group row">
-                        <label asp-for="Id" class="col-sm-2 col-form-label"></label>
-                        <div class="col-sm-10">
-                            <input asp-for="Id" disabled class="form-control" />
+<partial name="_NewNavbar" />
+<div id="layoutSidenav">
+            <partial name="_NewSidenav"/>
+            <div id="layoutSidenav_content">
+               <main>
+                   <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                        <div class="container-xl px-4">
+                            <div class="page-header-content">
+                                <div class="row align-items-center justify-content-between pt-3">
+                                    <div class="col-auto mb-3">
+                                        <h1 class="page-header-title">
+                                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                                            Manage Role
+                                        </h1>
+                                    </div>
+                                    <div class="col-12 col-xl-auto mb-3">
+                                        <a class="btn btn-sm btn-light text-primary" asp-action="ListRoles">
+                                            <i class="me-1" data-feather="arrow-left"></i>
+                                            Back to List
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </header>
+                    <!-- Main page content-->
+                    <div class="container-xl px-4 mt-4">
+                        <form id="profile-form" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                
+                                <div class="card card-header-actions mb-4 mb-xl-0">
+                                            <div class="card-header">
+                                                @if (Model.RoleName == "sceneOfficer")
+                                                {
+                                                    <div>SCENE Officer</div>
+                                                }
+                                                else
+                                                {
+                                                    <div>@Model.RoleName</div>
+                                                }
+                                                
+                                                <div class="dropdown no-caret">
+                                                    <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                                    <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                                                        <h6 class="dropdown-header">Manage</h6>
+                                                        <a class="dropdown-item" asp-action="EditUsersInRole" asp-controller="Administration" asp-route-roleId="@Model.Id"><span class="badge bg-blue-soft text-blue my-1">Users in Role</span></a>
+                                                        <a class="dropdown-item"  asp-action="ManageRoleClaims" asp-route-roleId="@Model.Id"><span class="badge bg-blue-soft text-blue my-1">Role Claims</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                    @if (Model.Users.Any())
+                                                    {
+                                                        foreach (var user in Model.Users)
+                                                        {
+                                                            <!-- Item -->
+                                                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                                                <div class="d-flex align-items-center flex-shrink-0 me-3">
+                                                                    <div class="avatar avatar-xl me-3 bg-gray-200"><img class="avatar-img img-fluid" src="~/UserImages/@user.ImageUrl" alt="" /></div>
+                                                                    <div class="d-flex flex-column fw-bold">
+                                                                        <p class="text-dark line-height-normal mb-1">@user.FirstName @user.LastName</p>
+                                                                        <div class="small text-muted line-height-normal">@user.Email</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-red-soft text-red">None at the moment</span>
+                                                    }
+                                                
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="col-xl-8">
+                                <!-- Account details card-->
+                                <div class="card mb-4">
+                                    <div class="card-header">Role Details</div>
+                                    
+                                    <div class="card-body">
+                                            
+                                            <!-- Form Row-->
+                                            <div class="row gx-3 mb-3">
+                                                <!-- Form Group (id)-->
+                                                <div class="col-md-6">
+                                                    <p class="text-dark line-height-normal mb-1">Unique ID:</p>
+                                                    <p><span class="badge bg-blue-soft text-blue">@Model.Id</span></p>
+                                                </div>
+                                                <!-- Form Group (email)-->
+                                                <div class="col-md-6">
+                                                    <p class="text-dark line-height-normal mb-1">Name:</p>
+                                                    <p>
+                                                        @if (Model.RoleName == "sceneOfficer")
+                                                        {
+                                                        <span class="badge bg-blue-soft text-blue">SCENE Officer</span>
+                                                        }
+                                                        else
+                                                        {
+                                                        <span class="badge bg-blue-soft text-blue">@Model.RoleName</span>
+                                                        }
+                                                        
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Form Row-->
+                                            <div class="row gx-3 mb-3">
+                                                <!-- Form Group (Roles)-->
+                                                <div class="col-md-6">
+                                                    <p class="text-dark line-height-normal mb-1">Users:
+                                                        <span>
+                                                            <a asp-action="EditUsersInRole" asp-controller="Administration" asp-route-roleId="@Model.Id" class="btn btn-datatable btn-icon btn-transparent-dark me-2">
+                                                            <i data-feather="edit"></i>
+                                                            </a>
+                                                        </span>
+                                                    </p>
+                                                    @if (Model.Users.Any())
+                                                    {
+                                                        foreach (var user in Model.Users)
+                                                        {
+                                                            <p><span class="badge bg-blue-soft text-blue">@user.Email</span></p>
+                                                                
+                                                            
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <p><span class="badge bg-red-soft text-red">None at the moment</span></p>
+                                                    }
+                                                    
+                                                </div>
+                                                <!-- Form Group (Claims)-->
+                                                <div class="col-md-6">
+                                                    <p class="text-dark line-height-normal mb-1">Claims:
+                                                        <span>
+                                                            <a asp-action="ManageRoleClaims" asp-route-roleId="@Model.Id" class="btn btn-datatable btn-icon btn-transparent-dark me-2">
+                                                            <i data-feather="edit"></i>
+                                                            </a>
+                                                        </span>
+                                                    </p>
+                                                    @if (Model.Claims.Any())
+                                                    {
+                                                        foreach (var claim in Model.Claims)
+                                                        {
+                                                            <p><span class="badge bg-blue-soft text-blue">@claim</span></p>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <p><span class="badge bg-red-soft text-red">None at the moment</span></p>
+                                                    }
+                                                    
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
                     </div>
-                    <div class="form-group row">
-                        <label asp-for="RoleName" class="col-sm-2 col-form-label"></label>
-                        <div class="col-sm-10">
-                            <input asp-for="RoleName" class="form-control" />
-                            <span asp-validation-for="RoleName" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="form-group row">
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                            <a asp-action="ListRoles" class="btn btn-primary">Cancel</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Users in this Role</h3>
-                        </div>
-                        <div class="card-body">
-                            @if(Model.Users.Any())
-                            {
-                                foreach(var user in Model.Users)
-                                {
-                                    <h5 class="card-title">@user</h5>
-                                }
-                            }
-                            else
-                            {
-                                <h5 class="card-title">None at this moment</h5>
-                            }
-                        </div>
-                        <div class="card-footer">
-                            <a asp-action="EditUsersInRole" asp-controller="Administration" asp-route-roleId="@Model.Id" class="btn btn-primary">Add/Remove Users</a>
-                        </div>
-                    </div>
-
-
-                    <div class="card mt-3">
-                        <div class="card-header">
-                            <h3>Role Claims</h3>
-                        </div>
-                        <div class="card-body">
-                            @if (Model.Claims.Any())
-                            {
-                                foreach (var claim in Model.Claims)
-                                {
-                                    <h5 class="card-title">@claim</h5>
-                                }
-                            }
-                            else
-                            {
-                                <h5 class="card-title">None at the moment</h5>
-                            }
-                        </div>
-                        <div class="card-footer">
-                            <a asp-action="ManageRoleClaims" asp-route-roleId="@Model.Id"
-                               style="width:auto" class="btn btn-primary">
-                                Manage Claims
-                            </a>
-                        </div>
-                    </div>
-                </form>
-
-
-
-
+                </main>
+                <partial name="_NewFooter"/>
             </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- End of Main Content -->
-        <!-- Footer -->
-        <partial name="_Footer" />
-
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
 </div>
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 
 @section Scripts {

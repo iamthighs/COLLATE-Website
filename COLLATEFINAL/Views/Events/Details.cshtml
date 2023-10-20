@@ -2,75 +2,41 @@
 
 @{
     ViewData["Title"] = "List";
-    ViewData["ActivePage"] = ManageSidebar.Events;
+    ViewData["ActivePage"] = ManageSidebar.CMSEvents;
 
 }
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-
-<!-- Page Wrapper -->
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    <partial name="_ManageSidebar" />
-    <!-- End of Sidebar -->
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-
-
-
-
-
-
-
-
-                    <!-- Nav Item - User Information -->
-                    <partial name="_LoginPartialProfileUser" />
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+<partial name="_NewNavbar" />
+<div id="layoutSidenav">
+    <partial name="_NewSidenav" />
+    <div id="layoutSidenav_content">
+        <main>
+            <header class="py-10 mb-4 bg-green">
+                <div class="container-xl px-4">
+                    <div class="text-center">
+                        <h1 class="text-white">Collection of Latest Laboratory Activities, Trainings & Engagements</h1>
+                        <p class="lead mb-0 text-white-50">A project website of SCENE organization designed to provide secure and efficient data management for Computer Engineering students.</p>
+                    </div>
+                </div>
+            </header>
+            <!-- Main page content-->
+            <div class="container-xl px-4">
                 <partial name="_Notification" />
-                <ul class="breadcrumb">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-                    <li><a asp-area="" asp-controller="Events" asp-action="Index">Events</a></li>
-                    <li class="text-dark">Content Management</li>
-                </ul>
 
-                
-                    <h2>Attendees: @Model.Title</h2>
-                    <table class="table">
-                        <thead>
+                <h2>Attendees: @Model.Title</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var attendance in Model.Attendees)
+                        {
                             <tr>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var attendance in Model.Attendees)
-                            {
-                                <tr>
-                                    <td>@attendance.Email</td>
-                                
-                                    <td>
+                                <td>@attendance.Email</td>
+
+                                <td>
 
                                     <form asp-action="RemoveUserFromEvent" asp-route-eventId="@Model.Id" asp-route-userId="@attendance.Id" method="post">
 
@@ -85,28 +51,28 @@
                                                onclick="confirmDelete('@attendance.Id', true)">Delete</a>
                                         </span>
                                     </form>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
 
 
 
 
 
-                    <form method="post" asp-action="AddUserToEvent" asp-route-eventId="@Model.Id">
-                        <label for="userId">Add user:</label>
-                        <select name="userId" id="userId">
-                            <option value="">Select a user</option>
-                            @foreach (var user in GetAllUsers())
-                            {
-                                <option value="@user.Id">@user.UserName</option>
-                            }
-                        </select>
+                <form method="post" asp-action="AddUserToEvent" asp-route-eventId="@Model.Id">
+                    <label for="userId">Add user:</label>
+                    <select name="userId" id="userId">
+                        <option value="">Select a user</option>
+                        @foreach (var user in GetAllUsers())
+                        {
+                            <option value="@user.Id">@user.UserName</option>
+                        }
+                    </select>
                     <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
-                
+                </form>
+
 
                 @functions {
                     public IEnumerable<AppIdentityUser> GetAllUsers()
@@ -115,47 +81,16 @@
                         return userManager.Users.ToList();
                     }
                 }
-                
+
                 <a asp-action="List">Back to List</a>
+
             </div>
-            <!-- /.container-fluid -->
 
-        </div>
-        <!-- End of Main Content -->
-        <!-- Footer -->
-        <partial name="_Footer" />
-
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
+        </main>
+        <partial name="_NewFooter" />
     </div>
 </div>
+
 
 @section Scripts {
     <script src="~/js/CustomScripts.js"></script>

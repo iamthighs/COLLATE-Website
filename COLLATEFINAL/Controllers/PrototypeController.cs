@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace COLLATEFINAL.Controllers
 {
-    [Authorize(Roles = "Administrator,Faculty", Policy = "InstructionalPolicy")]
+    [Authorize(Roles = "Administrator,Faculty")]
     public class PrototypeController : BaseController
     {
 
@@ -517,7 +517,7 @@ namespace COLLATEFINAL.Controllers
 
             _context.SaveChanges();
             TempData["success"] = "Video deleted successfully";
-            return RedirectToAction(nameof(ListLectures));
+            return RedirectToAction(nameof(ListVideos));
         }
 
         private bool PrototypeModelExists(int id)

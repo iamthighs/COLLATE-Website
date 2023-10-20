@@ -1,0 +1,312 @@
+﻿@model IEnumerable<EventsModel>
+@inject SignInManager<AppIdentityUser> SignInManager
+@inject UserManager<AppIdentityUser> UserManager
+@{
+    ViewData["Title"] = "Events";
+    ViewData["ActivePage"] = ManageSidebar.Events;
+}
+
+<style>
+
+
+    * {
+        box-sizing: border-box
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+    }
+
+    /* Hide the images by default */
+    .mySlides {
+        display: none;
+    }
+
+    /* Next & previous buttons */
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+    /* Caption text */
+    .text {
+        color: #f2f2f2;
+        font-size: 15px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+        cursor: pointer;
+        height: 10px;
+        width: 10px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+
+
+    /* Fading animation */
+    .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+
+</style>
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <partial name="_ManageSidebar" />
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    
+
+
+
+
+                    
+
+                    <!-- Nav Item - User Information -->
+                    <partial name="_LoginPartialProfileUser" />
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+                    <li class="text-dark">Events</li>
+                </ul>
+
+                
+                
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="card lift shadow mb-4 accordion" id="accordionSidebar">
+                            @foreach (var user in Model)
+                            {
+                            <!-- Nav Item - Pages Collapse Menu -->
+                            <div class="nav-item">
+                                    <a class="d-block card-header py-3 collapsed" href="#" data-toggle="collapse" data-target="#@user.Category@user.Id"
+                                   aria-expanded="true" aria-controls="colllapseWeb">
+                                    <h6 class="m-0 font-weight-bold text-primary">@user.Title</h6>
+
+                                </a>
+                                <div id="@user.Category@user.Id" class="collapse" aria-labelledby="headingWeb" data-parent="#accordionSidebar">
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        <div class="card-body">
+                                           <ul>
+                                                
+                                            
+                                                @Html.Raw(user.Objectives)
+                                           </ul>
+
+                                            
+                                            <div class="text-center">
+                                                <a href="@Url.Action("EventsDetail","Detail", new { id = user.Id, pageType = "Events"})" class="d-sm-inline-block btn btn-sm btn-info shadow-sm">
+                                                    <i class="fas fa-info-circle text-white-50"></i> See Full Details
+                                                </a>
+
+                                            </div>
+                                                
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                            
+                            
+
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="card lift shadow mb-4 p-0">
+                            <div class="card-body p-0">
+                                <div class="card-header bg-success py-3 text-center">
+                                    <h6 class="m-0 font-weight-bold text-light text-center">@ViewData["Title"]</h6>
+                                </div>
+                                <div class="chart-area-slideshow text-center">
+
+
+                                   @foreach (var pic in Model)
+                                   {
+                                        <div class="mySlides">
+                                            <a class="chart-area-slideshow" href="@Url.Action("EventsDetail","Detail", new { id = pic.Id, pageType = "Events"})">
+                                                <div class="image">
+                                                    <img class="chart-area-slideshow" src="@Url.Content($"~/Uploads/Events/{@pic.ImageUrl}")">
+
+                                                </div>
+                                                <div class="details">
+                                                    <div class="center">
+                                                        <p class="small">@pic.Title</p>
+
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            
+                                        </div>
+
+                                        
+                                   }
+
+
+
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-xl-4 col-lg-4">
+                        
+                        <div class="card lift shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 bg-success text-center">
+                                <h6 class="m-0 font-weight-bold text-light">Recent Facebook posts</h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body p-0">
+
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FPUP.SCENE.ORG&tabs=timeline&width=350&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId=1567968913599100" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <partial name="_Footer" />
+
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let slideIndex = 0;
+showSlides();
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 3000); // Change image every 2 seconds
+}
+</script>
+
+
+
+
+

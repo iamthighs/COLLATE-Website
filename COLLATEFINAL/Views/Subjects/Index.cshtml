@@ -7,159 +7,71 @@
     ViewData["ActivePage"] = ManageSidebar.Prototype;
 }
 
-<style>
-    #myDIV {
-        background-color: #FFFFFF;
-    }
-
-    #myDIV2 {
-        width: 300px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-</style>
-<!-- Page Wrapper -->
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    <partial name="_ManageSidebar" />
-    <!-- End of Sidebar -->
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-                    
-
-
-
-
-
-                    
-
-                    <!-- Nav Item - User Information -->
-                    <partial name="_LoginPartialProfileUser" />
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                <ul class="breadcrumb">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-                    <li class="text-dark">Instructional Materials</li>
-                </ul>
-
-                <!-- Content Row -->
-                <div class="row">
-                    
-                    <div class="col-lg-12 mb-4">
-                        <!-- Overview -->
-                        <div class="card lift shadow mb-4">
-                            <div class="card-header bg-success py-3 text-center">
-                                <h6 class="m-0 font-weight-bold text-light text-center">Overview</h6>
-                            </div>
-                            <div class="card-body text-center">
-                                <h6 class="text-dark text-justify" style="text-indent:50px">
+<partial name="_NewNavbar" />
+<div id="layoutSidenav">
+    <partial name="_NewSidenav" />
+    <div id="layoutSidenav_content">
+        <main>
+            <!-- Main page content-->
+            <div class="container-xl px-4 mt-4">
+                <header class="card card-waves">
+                    <div class="card-body px-5 pt-5 pb-0">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-lg-8">
+                                <h1 class="text-primary">Instructional Materials</h1>
+                                <p class="lead mb-4">
                                     In this page, we are presenting the modules and materials for Computer Engineering courses which includes paper works, concept and process, design, electronic system, and software programming subjects. Our team specifically aims to show the records of how these creative ideas made which will help our fellow computer engineering students illustrate the product for their project and improve the overall understanding of their project. It also allows the design team to comprehend the product's function, and target audience. Making a prototype can thus highlight unanticipated physical, technical or financial constraints and will absolutely save us time and money.
-                                </h6>
-
+                                </p>
                             </div>
+                            <div class="col-lg-4"><img class="img-fluid" src="/new/assets/img/illustrations/problem-solving.svg" /></div>
+                        </div>
+                        <nav class="nav nav-borders">
+                            <a class="nav-link active ms-0" href="#!">Getting Started</a>
+                            <a class="nav-link" href="#!">Tutorials</a>
+                            <a class="nav-link" href="#!">Licensing</a>
+                            <a class="nav-link" href="#!">Terms &amp; Conditions</a>
+                            <a class="nav-link" href="#!">Support</a>
+                        </nav>
+                    </div>
+                </header>
+                <h4 class="mb-0 mt-5">Course Materials</h4>
+                <hr class="mt-2 mb-4" />
+                <div class="row">
+                    @if (Model.Count() == 0)
+                    {
+                        <div class="col-4 text-center">
+                        </div>
+                        <div class="col-4 text-center">
+
+                            <p>No entries found.</p>
 
                         </div>
-
-                    </div>
-
-
-                    @foreach (var prototype in Model)
-                    {
-                        <div class="col-xl-4 col-md-4 mb-4">
-
-                            <a class="card lift shadow mb-4" asp-controller="Subjects" asp-action="SubjectsDetail" asp-route-id="@prototype.Id">
-                                <img src="@Url.Content($"~/Uploads/Subjects/{prototype.ImageUrl}")" style="max-height: 300px" class="card-img-top" alt="@prototype.Subject" />
-                                <h5 class="card-title p-3 cut-text font-weight-bold" style="max-height:40px; min-height:40px">@prototype.Code</h5>
-
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item cut-text" style="max-height:40px; min-height:40px">
-                                        @prototype.Subject
-                                    </li>
-                                </ul>
-                                
-                                
-
-                            </a>
+                        <div class="col-4 text-center">
                         </div>
                     }
-
-                    
-                    
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 mb-4">
+                                <!-- Knowledge base category card-->
+                                <a class="card lift shadow-none rounded-xl" asp-controller="Subjects" asp-action="SubjectsDetail" asp-route-id="@item.Id">
+                                    <img class="card-img-top" src="@Url.Content($"~/Uploads/Subjects/{item.ImageUrl}")" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-teal">
+                                            <i class="me-2" data-feather="book"></i>
+                                            @item.Code
+                                        </h5>
+                                        <p class="card-text">@item.Subject</p>
+                                    </div>
+                                    <div class="card-footer"><div class="small text-muted">@item.PostedDate.ToString("MMM dd, yyyy")</div></div>
+                                </a>
+                            </div>
+                        }
+                    }
                 </div>
-
-                
             </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- End of Main Content -->
-        <!-- Footer -->
-        <partial name="_Footer" />
-
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-
-
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
+        </main>
+        <partial name="_NewFooter" />
     </div>
 </div>
-
-
-
-
-
-
-
-

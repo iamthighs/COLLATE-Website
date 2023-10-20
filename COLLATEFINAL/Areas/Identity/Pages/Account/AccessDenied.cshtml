@@ -4,42 +4,26 @@
     ViewData["Title"] = "Access denied";
 }
 
-
-<div class="container">
-
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
-
-        <div class="col-xl-10 col-lg-12 col-md-9">
-
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-register-image"></div>
+<div class="bg-img-cover" style="background-image: url('/new/assets/img/bg-scene.svg')">
+    <div id="layoutError">
+        <div id="layoutError_content">
+            <main>
+                <div class="container-xl px-4">
+                    <div class="row justify-content-center">
                         <div class="col-lg-6">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                                        <img src="~/Logo PNG.png" alt="Logo">
-                                    </a>
-                                </div>
-                                <br>
-                                <h1 class="text-center class=" text-danger"">@ViewData["Title"]</h1>
-                                <hr>
-                                <p class="text-danger text-center">You do not have access to this resource.</p>
-                                <div class="text-center">
-                                    <a class="small" asp-area="" asp-controller="Home" asp-action="Index" >Back to Home</a>
-                                </div>
+                            <div class="text-center mt-4">
+                                <img class="img-fluid p-4" src="~/new/assets/img/illustrations/403-error-forbidden.svg" alt="" />
+                                <p class="text-light">Access to this page from the server is not authorized.</p>
+                                <a class="text-arrow-icon fw-bolder text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                                    <i class="ms-0 me-1" data-feather="arrow-left"></i>
+                                    Return to Home
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+            </main>
         </div>
-
+        <partial name="_NewFooterV2"/>
     </div>
-
 </div>
-

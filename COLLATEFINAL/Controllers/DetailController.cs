@@ -34,6 +34,26 @@ namespace COLLATEFINAL.Controllers
 
             return View(detail);
         }
+        public IActionResult ResearchPapersDetail(int id, string pageType)
+        {
+            List<ResearchPapersModel> researchPapersModels = _context.ResearchPapers.ToList();
+
+            var detail = researchPapersModels.FirstOrDefault(c => c.Id == id);
+            ViewBag.PageType = pageType;
+            // Retrieve data from the database
+            var itemsFromDatabase = _context.ResearchPapers.ToList();
+
+            var category = itemsFromDatabase.Select(item => new SelectListItem
+            {
+                Value = item.Id.ToString(),
+                Text = item.ImageUrl
+            }).ToList();
+
+            ViewBag.CountResearch = _context.ResearchPapers.Count();
+            ViewBag.pageType = pageType;
+            ViewBag.category = category;
+            return View(detail);
+        }
         public IActionResult GameAndWebDevDetail(int id, string pageType)
         {
             List<GameAndWebDevModel> gameAndWebDevModels = _context.GameAndWebDevelopments.Include(p => p.Likes).Include(p => p.Comments).ToList();
@@ -86,6 +106,8 @@ namespace COLLATEFINAL.Controllers
             return RedirectToAction(nameof(GameAndWebDevDetail), new { id = postId });
         }
 
+        
+
         [HttpPost]
         public IActionResult AddComment(int postId, string content)
         {
@@ -109,26 +131,7 @@ namespace COLLATEFINAL.Controllers
             return RedirectToAction(nameof(GameAndWebDevDetail), new { id = postId });
         }
 
-        public IActionResult ResearchPapersDetail(int id, string pageType)
-        {
-            List<ResearchPapersModel> researchPapersModels = _context.ResearchPapers.ToList();
-
-            var detail = researchPapersModels.FirstOrDefault(c => c.Id == id);
-            ViewBag.PageType = pageType;
-            // Retrieve data from the database
-            var itemsFromDatabase = _context.ResearchPapers.ToList();
-
-            var category = itemsFromDatabase.Select(item => new SelectListItem
-            {
-                Value = item.Id.ToString(),
-                Text = item.ImageUrl
-            }).ToList();
-
-
-            ViewBag.pageType = pageType;
-            ViewBag.category = category;
-            return View(detail);
-        }
+        
 
 
         

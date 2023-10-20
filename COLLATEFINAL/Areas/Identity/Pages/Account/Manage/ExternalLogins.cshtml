@@ -45,26 +45,7 @@
             <p>
                 @foreach (var provider in Model.OtherLogins)
                 {
-                    if (provider.Name == "Google")
-                    {
-
-                        <button type="submit" class="btn btn-inline-block btn-google" value="@provider.Name"
-                    title="Log in using your @provider.DisplayName account" name="provider">
-
-                            <i class="fab fa-google fa-align-center social-icon" style=""></i>
-                        </button>
-
-                    }
-                    else if (provider.Name == "Facebook")
-                    {
-
-                        <button class="btn-inline-block btn btn-facebook" type="submit" value="@provider.Name"
-                    title="Log in using your @provider.DisplayName account" name="provider">
-
-                            <i class="fab fa-facebook-f fa-align-center social-icon"></i>
-                        </button>
-
-                    }
+                    <button id="@($"link-login-button-{provider.Name}")" type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                 }
             </p>
         </div>

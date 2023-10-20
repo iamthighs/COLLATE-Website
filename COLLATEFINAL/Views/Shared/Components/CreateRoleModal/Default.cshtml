@@ -1,0 +1,29 @@
+﻿@model IEnumerable<IdentityRole>
+
+<!-- Create group modal-->
+                    <div class="modal fade" id="createRoleModal" tabindex="-1" role="dialog" aria-labelledby="createGroupModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="createGroupModalLabel">Create New Role</h5>
+                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form asp-controller="Administration" asp-action="CreateRole" method="post">
+                                <div class="modal-body">
+                                    
+                                        <div class="mb-0">
+                                            <label class="mb-1 small text-muted" for="formGroupName">Role Name</label>
+                                            <input type="text" id="roleName" name="roleName" class="form-control" placeholder="Enter role name..." required />
+                                        </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-danger-soft text-danger" data-bs-dismiss="modal">Cancel</a>
+                                    <button class="btn btn-primary-soft text-primary" type="submit">Create New Role</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+

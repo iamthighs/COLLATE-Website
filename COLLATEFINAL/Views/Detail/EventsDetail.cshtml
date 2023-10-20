@@ -92,66 +92,23 @@
     }
 
 </style>
-<!-- Page Wrapper -->
-<div id="wrapper">
 
-    <!-- Sidebar -->
-    <partial name="_ManageSidebar" />
-    <!-- End of Sidebar -->
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-
-
-
-
-
-
-
-
-                    <!-- Nav Item - User Information -->
-                    <partial name="_LoginPartialProfileUser" />
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                <ul class="breadcrumb">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-                    <li><a asp-area="" asp-controller="Events" asp-action="Index">Events</a></li>
-                    <li class="text-dark">@Model.Category</li>
-                </ul>
-
+<partial name="_NewNavbar" />
+<div id="layoutSidenav">
+    <partial name="_NewSidenav" />
+    <div id="layoutSidenav_content">
+        <main>
+            <header class="py-10 mb-4 bg-img-cover overlay overlay-50 overlay-success" style="background-image: url('/Uploads/Events/@Model.ImageUrl')">
+                <div class="container-xl px-4">
+                    <div class="text-center z-1">
+                        <h6 class="m-0 fw-bolder text-light text-center" style="font-size:3vw;">@Model.Title</h6>
+                    </div>
+                </div>
+            </header>
+            <!-- Main page content-->
+            <div class="container-xl px-4">
                 <div class="row">
-                    <div class="col-6 card shadow mb-4">
-                        
-                    </div>
-                    <div class="col-6 card shadow mb-4">
-                    </div>
-
                     <div class="col-12 card shadow mb-4">
-                        <div class="card-header bg-success text-center">
-                            <h6 class="m-0 font-weight-bold text-light text-center" style="font-size:3vw;">@Model.Title</h6>
-                        </div>
-
                         <div class="row card-body text-justify">
 
                             <div class="col-xl-4 col-lg-5">
@@ -160,16 +117,16 @@
                                     Date: @Model.PostedDate.ToString("MMM dd, yyyy")
                                 </p>
 
-                                
+
                                 @if (Model.IsDone == true)
                                 {
-                                    <p class="text-danger">This Event is already conducted. Registration is not available anymore.</p>
+                                    <p class="text-center text-danger">This Event was already conducted. Registration is not available anymore.</p>
+                                    
                                 }
                                 else
                                 {
                                     <a class="btn btn-primary" asp-area="" asp-controller="Events" asp-action="RegisterForEvent" asp-route-id="@Model.Id">Register Here PUPian!</a>
-                                        
-                                    
+
                                 }
                             </div>
 
@@ -177,76 +134,30 @@
                                 <div class="text-dark" style="text-indent:50px">
                                     @Html.Raw(Model.Content)
                                 </div>
-                                
+
                             </div>
                             <div class="card-body">
                                 @if (Model.IFrame == "none")
                                 {
-                                    <p>There is no available Video for this Event.</p>
+                                    <p class="text-center"><span class="badge bg-red-soft text-red">There's no available Video for this Event.</span></p>
                                 }
                                 else
                                 {
                                     @Html.Raw(Model.IFrame)
-                                    
+
                                     //<iframe class="col-12" height="480" src="" allow="autoplay" frameborder="1">
                                     //</iframe>
                                 }
-                                
-
-                                
-
                             </div>
-
-                            
-
-
                         </div>
-
-
                     </div>
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
 
-        </div>
-        <!-- End of Main Content -->
-        <!-- Footer -->
-        <partial name="_Footer" />
-
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
+        </main>
+        <partial name="_NewFooter" />
     </div>
 </div>
-
-
 <script>
     let slideIndex = 0;
     showSlides();

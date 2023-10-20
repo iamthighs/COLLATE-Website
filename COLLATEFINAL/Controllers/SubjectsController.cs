@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace COLLATEFINAL.Controllers
 {
-    [Authorize(Roles = "Administrator,Faculty", Policy = "InstructionalPolicy")]
+    [Authorize(Roles = "Administrator,Faculty")]
     public class SubjectsController : BaseController
     {
 
@@ -152,12 +152,6 @@ namespace COLLATEFINAL.Controllers
                 {
                     model.IsSelected = false;
                 }
-
-                
-                
-                
-                
-               
             }
 
             foreach (var videos in _context.Videos)

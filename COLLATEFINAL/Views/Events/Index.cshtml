@@ -93,217 +93,96 @@
     }
 
 </style>
-<!-- Page Wrapper -->
-<div id="wrapper">
 
-    <!-- Sidebar -->
-    <partial name="_ManageSidebar" />
-    <!-- End of Sidebar -->
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-                    
-
-
-
-
-                    
-
-                    <!-- Nav Item - User Information -->
-                    <partial name="_LoginPartialProfileUser" />
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                <ul class="breadcrumb">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-                    <li class="text-dark">Events</li>
-                </ul>
-
-                
-                
+<partial name="_NewNavbar" />
+<div id="layoutSidenav">
+    <partial name="_NewSidenav" />
+    <div id="layoutSidenav_content">
+        <main>
+            @foreach (var pic in Model)
+            {
+                <header class="py-10 mb-4 bg-img-cover mySlides overlay overlay-50 overlay-success" style="background-image: url('/Uploads/Events/@pic.ImageUrl')">
+                <div class="container-xl px-4">
+                    <div class="text-center z-1">
+                        <img src="~/Logo PNG1.png" style="height:100px" />
+                        <h1 class="text-white fw-bolder">Collection of Latest Laboratory Activities, Trainings & Engagements</h1>
+                        <p class="lead mb-0 text-white">A project website of SCENE organization designed to provide secure and efficient data management for Computer Engineering students.</p>
+                    </div>
+                </div>
+            </header>
+            }
+            <!-- Main page content-->
+            <div class="container-xl px-4 mt-4">
+                <h4 class="mb-0 mt-5">Events</h4>
+                <hr class="mt-2 mb-4" />
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4">
-                        <div class="card lift shadow mb-4 accordion" id="accordionSidebar">
-                            @foreach (var user in Model)
-                            {
-                            <!-- Nav Item - Pages Collapse Menu -->
-                            <div class="nav-item">
-                                    <a class="d-block card-header py-3 collapsed" href="#" data-toggle="collapse" data-target="#@user.Category@user.Id"
-                                   aria-expanded="true" aria-controls="colllapseWeb">
-                                    <h6 class="m-0 font-weight-bold text-primary">@user.Title</h6>
-
+                    <div class="col-xl-8 col-lg-4">
+                        @foreach (var item in Model)
+                        {
+                            <div class="card card-collapsable card-scrollable shadow-none" style="max-height:30rem">
+                                <a class="card-header" href="#collapseCard_@item.Id" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCard_@item.Id">
+                                    @item.Title
+                                    <div class="card-collapsable-arrow">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </a>
-                                <div id="@user.Category@user.Id" class="collapse" aria-labelledby="headingWeb" data-parent="#accordionSidebar">
-                                    <div class="bg-white py-2 collapse-inner rounded">
-                                        <div class="card-body">
-                                           <ul>
-                                                
-                                            
-                                                @Html.Raw(user.Objectives)
-                                           </ul>
+                                <div class="collapse" id="collapseCard_@item.Id">
+                                    <div class="card-body">
+                                        <ul>
+                                            @Html.Raw(item.Objectives)
+                                        </ul>
+                                        <div class="text-center">
+                                            <a href="@Url.Action("EventsDetail","Detail", new { id = item.Id, pageType = "Events"})" class="d-sm-inline-block btn btn-sm btn-info shadow-sm">
+                                                <i class="fas fa-info-circle text-white-50"></i> See Full Details
+                                            </a>
 
-                                            
-                                            <div class="text-center">
-                                                <a href="@Url.Action("EventsDetail","Detail", new { id = user.Id, pageType = "Events"})" class="d-sm-inline-block btn btn-sm btn-info shadow-sm">
-                                                    <i class="fas fa-info-circle text-white-50"></i> See Full Details
-                                                </a>
-
-                                            </div>
-                                                
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
-                            }
-                            
-                            
-
-                        </div>
+                        }
                     </div>
                     <div class="col-xl-4 col-lg-4">
-                        <div class="card lift shadow mb-4 p-0">
-                            <div class="card-body p-0">
-                                <div class="card-header bg-success py-3 text-center">
-                                    <h6 class="m-0 font-weight-bold text-light text-center">@ViewData["Title"]</h6>
-                                </div>
-                                <div class="chart-area-slideshow text-center">
-
-
-                                   @foreach (var pic in Model)
-                                   {
-                                        <div class="mySlides">
-                                            <a class="chart-area-slideshow" href="@Url.Action("EventsDetail","Detail", new { id = pic.Id, pageType = "Events"})">
-                                                <div class="image">
-                                                    <img class="chart-area-slideshow" src="@Url.Content($"~/Uploads/Events/{@pic.ImageUrl}")">
-
-                                                </div>
-                                                <div class="details">
-                                                    <div class="center">
-                                                        <p class="small">@pic.Title</p>
-
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            
-                                        </div>
-
-                                        
-                                   }
-
-
-
-
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                    <div class="col-xl-4 col-lg-4">
-                        
-                        <div class="card lift shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 bg-success text-center">
-                                <h6 class="m-0 font-weight-bold text-light">Recent Facebook posts</h6>
-                            </div>
+                        <div class="card mb-4 shadow-none">
                             <!-- Card Body -->
                             <div class="card-body p-0">
-
-                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FPUP.SCENE.ORG&tabs=timeline&width=350&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId=1567968913599100" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>                            
+                                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FPUP.SCENE.ORG&tabs=timeline&width=350&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId=1567968913599100" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
-            <!-- /.container-fluid -->
 
-        </div>
-        <!-- End of Main Content -->
-        <!-- Footer -->
-        <partial name="_Footer" />
-
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
+        </main>
+        <partial name="_NewFooter" />
     </div>
 </div>
-
 
 <script>
     let slideIndex = 0;
-showSlides();
+    showSlides();
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
 
-function showSlides() {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides, 3000); // Change image every 2 seconds
-}
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000); // Change image every 2 seconds
+    }
 </script>
 
 

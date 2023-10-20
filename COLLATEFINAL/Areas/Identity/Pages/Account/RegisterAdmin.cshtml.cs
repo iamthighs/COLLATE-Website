@@ -11,7 +11,6 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using COLLATEFINAL.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using COLLATEFINAL.Data;
 
 namespace COLLATEFINAL.Areas.Identity.Pages.Account
 {
@@ -29,17 +29,16 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
         private readonly UserManager<AppIdentityUser> _userManager;
         private readonly IUserStore<AppIdentityUser> _userStore;
         private readonly IUserEmailStore<AppIdentityUser> _emailStore;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<RegisterAdminModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IWebHostEnvironment _webhost;
         private readonly RoleManager<IdentityRole> _roleManager;
-
 
         public RegisterAdminModel(
             UserManager<AppIdentityUser> userManager,
             IUserStore<AppIdentityUser> userStore,
             SignInManager<AppIdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<RegisterAdminModel> logger,
             IEmailSender emailSender,
             IWebHostEnvironment webhost,
             RoleManager<IdentityRole> roleManager)
@@ -66,6 +65,7 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public string ReturnUrl { get; set; }
+        public IFormFile? CoverImage { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -85,37 +85,24 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "Email Address")]
+            [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Required]
             [Display(Name = "First Name")]
-            public string First { get; set; }
-
-            
+            public string FirstName { get; set; }
 
             [Required]
             [Display(Name = "Last Name")]
-            public string Last { get; set; }
+            public string LastName { get; set; }
+            public Roles RoleName { get; set; }
+
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(15, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Password")]
-            public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
         }
 
 
@@ -125,101 +112,69 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(IFormFile ImageUrl, string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            var saveimg = Path.Combine(_webhost.WebRootPath, "UserImages", ImageUrl.FileName);
 
-
-            if (saveimg == null || saveimg.Length == 0 || ImageUrl.FileName == null || ImageUrl.FileName.Length == 0)
-            {
-
-                ModelState.AddModelError("", "Uploaded file is empty or null.");
-            }
-
-            string imgext = Path.GetExtension(ImageUrl.FileName);
-
-
-
-            if (imgext == ".jpg" || imgext == ".png")
-
-            {
-
-
-                using var uploadimg = new FileStream(saveimg, FileMode.Create);
-
-                await ImageUrl.CopyToAsync(uploadimg);
-               
-
-            }
-            else
-            {
-                ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-            }
 
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
-                user.LastName = Input.Last;
-                user.FirstName = Input.First;
-                user.ImageUrl = ImageUrl.FileName;
-
-                //await _userStore.SetUserNameAsync(user, Input.First, CancellationToken.None);
-
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                string uniqueImg = UploadedFile(user);
+                user.ImageUrl = uniqueImg;
+                user.JoinedDate = DateTime.Now;
+                string password = "P@ssw0rd";
+                user.EmailConfirmed = true;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
-
-                if (result.Succeeded)
+                string imgext = Path.GetExtension(uniqueImg);
+                if (imgext == ".jpg" || imgext == ".png")
                 {
-                    _logger.LogInformation("User created a new account with password.");
-                    if (Input.Email == "collatewebsite@gmail.com") 
+                    var result = await _userManager.CreateAsync(user, password);
+
+
+
+                    if (result.Succeeded)
                     {
-                        user.EmailConfirmed = true;
-                        user.PhoneNumberConfirmed = true;
-                        await _roleManager.CreateAsync(new IdentityRole(Roles.Administrator.ToString()));
-                        await _roleManager.CreateAsync(new IdentityRole(Roles.Student.ToString()));
-                        await _roleManager.CreateAsync(new IdentityRole(Roles.Faculty.ToString()));
-                        await _roleManager.CreateAsync(new IdentityRole(Roles.sceneOfficer.ToString()));
+                        _logger.LogInformation("User created a new account with password.");
+
+                        _userManager.AddToRoleAsync(user, Input.RoleName.ToString()).Wait();
+
+                        await _emailSender.SendEmailAsync(Input.Email, "You are added as New User",
+                            $"Welcome to COLLATE {Input.FirstName} {Input.LastName}!");
 
 
-                        _userManager.AddToRoleAsync(user, Roles.Administrator.ToString()).Wait();
+                        return RedirectToAction("ListUsers", "Administration");
+
                     }
-                    user.EmailConfirmed = true;
-                    user.PhoneNumberConfirmed = true;
-                    _userManager.AddToRoleAsync(user, Roles.Student.ToString()).Wait();
-
-                    
-
-                    await _emailSender.SendEmailAsync("collatewebsite@gmail.com", "Newly Registered User",
-                        $"A new user named <strong>{Input.First} {Input.Last}</strong>  has just signed up.");
-
-                    await _emailSender.SendEmailAsync(Input.Email, "COLLATE Website",
-                        $"The Administrator was successfully create your account in COLLATE. You may login now. The Default Password is 'P@ssw0rd', please change this immediately. Thank you!");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    foreach (var error in result.Errors)
                     {
-                        TempData["success"] = "Successfully Registered a User";
-                        return LocalRedirect(returnUrl);
+                        ModelState.AddModelError(string.Empty, error.Description);
                     }
-                    else
-                    {
-                        TempData["success"] = "Successfully Registered a User";
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+        private string UploadedFile(AppIdentityUser user)
+        {
+            string uniqueFileName = user.ImageUrl;
+            if (CoverImage != null)
+            {
+                string uploadsFolder = Path.Combine(_webhost.WebRootPath, "UserImages");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + CoverImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    CoverImage.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
 
         private AppIdentityUser CreateUser()

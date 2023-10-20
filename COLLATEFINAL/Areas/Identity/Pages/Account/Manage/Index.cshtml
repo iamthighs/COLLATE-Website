@@ -1,13 +1,9 @@
 ﻿@page
 @model IndexModel
-
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
-
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 <style>
     .valid {
         color: green;
@@ -17,98 +13,80 @@
         color: red;
     }
 </style>
-<div class="row">
-    
-    <!-- Main page content-->
-    <div class="container-xl px-4 mt-4">
+<form id="profile-form" method="post" enctype="multipart/form-data">
+    <div class="row">
+                            <div class="col-xl-4">
+                                <!-- Profile picture card-->
+                                <div class="card mb-4 mb-xl-0">
+                                    <div class="card-header">Profile Picture</div>
+                                    <div class="card-body text-center">
+                                        <!-- Profile picture image-->
+                                        <img class="img-account-profile rounded-circle mb-2" id="CoverImagePrv" src="~/UserImages/@(User.FindFirst("UserProfile").Value)" alt="" />
+                                        <!-- Profile picture help block-->
+                                        <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                                        <!-- Form Group (profile picture)-->
+                                        <div class="col-md-12 mb-3">
+                                            <label class="small mb-1">Upload New Profile Picture</label>
+                                            <div class="custom-file">
+                                                <input asp-for="CoverImage" class="form-control" id="FLCoverImage" accept="image/png, image/jpeg"
+                                                       onChange="document.getElementById('CoverImagePrv').src = window.URL.createObjectURL(this.files[0])">
+                                                <label class="custom-file-label" for="FLCoverImage"></label>
+                                            </div>
 
-        <partial name="_Notification" />
-
-        <form id="profile-form" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="row">
-            <div class="col-xl-4">
-                <!-- Profile picture card-->
-                <div class="card shadow mb-4 mb-xl-0">
-                    <div class="card-header bg-success py-3 text-center">
-                        <h6 class="m-0 font-weight-bold text-light text-center">Profile Picture</h6>
-                    </div>
-                    <div class="card-body text-center">
-                        <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle mb-2" id="CoverImagePrv" src="~/UserImages/@(User.FindFirst("UserProfile").Value)" alt="" />
-                        <!-- Profile picture help block-->
-                        <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-
-                            <span asp-validation-for="CoverImage" class="text-danger"></span>
-                        
-                    </div>
-                        <!-- Form Group (profile picture)-->
-                        <div class="col-md-12 mb-3">
-                            <label class="small mb-1">Upload New Profile Picture</label>
-                            <div class="custom-file">
-                                <input asp-for="CoverImage" class="custom-file-input" id="FLCoverImage" accept="image/png, image/jpeg"
-                                       onChange="document.getElementById('CoverImagePrv').src = window.URL.createObjectURL(this.files[0])">
-                                <label class="custom-file-label" for="FLCoverImage">Choose File</label>
-                            </div>
-
-                        </div>
-                </div>
-            </div>
-            <div class="col-xl-8">
-                <!-- Account details card-->
-                <div class="card shadow mb-4">
-                    <div class="card-header bg-success py-3 text-center">
-                        <h6 class="m-0 font-weight-bold text-light text-center">Account Details</h6>
-                    </div>
-                    <div class="card-body">
-                        
-                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                            <!-- Form Group (username)-->
-                            <div class="mb-3">
-                                
-                                <label class="small mb-1" for="inputUsername">Email Address</label>
-                                <input asp-for="Username" class="form-control" disabled />
-                            </div>
-                            <!-- Form Row-->
-                            <div class="row gx-3 mb-3">
-                                <!-- Form Group (first name)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="inputFirstName">First name</label>
-                                    <input asp-for="Input.NewFirstName" id="inputFieldFN" maxlength="50" class="form-control" />
-                                </div>
-                                <!-- Form Group (last name)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="inputLastName">Last name</label>
-                                    <input asp-for="Input.NewLastName" id="inputFieldFN" maxlength="50" class="form-control" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            
-                            <!-- Form Row-->
-                            <div class="row gx-3 mb-3">
-                                <!-- Form Group (phone number)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="inputPhone">Phone number</label>
-                                    <input asp-for="Input.PhoneNumber" id="phoneNumberInput" maxlength="11" class="form-control" />
-                                    <p id="validationMessage"></p>
-                                </div>
-                                <!-- Form Group (profile picture)-->
-                                <div class="col-md-6">
+                            <div class="col-xl-8">
+                                <!-- Account details card-->
+                                <div class="card mb-4">
+                                    <div class="card-header">Account Details</div>
+                                    <partial name="_StatusMessage" for="StatusMessage" />
                                     
+                                    <div class="card-body">
+                                            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+                                            
+                                            <!-- Form Group (username)-->
+                                            <div class="mb-3">
+                                                <label class="small mb-1" for="inputUsername">Username</label>
+                                                <input asp-for="Username" disabled class="form-control" />
+                                            </div>
+                                            <!-- Form Row-->
+                                            <div class="row gx-3 mb-3">
+                                                <!-- Form Group (first name)-->
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="inputFirstName">First name</label>
+                                                    <input class="form-control" asp-for="Input.NewFirstName" value="@(User.FindFirst("UserFirstName").Value)" />
+                                                </div>
+                                                <!-- Form Group (last name)-->
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="inputLastName">Last name</label>
+                                                    <input class="form-control" asp-for="Input.NewLastName" value="@(User.FindFirst("UserLastName").Value)" />
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <!-- Form Row-->
+                                            <div class="row gx-3 mb-3">
+                                                <!-- Form Group (phone number)-->
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="inputPhone">Phone number</label>
+                                                    <input class="form-control" asp-for="Input.PhoneNumber" placeholder="Enter valid phone number" maxlength="11" id="phoneNumberInput" />
+                                                    <p id="validationMessage"></p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                            <!-- Save changes button-->
+                                            <button class="btn btn-primary" type="submit">Save changes</button>
+                                        
+                                    </div>
                                 </div>
-                                
                             </div>
-                            <!-- Save changes button-->
-                            <button class="btn btn-primary" type="submit" id="update-profile-button">Save changes</button>
-                       
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        </form>
     </div>
-</div>
+</form>
 
 
 @section Scripts {
@@ -137,39 +115,8 @@
         // Add a click event listener to the validateButton
         phoneNumberInput.addEventListener("click", validatePhoneNumber);
     </script>
-    <script>
-        var input1 = document.getElementById("inputFieldFN");
-        var input2 = document.getElementById("inputFieldLN");
-        var input3 = document.getElementById("phoneNumberInput");
-        input1.addEventListener("input", function () {
-            var input = input1.value;
-
-            var count = input.length;
-            if (input.length > 50) {
-                input.value = textField.value.slice(0, 50);
-            }
-        });
-        input2.addEventListener("input", function () {
-            var input = input2.value;
-
-            var count = input.length;
-            if (input.length > 50) {
-                input.value = textField.value.slice(0, 50);
-            }
-        });
-        input3.addEventListener("input", function () {
-            var input = input3.value;
-
-            var count = input.length;
-            if (input.length > 11) {
-                input.value = textField.value.slice(0, 11);
-            }
-        });
-
-
-    </script>
     <script type="text/javascript">
-        $(".custom-file-input").on("change", function () {
+        $(".form-control").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });

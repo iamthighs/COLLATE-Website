@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace COLLATEFINAL.Controllers
 {
-    [Authorize(Roles = "Administrator,sceneOfficer", Policy = "ResearchPolicy")]
+    [Authorize(Roles = "Administrator,sceneOfficer")]
     public class ResearchPapersController : BaseController
     {
 

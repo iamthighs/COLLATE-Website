@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace COLLATEFINAL.Controllers
 {
-    [Authorize(Roles = "Administrator,sceneOfficer", Policy = "EventsPolicy")]
+    [Authorize(Roles = "Administrator,sceneOfficer")]
     public class EventsController : BaseController
     {
 

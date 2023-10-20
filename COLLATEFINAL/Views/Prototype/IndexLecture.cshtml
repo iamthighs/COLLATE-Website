@@ -7,6 +7,74 @@
     ViewData["ActivePage"] = ManageSidebar.Prototype;
 }
 
+<partial name="_NewNavbar" />
+<div id="layoutSidenav">
+    <partial name="_NewSidenav" />
+    <div id="layoutSidenav_content">
+        <main>
+            <header class="py-10 mb-4 bg-green">
+                <div class="container-xl px-4">
+                    <div class="text-center">
+                        <h1 class="text-white">Collection of Latest Laboratory Activities, Trainings & Engagements</h1>
+                        <p class="lead mb-0 text-white-50">A project website of SCENE organization designed to provide secure and efficient data management for Computer Engineering students.</p>
+                    </div>
+                </div>
+            </header>
+            <!-- Main page content-->
+            <div class="container-xl px-4">
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <div class="col-lg-12 mb-4">
+                        <!-- Overview -->
+                        <div class="card lift shadow mb-4">
+                            <div class="card-header bg-success py-3 text-center">
+                                <h6 class="m-0 font-weight-bold text-light text-center">Overview</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <h6 class="text-dark text-justify" style="text-indent:50px">
+                                    In this page, we are presenting the inventions and innovations of Students of Computer Engineering with Natural Excellence organization that includes their paper with sample model, concept and process, design, electronic system, and software programming. Our team specifically aims to show the records of these creative ideas to help our fellow computer engineering students illustrate the product for their project and improve the overall understanding of the design. It also allows the design team to comprehend the product's function, and target audience. Making a prototype can thus highlight unanticipated physical, technical or financial constraints and will absolutely save us time and money.
+                                </h6>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    @foreach (var prototype in Model)
+                    {
+                        <div class="col-xl-3 col-md-3 mb-4">
+
+                            <div class="card lift shadow mb-4">
+                                <img src="@Url.Content($"~/PDF/{prototype.FileUrl}")" style="max-height: 300px" class="card-img-top" alt="@prototype.Title" />
+                                <h5 class="card-title p-3 cut-text font-weight-bold" style="max-height:40px; min-height:40px">@prototype.Title</h5>
+
+
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        @prototype.PostedDate.ToString("MMM dd, yyyy")
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+
+            </div>
+
+        </main>
+        <partial name="_NewFooter" />
+    </div>
+</div>
 
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -56,51 +124,7 @@
                     <li class="text-dark">Instructional Materials</li>
                 </ul>
 
-                <!-- Content Row -->
-                <div class="row">
-                    
-                    <div class="col-lg-12 mb-4">
-                        <!-- Overview -->
-                        <div class="card lift shadow mb-4">
-                            <div class="card-header bg-success py-3 text-center">
-                                <h6 class="m-0 font-weight-bold text-light text-center">Overview</h6>
-                            </div>
-                            <div class="card-body text-center">
-                                <h6 class="text-dark text-justify" style="text-indent:50px">
-                                    In this page, we are presenting the inventions and innovations of Students of Computer Engineering with Natural Excellence organization that includes their paper with sample model, concept and process, design, electronic system, and software programming. Our team specifically aims to show the records of these creative ideas to help our fellow computer engineering students illustrate the product for their project and improve the overall understanding of the design. It also allows the design team to comprehend the product's function, and target audience. Making a prototype can thus highlight unanticipated physical, technical or financial constraints and will absolutely save us time and money.
-                                </h6>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    @foreach (var prototype in Model)
-                    {
-                        <div class="col-xl-3 col-md-3 mb-4">
-
-                            <div class="card lift shadow mb-4">
-                                <img src="@Url.Content($"~/PDF/{prototype.FileUrl}")" style="max-height: 300px" class="card-img-top" alt="@prototype.Title" />
-                                <h5 class="card-title p-3 cut-text font-weight-bold" style="max-height:40px; min-height:40px">@prototype.Title</h5>
-
-
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        @prototype.PostedDate.ToString("MMM dd, yyyy")
-                                    </li>
-                                </ul>
-
-
-                            </div>
-                        </div>
-                    }
-
-                    
-                    
-                </div>
-
+               
                 
             </div>
             <!-- /.container-fluid -->

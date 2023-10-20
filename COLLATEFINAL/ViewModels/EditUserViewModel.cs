@@ -30,6 +30,9 @@ namespace COLLATEFINAL.ViewModels
         public IList<string> Roles { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string ImageUrl { get; set; }
+        public DateTime JoinedDate { get; set; }
+        public IFormFile? CoverImage { get; set; }
 
 
     }

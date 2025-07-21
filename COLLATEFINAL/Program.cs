@@ -34,12 +34,14 @@ builder.Services.AddMvc().AddRazorPagesOptions(options =>
 {
     options.FormatterMappings.SetMediaTypeMappingForFormat("pdf", "application/pdf");
 });
+/* temporary comment
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
     {
         options.ClientId = builder.Configuration["App:GoogleClientId"];
         options.ClientSecret = builder.Configuration["App:GoogleClientSecret"];
     });
+*/
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdministratorPolicy",

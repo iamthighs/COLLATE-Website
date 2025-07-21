@@ -1,32 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL.csproj": {}
+    "D:\\Projects\\COLLATEnew\\COLLATEFINAL\\COLLATEFINAL.csproj": {}
   },
   "projects": {
-    "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL.csproj": {
+    "D:\\Projects\\COLLATEnew\\COLLATEFINAL\\COLLATEFINAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL.csproj",
+        "projectUniqueName": "D:\\Projects\\COLLATEnew\\COLLATEFINAL\\COLLATEFINAL.csproj",
         "projectName": "COLLATEFINAL",
-        "projectPath": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL.csproj",
-        "packagesPath": "C:\\Users\\reyna\\.nuget\\packages\\",
-        "outputPath": "E:\\[Summer Semester] BSCpE 3-1 Files\\Web and Mobile Systems\\COLLATEFINAL\\COLLATEFINAL\\COLLATEFINAL\\obj\\",
+        "projectPath": "D:\\Projects\\COLLATEnew\\COLLATEFINAL\\COLLATEFINAL.csproj",
+        "packagesPath": "C:\\Users\\Tyson Cortez\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\COLLATEnew\\COLLATEFINAL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\reyna\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tyson Cortez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net9.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -34,41 +38,47 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
-              "version": "[6.0.16, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.14, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.14, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.12, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -90,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

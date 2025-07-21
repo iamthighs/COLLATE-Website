@@ -21,6 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+    <Folder Include="wwwroot\UserImages\" />
     <Folder Include="wwwroot\PDF\Lectures\" />
     <Folder Include="wwwroot\Uploads\SoftwareProjects\" />
     <Folder Include="wwwroot\Uploads\Subjects\" />

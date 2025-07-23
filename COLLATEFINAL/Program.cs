@@ -1,24 +1,50 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication;
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using COLLATEFINAL.Controllers;
-using COLLATEFINAL.ViewModels;
-using COLLATEFINAL.Models;
 using COLLATEFINAL.Data;
 using COLLATEFINAL.Helpers;
+using COLLATEFINAL.Models;
 using COLLATEFINAL.Services;
-using Microsoft.AspNetCore.Mvc;
+using COLLATEFINAL.ViewModels;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+//azure key vault configuration
+var keyVaultURL = builder.Configuration.GetSection("KeyVault:KeyVault-URL");
+var keyVaultClientId = builder.Configuration.GetSection("KeyVault:ClientId");
+var keyVaultClientSecret = builder.Configuration.GetSection("KeyVault:ClientSecret");
+var keyVaultDirectoryID = builder.Configuration.GetSection("KeyVault:DirectoryID");
+var credential = new ClientSecretCredential(
+    keyVaultDirectoryID.Value!.ToString(),
+    keyVaultClientId.Value!.ToString(),
+    keyVaultClientSecret.Value!.ToString());
+
+builder.Configuration.AddAzureKeyVault(
+    keyVaultURL.Value!.ToString(),
+    keyVaultClientId.Value!.ToString(),
+    keyVaultClientSecret.Value!.ToString(), new DefaultKeyVaultSecretManager());
+
+var client = new SecretClient(
+    new Uri(keyVaultURL.Value!.ToString()),
+    credential);
+
+var azureConnectionString = client.GetSecret("ProdConnection2").Value.Value.ToString();
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+Console.WriteLine($"Using azure connection string: {azureConnectionString}");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(azureConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<AppIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

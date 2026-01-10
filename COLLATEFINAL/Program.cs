@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration.AzureKeyVault;
 using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+/*
 //azure key vault configuration
 var keyVaultURL = builder.Configuration.GetSection("KeyVault:KeyVault-URL");
 var keyVaultClientId = builder.Configuration.GetSection("KeyVault:ClientId");
@@ -35,16 +36,16 @@ builder.Configuration.AddAzureKeyVault(
 var client = new SecretClient(
     new Uri(keyVaultURL.Value!.ToString()),
     credential);
-
-var azureConnectionString = client.GetSecret("ProdConnection2").Value.Value.ToString();
+*/
+// var azureConnectionString = client.GetSecret("ProdConnection2").Value.Value.ToString();
 
 // Add services to the container.
-// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-Console.WriteLine($"Using azure connection string: {azureConnectionString}");
+// Console.WriteLine($"Using azure connection string: {azureConnectionString}");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(azureConnectionString));
+    options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<AppIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

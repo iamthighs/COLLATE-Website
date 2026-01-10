@@ -41,4 +41,20 @@ namespace COLLATEFINAL.Models
         public List<Comment> Comments { get; set; }
 
     }
+
+    public class GameAndWebDevCreateDto
+    {
+        public string Title { get; set; } = default!;
+        public string Description { get; set; } = default!;
+        public string YearAndSection { get; set; } = default!;
+        public IFormFile CoverImage { get; set; } = default!;
+    }
+
+    public class GameAndWebDevUpdateDto
+    {
+        public string Title { get; set; } = default!;
+        public string Description { get; set; } = default!;
+        public string YearAndSection { get; set; } = default!;
+        public IFormFile? CoverImage { get; set; }
+    }
 }

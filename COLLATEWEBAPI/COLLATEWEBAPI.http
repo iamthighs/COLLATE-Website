@@ -1,0 +1,6 @@
+@COLLATEWEBAPI_HostAddress = http://localhost:5240
+
+GET {{COLLATEWEBAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

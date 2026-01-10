@@ -1,0 +1,9 @@
+wwwroot\PDF\Lectures\0194b83a-b3c1-451b-b2e2-b99ffe9c7a5c_rent.pdf
+wwwroot\PDF\ResearchPapers\922b2f04-ee13-4cc4-8185-7de7d32c7846_rent.pdf
+wwwroot\Uploads\Events\ff2eab6c-d8c0-4d8d-b5dc-91a0f6651abb_summy.png
+wwwroot\Uploads\ResearchPapers\0c75997e-ac9d-4c65-a5ff-084bbe22fe14_summy.png
+wwwroot\Uploads\ResearchPapers\39c690d2-f832-4fe5-8389-0dfdc9875c64_summy.png
+wwwroot\Uploads\ResearchPapers\570043c5-1bcf-4dfc-876d-8250d8774b0e_summy.png
+wwwroot\Uploads\SoftwareProjects\ec6a1bcc-ca12-4b05-8819-2d7873f19b4c_Gemini_Generated_Image_hanfuihanfuihanf.png
+wwwroot\UserImages\tys_.jpg
+wwwroot\Uploads\Events\d85c3903-5981-45eb-a6da-dd929fe56bf0_summy.png

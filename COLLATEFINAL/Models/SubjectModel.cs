@@ -88,4 +88,21 @@ namespace COLLATEFINAL.Models
 
 
     }
+
+    public class SubjectCreateDto
+    {
+        [Required]
+        public string Subject { get; set; } = default!;
+
+        [Required]
+        public IFormFile CoverImage { get; set; } = default!;
+    }
+
+    public class SubjectUpdateDto
+    {
+        [Required]
+        public string Subject { get; set; } = default!;
+
+        public IFormFile? CoverImage { get; set; }
+    }
 }

@@ -37,6 +37,40 @@ namespace COLLATEFINAL.Models
         [Display(Name = "Attendees")]
         public ICollection<AppIdentityUser> Attendees { get; set; } = new List<AppIdentityUser>();
     }
+    public class EventsCreateDto
+    {
+        [Required]
+        public string Title { get; set; } = default!;
 
-    
+        [Required]
+        public string Description { get; set; } = default!;
+
+        [Required]
+        public string Category { get; set; } = default!;
+
+        [Required]
+        public DateTime EventDate { get; set; }
+
+        [Required]
+        public IFormFile CoverImage { get; set; } = default!;
+    }
+
+    public class EventsUpdateDto
+    {
+        [Required]
+        public string Title { get; set; } = default!;
+
+        [Required]
+        public string Description { get; set; } = default!;
+
+        [Required]
+        public string Category { get; set; } = default!;
+
+        [Required]
+        public DateTime EventDate { get; set; }
+
+        // Optional on update
+        public IFormFile? CoverImage { get; set; }
+    }
+
 }

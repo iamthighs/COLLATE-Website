@@ -36,7 +36,7 @@
                     <button type="submit" class="btn btn-primary">Register</button>
                 </form>
 
-                <a asp-action="List">Back to List</a>
+                <a href="@Url.Action("EventsDetail", "Detail", new { id = @Model.Id, pageType = "Events" })">Back to List</a>
 
             </div>
 

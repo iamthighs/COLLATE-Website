@@ -249,50 +249,36 @@ namespace COLLATEFINAL.Controllers
             return View(model);
         }
 
-        // POST: SubjectModels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, SubjectModel subjectModel)
+        public IActionResult Edit(int id, EditSubjViewModel model)
         {
-            if (id == null || _context.Subjects == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                TempData["error"] = "Invalid form data.";
+                return View(model); // ✅ correct type
             }
-            if (ModelState.IsValid)
+
+            try
             {
+                var entity = _context.Subjects.Find(id);
+                if (entity == null)
+                    return NotFound();
 
-                string uniqueImg = UploadedFile(subjectModel);
-                subjectModel.ImageUrl = uniqueImg;
-
-
-                string imgext = Path.GetExtension(uniqueImg);
-                if (imgext == ".jpg" || imgext == ".png")
-
-                {
+                entity.Subject = model.Subject;
 
 
-                    _context.Update(subjectModel);
-                    _context.SaveChanges();
-                    TempData["success"] = "Subject updated successfully";
-
-                    return RedirectToAction(nameof(List));
-
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-                    TempData["error"] = "Uploaded file is not a jpg or png file!";
-                }
-
-
-                return RedirectToAction(nameof(Edit));
+                _context.SaveChanges();
+                TempData["success"] = "Subject updated successfully";
+                return RedirectToAction(nameof(List));
             }
-            ModelState.AddModelError("name", "");
-            TempData["error"] = "Error when updating Subject";
-            return View();
+            catch (Exception ex)
+            {
+                TempData["error"] = "Unexpected error occurred.";
+                return View(model);
+            }
         }
+
 
 
         [HttpGet]

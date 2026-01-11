@@ -37,8 +37,8 @@ namespace COLLATEFINAL.Models
         [Display(Name = "Cover Image")]
         [NotMapped]
         public IFormFile? CoverImage { get; set; }
-        public List<Like> Likes { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<Like>? Likes { get; set; }
+        public List<Comment>? Comments { get; set; }
 
     }
 

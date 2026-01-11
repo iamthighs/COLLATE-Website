@@ -125,8 +125,8 @@
                     const tr = document.createElement('tr');
 
                     tr.innerHTML = `
-                        <td><span class="badge bg-blue-soft text-blue">${item.subject}</span></td>
-                        <td>${item.code}</td>
+                        <td><span class="badge bg-blue-soft text-blue">${item.code}</span></td>
+                        <td>${item.subject}</td>
                         <td>${new Date(item.postedDate).toLocaleDateString(undefined, {
                             weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
                         })}</td>

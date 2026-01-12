@@ -73,4 +73,20 @@ namespace COLLATEFINAL.Models
         public IFormFile? CoverImage { get; set; }
     }
 
+    public class EventDto
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public DateTime Date { get; set; }
+        public List<AttendeeDto> Attendees { get; set; }
+    }
+
+    public class AttendeeDto
+    {
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+    }
+
 }

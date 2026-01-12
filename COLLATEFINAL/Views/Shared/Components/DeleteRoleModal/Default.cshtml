@@ -1,20 +1,13 @@
-﻿<div class="modal fade" id="editRoleModal" tabindex="-1" aria-hidden="true">
+﻿<div class="modal fade" id="deleteRoleModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editRoleModalTitle"></h5>
+                <h5 class="modal-title" id="deleteRoleModalTitle"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="editRoleForm" method="post">
+            <form id="deleteRoleForm" method="post">
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="small text-muted mb-1" for="editRoleName">Role Name</label>
-                        <input id="editRoleName"
-                               name="roleName"
-                               type="text"
-                               class="form-control"
-                               required />
-                    </div>
+                    <div class="mb-3" id="deleteRoleModalBody"></div>
                 </div>
 
                 <div class="modal-footer">
@@ -22,7 +15,7 @@
                         Cancel
                     </button>
                     <button type="submit" class="btn btn-primary-soft text-primary">
-                        Save Changes
+                        Delete
                     </button>
                 </div>
             </form>
@@ -33,26 +26,26 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const modalElement = document.getElementById("editRoleModal");
+        const modalElement = document.getElementById("deleteRoleModal");
         const modal = new bootstrap.Modal(modalElement);
 
-        const form = document.getElementById("editRoleForm");
-        const roleNameInput = document.getElementById("editRoleName");
-        const modalTitle = document.getElementById("editRoleModalTitle");
+        const form = document.getElementById("deleteRoleForm");
+        const modalTitle = document.getElementById("deleteRoleModalTitle");
+                const modalBody = document.getElementById("deleteRoleModalBody");
 
         document.body.addEventListener("click", (e) => {
-            const button = e.target.closest(".open-edit-role-modal");
+            const button = e.target.closest(".open-delete-role-modal");
             if (!button) return;
 
             const roleId = button.dataset.id;
             const roleName = button.dataset.name;
 
             // Set modal data
-            roleNameInput.value = roleName;
-            modalTitle.textContent = `Edit Role: ${roleName}`;
+            modalBody.textContent = `Are you sure you want to delete ${roleName}?`;
+            modalTitle.textContent = `Delete Role: ${roleName}`;
 
             // Update form action dynamically
-            form.action = `/Administration/EditRole/${roleId}`;
+            form.action = `/Administration/DeleteRole/${roleId}`;
 
             modal.show();
         });

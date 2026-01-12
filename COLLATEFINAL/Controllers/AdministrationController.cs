@@ -72,7 +72,15 @@ namespace COLLATEFINAL.Controllers
             {
                 if (await userManager.IsInRoleAsync(user, role.Name))
                 {
-                    model.Users.Add(user);
+                    model.Users.Add(new RoleUserDto
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        UserName = user.UserName,
+                        ImageUrl = user.ImageUrl
+                    });
                 }
             }
 

@@ -139,10 +139,10 @@ namespace COLLATEFINAL.Controllers
             }
             else
             {
-                TempData["error"] = "Error when Registering in an Event";
+                TempData["error"] = "This User already registered for this Event";
                 return RedirectToAction("Details", new { id = eventId });
             }
-
+            TempData["error"] = "Error when Registering in an Event";
             return RedirectToAction("Details", new { id = eventId });
         }
 

@@ -59,8 +59,36 @@ namespace COLLATEWEBAPI.Controllers.Api
         public async Task<IActionResult> GetRole(string roleId)
         {
             var role = await _roleManager.FindByIdAsync(roleId);
-            if (role == null) return NotFound();
-            return Ok(role);
+            if (role == null)
+                return NotFound(); // check first
+
+            var roleClaims = await _roleManager.GetClaimsAsync(role);
+
+            var model = new EditRoleViewModel
+            {
+                Id = role.Id,
+                RoleName = role.Name,
+                Claims = roleClaims.Select(c => $"{c.Type} : {c.Value}").ToList(),
+                Users = new List<RoleUserDto>() 
+            };
+
+            foreach (var user in _userManager.Users)
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    model.Users.Add(new RoleUserDto
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        UserName = user.UserName,
+                        ImageUrl = user.ImageUrl 
+                    });
+                }
+            }
+
+            return Ok(model); 
         }
 
         [HttpPut("roles/{roleId}")]
@@ -108,7 +136,7 @@ namespace COLLATEWEBAPI.Controllers.Api
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                result.Add(new { user.Id, user.UserName, user.Email, Roles = roles });
+                result.Add(new { user.Id, user.UserName, user.Email, Roles = roles, user.ImageUrl, user.FirstName, user.LastName});
             }
 
             return Ok(result);

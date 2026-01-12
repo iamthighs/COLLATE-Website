@@ -67,7 +67,10 @@
                         <option value="">Select a user</option>
                         @foreach (var user in GetAllUsers())
                         {
-                            <option value="@user.Id">@user.UserName</option>
+                            if (!Model.Attendees.Contains(user))
+                            {
+                                <option value="@user.Id">@user.UserName</option>
+                            }
                         }
                     </select>
                     <button type="submit" class="btn btn-primary">Add</button>

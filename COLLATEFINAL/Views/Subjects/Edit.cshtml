@@ -63,10 +63,10 @@
                                 <div class="card-body">
                                     @if (Model.Lectures.Any())
                                     {
-                                        foreach (var user in Model.Lectures)
+                                        foreach (var lecture in Model.Lectures)
                                         {
 
-                                            <h5 class="card-title">@user.Title</h5>
+                                            <h5 class="card-title">@lecture.Title</h5>
 
 
                                         }
@@ -89,21 +89,17 @@
                                 <div class="card-body">
                                     @if (Model.Videos.Any())
                                     {
-
-                                        foreach (var user in Model.Videos)
+                                        @foreach (var video in Model.Videos)
                                         {
-                                            if (Model.IsSelected == true)
-                                            {
-                                                <h5 class="card-title">@user.Title</h5>
-
-                                            }
+                                            <h5 class="card-title">@video.Title</h5>
                                         }
                                     }
                                     else
                                     {
-                                        <h5 class="card-title">None at this moment</h5>
+                                        <h5 class="card-title text-muted">None at this moment</h5>
                                     }
                                 </div>
+
                                 <div class="card-footer">
                                     <a asp-action="CreateVideos" asp-controller="Prototype" class="btn btn-primary">Add Video</a>
                                     <a asp-action="ListVideos" asp-controller="Prototype" class="btn btn-danger">Videos List</a>

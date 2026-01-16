@@ -1,15 +1,17 @@
-﻿using COLLATEFINAL.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using COLLATEFINAL.Common;
 using COLLATEFINAL.Data;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using COLLATEFINAL.Data.Migrations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Authorization;
-using COLLATEFINAL.Common;
+using COLLATEFINAL.Models;
+using COLLATEFINAL.Repository;
+using COLLATEFINAL.Services;
 using COLLATEFINAL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace COLLATEFINAL.Controllers
 {
@@ -19,11 +21,15 @@ namespace COLLATEFINAL.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment webHostEnvironment;
-        
-        public PrototypeController(ApplicationDbContext context, IWebHostEnvironment webHost)
+        private readonly BulkRepository _bulkRepository;
+        private readonly SampleImportService _sampleImportService;
+
+        public PrototypeController(ApplicationDbContext context, IWebHostEnvironment webHost, BulkRepository bulkRepository, SampleImportService sampleImportService)
         {
             _context = context;
             webHostEnvironment = webHost;
+            _bulkRepository = bulkRepository;
+            _sampleImportService = sampleImportService;
         }
 
         [AllowAnonymous]
@@ -533,6 +539,60 @@ namespace COLLATEFINAL.Controllers
         private bool VideosModelExists(int id)
         {
             return (_context.Videos?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpPost]
+        public IActionResult BulkImportLectures(IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                TempData["error"] = "Please select a valid file for import.";
+                return RedirectToAction(nameof(ListLectures));
+            }
+
+            try
+            {
+                // Parse the uploaded file and create a collection of objects.
+                var samples = _sampleImportService.ParseCsvFile<LectureModel, LectureCsvMap>(file);
+
+                // Insert the samples into the database.
+                _bulkRepository.BulkInsertEntities(samples);
+
+                TempData["success"] = "Bulk import of lectures successful.";
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "An error occurred during the bulk import: " + ex.Message;
+            }
+
+            return RedirectToAction(nameof(ListLectures));
+        }
+
+        [HttpPost]
+        public IActionResult BulkImportVideos(IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                TempData["error"] = "Please select a valid file for import.";
+                return RedirectToAction(nameof(ListVideos));
+            }
+
+            try
+            {
+                // Parse the uploaded file and create a collection of objects.
+                var samples = _sampleImportService.ParseCsvFile<VideosModel, VideoCsvMap>(file);
+
+                // Insert the samples into the database.
+                _bulkRepository.BulkInsertEntities(samples);
+
+                TempData["success"] = "Bulk import of videos successful.";
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "An error occurred during the bulk import: " + ex.Message;
+            }
+
+            return RedirectToAction(nameof(ListVideos));
         }
     }
 }

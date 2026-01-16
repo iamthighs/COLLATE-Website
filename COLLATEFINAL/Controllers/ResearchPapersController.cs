@@ -1,16 +1,18 @@
-﻿using COLLATEFINAL.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using COLLATEFINAL.Common;
 using COLLATEFINAL.Data;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using COLLATEFINAL.Data.Migrations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using COLLATEFINAL.Models;
+using COLLATEFINAL.Repository;
+using COLLATEFINAL.Services;
 using Microsoft.AspNetCore.Authorization;
-using COLLATEFINAL.Common;
-using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace COLLATEFINAL.Controllers
 {
@@ -20,14 +22,17 @@ namespace COLLATEFINAL.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly BulkRepository _bulkRepository;
+        private readonly SampleImportService _sampleImportService;
 
 
 
-        public ResearchPapersController(ApplicationDbContext context, IWebHostEnvironment webHost)
+        public ResearchPapersController(ApplicationDbContext context, IWebHostEnvironment webHost, BulkRepository bulkRepository, SampleImportService sampleImportService)
         {
             _context = context;
             webHostEnvironment = webHost;
-            
+            _bulkRepository = bulkRepository;
+            _sampleImportService = sampleImportService;
 
         }
 
@@ -283,6 +288,33 @@ namespace COLLATEFINAL.Controllers
         private bool ResearchPaperModelExists(int id)
         {
             return (_context.ResearchPapers?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpPost]
+        public IActionResult BulkImportSamples(IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                TempData["error"] = "Please select a valid file for import.";
+                return RedirectToAction("List");
+            }
+
+            try
+            {
+                // Parse the uploaded file and create a collection of objects.
+                var samples = _sampleImportService.ParseCsvFile<ResearchPapersModel, ResearchPaperCsvMap>(file);
+
+                // Insert the samples into the database.
+                _bulkRepository.BulkInsertEntities(samples);
+
+                TempData["success"] = "Bulk import of research papers successful.";
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "An error occurred during the bulk import: " + ex.Message;
+            }
+
+            return RedirectToAction("List");
         }
     }
 }

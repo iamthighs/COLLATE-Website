@@ -4,6 +4,7 @@ using COLLATEFINAL.Controllers;
 using COLLATEFINAL.Data;
 using COLLATEFINAL.Helpers;
 using COLLATEFINAL.Models;
+using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
 using COLLATEFINAL.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -54,6 +55,8 @@ builder.Services.AddDefaultIdentity<AppIdentityUser>(options => options.SignIn.R
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUserClaimsPrincipalFactory<AppIdentityUser>, AppIdentityUserClaimsPrincipalFactory>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddScoped<SampleImportService>();
+builder.Services.AddScoped<BulkRepository>();
 builder.Services.AddMvc().AddRazorPagesOptions(options =>
 {
     options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());

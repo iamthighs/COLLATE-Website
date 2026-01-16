@@ -1,17 +1,19 @@
-﻿ using COLLATEFINAL.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using COLLATEFINAL.Common;
 using COLLATEFINAL.Data;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using COLLATEFINAL.Data.Migrations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Authorization;
-using COLLATEFINAL.Common;
-using Microsoft.AspNetCore.Identity;
-using System.Data;
+ using COLLATEFINAL.Models;
+using COLLATEFINAL.Repository;
+using COLLATEFINAL.Services;
 using COLLATEFINAL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
+using System.IO;
 
 namespace COLLATEFINAL.Controllers
 {
@@ -21,11 +23,15 @@ namespace COLLATEFINAL.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly BulkRepository _bulkRepository;
+        private readonly SampleImportService _sampleImportService;
 
-        public SubjectsController(ApplicationDbContext context, IWebHostEnvironment webHost)
+        public SubjectsController(ApplicationDbContext context, IWebHostEnvironment webHost, BulkRepository bulkRepository, SampleImportService sampleImportService)
         {
             _context = context;
             webHostEnvironment = webHost;
+            _bulkRepository = bulkRepository;
+            _sampleImportService = sampleImportService;
         }
 
         [AllowAnonymous]
@@ -100,83 +106,42 @@ namespace COLLATEFINAL.Controllers
             return uniqueFileName;
         }
 
-        
+
         [HttpGet]
-        // GET: SubjectModels/Edit/5
         public IActionResult Edit(int id)
         {
-
-            // Retrieve data from the database
-            var itemsFromDatabase = _context.Subjects.ToList();
-
-            // Create a list of SelectListItem
-            var category = itemsFromDatabase.Select(item => new SelectListItem
-            {
-                Value = item.Subject, 
-                Text = item.Subject 
-            }).ToList();
-
-            ViewBag.category = category;
-
-            if (id == null || _context.Subjects == null)
-            {
+            if (_context.Subjects == null)
                 return NotFound();
-            }
 
             var subject = _context.Subjects.Find(id);
-
             if (subject == null)
-            {
                 return NotFound();
-            }
+
+            ViewBag.category = _context.Subjects
+                .Select(s => new SelectListItem
+                {
+                    Value = s.Subject,
+                    Text = s.Subject
+                })
+                .ToList();
 
             var model = new EditSubjViewModel
             {
                 Id = subject.Id,
-                Subject = subject.Subject
+                Subject = subject.Subject,
+
+                Lectures = _context.Lectures
+                    .Where(l => l.Subject == subject.Subject)
+                    .ToList(),
+
+                Videos = _context.Videos
+                    .Where(v => v.Subject == subject.Subject)
+                    .ToList()
             };
 
-            
-            foreach (var lecture in _context.Lectures)
-            {
-                if (subject.Subject == lecture.Subject)
-                {
-                    model.IsSelected = true;
-
-                    if (model.IsSelected == true)
-                    {
-                        model.Lectures.Add(lecture);
-                    }
-                }
-                else
-                {
-                    model.IsSelected = false;
-                }
-            }
-
-            foreach (var videos in _context.Videos)
-            {
-
-                if (subject.Subject == videos.Subject)
-                {
-                    model.IsSelected = true;
-
-                    if (model.IsSelected == true)
-                    {
-                        model.Videos.Add(videos);
-                    }
-                }
-                else
-                {
-                    model.IsSelected = false;
-                }
-
-                
-                
-
-            }
             return View(model);
         }
+
 
         [AllowAnonymous]
         [HttpGet]
@@ -420,6 +385,32 @@ namespace COLLATEFINAL.Controllers
         private bool SubjectModelExists(int id)
         {
             return (_context.Subjects?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        [HttpPost]
+        public IActionResult BulkImportSamples(IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                TempData["error"] = "Please select a valid file for import.";
+                return RedirectToAction("List");
+            }
+
+            try
+            {
+                // Parse the uploaded file and create a collection of objects.
+                var samples = _sampleImportService.ParseCsvFile<SubjectModel, SubjectCsvMap>(file);
+
+                // Insert the samples into the database.
+                _bulkRepository.BulkInsertEntities(samples);
+
+                TempData["success"] = "Bulk import of subjects successful.";
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "An error occurred during the bulk import: " + ex.Message;
+            }
+
+            return RedirectToAction("List");
         }
     }
 }

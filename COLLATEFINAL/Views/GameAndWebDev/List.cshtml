@@ -23,6 +23,10 @@
                                 </h1>
                             </div>
                             <div class="col-12 col-xl-auto mb-3">
+                                <button class="btn btn-sm btn-light text-primary open-bulk-import-modal" data-title="Import Software Projects" data-action="/GameAndWebDev/BulkImportSamples">
+                                    <i class="me-1" data-feather="upload"></i>
+                                    Import
+                                </button>
                                 <a class="btn btn-sm btn-light text-primary" asp-action="Create" asp-controller="GameAndWebDev">
                                     <i class="me-1" data-feather="plus"></i>
                                     Create New
@@ -90,6 +94,7 @@
                 </div>
             </div>
             @await Component.InvokeAsync("DeleteModal")
+            @await Component.InvokeAsync("BulkImport")
         </main>
         <partial name="_NewFooter" />
     </div>

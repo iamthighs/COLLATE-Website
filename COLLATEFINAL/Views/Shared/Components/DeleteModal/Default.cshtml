@@ -1,0 +1,51 @@
+﻿<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="deleteForm" method="post">
+                <div class="modal-body">
+                    <div class="mb-3" id="deleteModalBody"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger-soft text-danger" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary-soft text-primary">
+                        Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modalElement = document.getElementById("deleteModal");
+        if (!modalElement) return;
+
+        const modal = new bootstrap.Modal(modalElement);
+        const form = document.getElementById("deleteForm");
+        const modalTitle = document.getElementById("deleteModalTitle");
+        const modalBody = document.getElementById("deleteModalBody");
+
+        document.body.addEventListener("click", (e) => {
+            const button = e.target.closest(".open-delete-modal");
+            if (!button) return;
+
+            const { id, name, title, action } = button.dataset;
+
+            modalTitle.textContent = `${title}: ${name}`;
+            modalBody.textContent = `Are you sure you want to delete ${name}?`;
+            form.action = `${action}/${id}`;
+
+            modal.show();
+        });
+    });
+
+</script>

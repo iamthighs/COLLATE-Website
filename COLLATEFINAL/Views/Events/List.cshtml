@@ -88,29 +88,11 @@
                                                     Attendees
                                                 </a>
                                                 <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" asp-action="Edit" asp-controller="Events" asp-route-id="@item.Id"><i data-feather="edit"></i></a>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal_@item.Id"><i data-feather="trash-2"></i></a>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="@item.Id" data-name="@item.Title" data-title="Delete Event" data-action="/Events/Delete">
+                                                    <i data-feather="trash-2"></i>
+                                                </button>
                                             </td>
                                         </tr>
-                                        <!--Delete Modal -->
-                                        <div class="modal fade" id="deleteModal_@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Delete an Event</h5>
-                                                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">Are you sure you want to delete <span class="text-danger">@item.Title</span>?</div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                                                        <form class="form-inline" asp-action="Delete" asp-route-id="@item.Id" method="post">
-
-                                                            <button type="submit" class="btn btn-primary">Delete</button>
-                                                        </form>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
                                     }
                                 </tbody>
                             }
@@ -118,7 +100,7 @@
                     </div>
                 </div>
             </div>
-
+            @await Component.InvokeAsync("DeleteModal")
         </main>
         <partial name="_NewFooter" />
     </div>

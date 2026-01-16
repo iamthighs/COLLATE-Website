@@ -73,7 +73,7 @@
                                         <button class="btn btn-datatable btn-icon btn-transparent-dark open-edit-role-modal" data-id="@role.Id" data-name="@role.Name">
                                             <i data-feather="edit"></i>
                                         </button>
-                                        <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-role-modal" data-id="@role.Id" data-name="@role.Name">
+                                            <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="@role.Id" data-name="@role.Name" data-title="Delete Role" data-action="/Administration/DeleteRole">
                                             <i data-feather="trash-2"></i>
                                         </button>
 
@@ -91,7 +91,7 @@
         @await Component.InvokeAsync("CreateRoleModal")
         @await Component.InvokeAsync("EditRoleModal")
         @await Component.InvokeAsync("ManageRoleModal")
-        @await Component.InvokeAsync("DeleteRoleModal")
+        @await Component.InvokeAsync("DeleteModal")
     </main>
     <partial name="_NewFooter"/>
 </div>

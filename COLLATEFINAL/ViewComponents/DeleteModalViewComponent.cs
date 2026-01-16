@@ -4,7 +4,7 @@ using COLLATEFINAL.ViewModels;
 
 namespace COLLATEFINAL.ViewComponents
 {
-    public class DeleteRoleModalViewComponent : ViewComponent
+    public class DeleteModalViewComponent : ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {

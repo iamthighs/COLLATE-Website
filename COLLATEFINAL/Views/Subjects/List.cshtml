@@ -84,6 +84,7 @@
                     </div>
                 </div>
             </div>
+            @await Component.InvokeAsync("DeleteModal")
         </main>
         <partial name="_NewFooter" />
     </div>
@@ -134,37 +135,15 @@
                             <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="/subjects/edit/${item.id}">
                                 <i data-feather="edit"></i>
                             </a>
-                            <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal_${item.id}">
+                            <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="${item.id}" data-name="${item.subject}" data-title="Delete Subject" data-action="/Subjects/Delete">
                                 <i data-feather="trash-2"></i>
-                            </a>
+                            </button>
                         </td>
                     `;
 
                     // append row
                     tbody.appendChild(tr);
 
-                    // append modal for delete confirmation
-                    const modalWrapper = document.createElement('div');
-                    modalWrapper.innerHTML = `
-                        <div class="modal fade" id="deleteModal_${item.id}" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Delete a Subject</h5>
-                                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete <span class="text-danger">${item.subject}</span>?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="deleteSubject(${item.id})" data-bs-dismiss="modal">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    document.body.appendChild(modalWrapper.firstElementChild);
                 });
 
                 feather.replace(); // render icons
@@ -173,25 +152,6 @@
                 toastr.error("Failed to load subjects");
             }
         }
-
-        async function deleteSubject(id) {
-            try {
-                const res = await fetch(`${apiBase}/${id}`, { method: 'DELETE' });
-                if (res.ok) {
-                    toastr.success("Subject deleted successfully");
-                    loadSubjects(); // reload table
-                } else {
-                    const errText = await res.text();
-                    toastr.error(errText || "Failed to delete subject");
-                }
-            } catch (err) {
-                console.error(err);
-                toastr.error("Failed to delete subject");
-            }
-        }
-
-        // attach globally
-        window.deleteSubject = deleteSubject;
 
         // initial load
         loadSubjects();

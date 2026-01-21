@@ -1,11 +1,11 @@
-﻿using COLLATEFINAL.Common;
-using COLLATEFINAL.Data;
+﻿using COLLATE.Helpers.Common;
+using COLLATE.Helpers.Data;
 using COLLATEFINAL.Data.Migrations;
-using COLLATEFINAL.Helpers;
-using COLLATEFINAL.Models;
+using COLLATE.Helpers.Helpers;
+using COLLATE.Helpers.Models;
 using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
-using COLLATEFINAL.ViewModels;
+using COLLATE.Helpers.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

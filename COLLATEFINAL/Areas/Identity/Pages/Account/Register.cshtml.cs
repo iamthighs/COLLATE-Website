@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using COLLATEFINAL.Data;
-using COLLATEFINAL.Helpers;
+using COLLATE.Helpers.Data;
+using COLLATE.Helpers.Helpers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using COLLATEFINAL.Data;
+using COLLATE.Helpers.Data;
 using Microsoft.AspNetCore.Authentication;
 using System.Text.Json;
 using System.Runtime.ConstrainedExecution;

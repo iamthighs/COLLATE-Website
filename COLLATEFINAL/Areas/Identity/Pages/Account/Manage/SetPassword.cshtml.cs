@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using COLLATEFINAL.Data;
+using COLLATE.Helpers.Data;
 
 namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
 {

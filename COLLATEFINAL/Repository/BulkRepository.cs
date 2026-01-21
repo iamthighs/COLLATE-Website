@@ -1,5 +1,5 @@
-﻿using COLLATEFINAL.Data;
-using COLLATEFINAL.Models;
+﻿using COLLATE.Helpers.Data;
+using COLLATE.Helpers.Models;
 
 namespace COLLATEFINAL.Repository
 {

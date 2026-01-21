@@ -1,7 +1,7 @@
-﻿using COLLATEFINAL.Data;
-using COLLATEFINAL.Helpers;
-using COLLATEFINAL.Models;
-using COLLATEFINAL.ViewModels;
+﻿using COLLATE.Helpers.Data;
+using COLLATE.Helpers.Helpers;
+using COLLATE.Helpers.Models;
+using COLLATE.Helpers.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

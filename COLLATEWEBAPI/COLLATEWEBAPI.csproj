@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\COLLATEFINAL\COLLATEFINAL.csproj" />
+    <ProjectReference Include="..\COLLATE.Helpers\COLLATE.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

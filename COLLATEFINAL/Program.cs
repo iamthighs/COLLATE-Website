@@ -57,6 +57,8 @@ builder.Services.AddTransient<IUserClaimsPrincipalFactory<AppIdentityUser>, AppI
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<SampleImportService>();
 builder.Services.AddScoped<BulkRepository>();
+builder.Services.AddScoped<FileHelper>();
+
 builder.Services.AddMvc().AddRazorPagesOptions(options =>
 {
     options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());

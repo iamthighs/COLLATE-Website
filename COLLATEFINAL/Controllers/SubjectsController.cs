@@ -1,17 +1,20 @@
-﻿ using COLLATEFINAL.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using COLLATEFINAL.Common;
 using COLLATEFINAL.Data;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using COLLATEFINAL.Data.Migrations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Authorization;
-using COLLATEFINAL.Common;
-using Microsoft.AspNetCore.Identity;
-using System.Data;
+using COLLATEFINAL.Helpers;
+using COLLATEFINAL.Models;
+using COLLATEFINAL.Repository;
+using COLLATEFINAL.Services;
 using COLLATEFINAL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
+using System.IO;
 
 namespace COLLATEFINAL.Controllers
 {
@@ -21,11 +24,22 @@ namespace COLLATEFINAL.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly BulkRepository _bulkRepository;
+        private readonly SampleImportService _sampleImportService;
+        private readonly FileHelper _file;
 
-        public SubjectsController(ApplicationDbContext context, IWebHostEnvironment webHost)
+
+        public SubjectsController(ApplicationDbContext context, 
+            IWebHostEnvironment webHost, 
+            BulkRepository bulkRepository, 
+            SampleImportService sampleImportService,
+            FileHelper file)
         {
             _context = context;
             webHostEnvironment = webHost;
+            _bulkRepository = bulkRepository;
+            _sampleImportService = sampleImportService;
+            _file = file;
         }
 
         [AllowAnonymous]
@@ -57,126 +71,70 @@ namespace COLLATEFINAL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(SubjectModel subjectModel)
+        public async Task<IActionResult> Create(SubjectModel model)
         {
-            string uniqueFileName = UploadedFile(subjectModel);
-            subjectModel.ImageUrl = uniqueFileName;
+            if (!ModelState.IsValid)
+                return View(model);
 
-            string imgext = Path.GetExtension(subjectModel.CoverImage.FileName);
-            if (imgext == ".jpg" || imgext == ".png")
-
+            if (model.CoverImage == null || model.CoverImage.Length == 0)
             {
-
-
-                _context.Add(subjectModel);
-                _context.SaveChanges();
-                TempData["success"] = "Subject created successfully.";
-                return RedirectToAction(nameof(List));
-
+                ModelState.AddModelError(nameof(model.CoverImage), "Cover image is required.");
+                return View(model);
             }
-            else
+
+            var allowedExtensions = new[] { ".jpg", ".png" };
+            var imgExt = Path.GetExtension(model.CoverImage.FileName).ToLowerInvariant();
+
+            if (!allowedExtensions.Contains(imgExt))
             {
-                ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-                TempData["error"] = "Uploaded file is not a jpg or png file!";
+                ModelState.AddModelError(nameof(model.CoverImage), "Uploaded file must be JPG or PNG.");
+                return View(model);
             }
-            return View();
 
+            model.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "Uploads/Subjects");
+
+            await _context.Subjects.AddAsync(model);
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Subject created successfully.";
+            return RedirectToAction(nameof(List));
         }
 
-        private string UploadedFile(SubjectModel subjectModel)
-        {
-            string uniqueFileName = subjectModel.ImageUrl;
-
-            if (subjectModel.CoverImage != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Uploads/Subjects");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + subjectModel.CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    subjectModel.CoverImage.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
-        }
-
-        
         [HttpGet]
-        // GET: SubjectModels/Edit/5
         public IActionResult Edit(int id)
         {
-
-            // Retrieve data from the database
-            var itemsFromDatabase = _context.Subjects.ToList();
-
-            // Create a list of SelectListItem
-            var category = itemsFromDatabase.Select(item => new SelectListItem
-            {
-                Value = item.Subject, 
-                Text = item.Subject 
-            }).ToList();
-
-            ViewBag.category = category;
-
-            if (id == null || _context.Subjects == null)
-            {
+            if (_context.Subjects == null)
                 return NotFound();
-            }
 
             var subject = _context.Subjects.Find(id);
-
             if (subject == null)
-            {
                 return NotFound();
-            }
+
+            ViewBag.category = _context.Subjects
+                .Select(s => new SelectListItem
+                {
+                    Value = s.Subject,
+                    Text = s.Subject
+                })
+                .ToList();
 
             var model = new EditSubjViewModel
             {
                 Id = subject.Id,
-                Subject = subject.Subject
+                Subject = subject.Subject,
+
+                Lectures = _context.Lectures
+                    .Where(l => l.Subject == subject.Subject)
+                    .ToList(),
+
+                Videos = _context.Videos
+                    .Where(v => v.Subject == subject.Subject)
+                    .ToList()
             };
 
-            
-            foreach (var lecture in _context.Lectures)
-            {
-                if (subject.Subject == lecture.Subject)
-                {
-                    model.IsSelected = true;
-
-                    if (model.IsSelected == true)
-                    {
-                        model.Lectures.Add(lecture);
-                    }
-                }
-                else
-                {
-                    model.IsSelected = false;
-                }
-            }
-
-            foreach (var videos in _context.Videos)
-            {
-
-                if (subject.Subject == videos.Subject)
-                {
-                    model.IsSelected = true;
-
-                    if (model.IsSelected == true)
-                    {
-                        model.Videos.Add(videos);
-                    }
-                }
-                else
-                {
-                    model.IsSelected = false;
-                }
-
-                
-                
-
-            }
             return View(model);
         }
+
 
         [AllowAnonymous]
         [HttpGet]
@@ -249,50 +207,36 @@ namespace COLLATEFINAL.Controllers
             return View(model);
         }
 
-        // POST: SubjectModels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, SubjectModel subjectModel)
+        public IActionResult Edit(int id, EditSubjViewModel model)
         {
-            if (id == null || _context.Subjects == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                TempData["error"] = "Invalid form data.";
+                return View(model); // ✅ correct type
             }
-            if (ModelState.IsValid)
+
+            try
             {
+                var entity = _context.Subjects.Find(id);
+                if (entity == null)
+                    return NotFound();
 
-                string uniqueImg = UploadedFile(subjectModel);
-                subjectModel.ImageUrl = uniqueImg;
-
-
-                string imgext = Path.GetExtension(uniqueImg);
-                if (imgext == ".jpg" || imgext == ".png")
-
-                {
+                entity.Subject = model.Subject;
 
 
-                    _context.Update(subjectModel);
-                    _context.SaveChanges();
-                    TempData["success"] = "Subject updated successfully";
-
-                    return RedirectToAction(nameof(List));
-
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-                    TempData["error"] = "Uploaded file is not a jpg or png file!";
-                }
-
-
-                return RedirectToAction(nameof(Edit));
+                _context.SaveChanges();
+                TempData["success"] = "Subject updated successfully";
+                return RedirectToAction(nameof(List));
             }
-            ModelState.AddModelError("name", "");
-            TempData["error"] = "Error when updating Subject";
-            return View();
+            catch (Exception ex)
+            {
+                TempData["error"] = "Unexpected error occurred.";
+                return View(model);
+            }
         }
+
 
 
         [HttpGet]
@@ -434,6 +378,32 @@ namespace COLLATEFINAL.Controllers
         private bool SubjectModelExists(int id)
         {
             return (_context.Subjects?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        [HttpPost]
+        public IActionResult BulkImportSamples(IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                TempData["error"] = "Please select a valid file for import.";
+                return RedirectToAction("List");
+            }
+
+            try
+            {
+                // Parse the uploaded file and create a collection of objects.
+                var samples = _sampleImportService.ParseCsvFile<SubjectModel, SubjectCsvMap>(file);
+
+                // Insert the samples into the database.
+                _bulkRepository.BulkInsertEntities(samples);
+
+                TempData["success"] = "Bulk import of subjects successful.";
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "An error occurred during the bulk import: " + ex.Message;
+            }
+
+            return RedirectToAction("List");
         }
     }
 }

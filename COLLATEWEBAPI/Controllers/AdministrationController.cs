@@ -1,11 +1,12 @@
-﻿using COLLATEFINAL.Data;
-using COLLATEFINAL.Models;
-using COLLATEFINAL.ViewModels;
+﻿using COLLATE.Helpers.Data;
+using COLLATE.Helpers.Models;
+using COLLATE.Helpers.ViewModels;
+using COLLATE.Helpers.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace COLLATEWEBAPI.Controllers.Api
 {
@@ -17,17 +18,21 @@ namespace COLLATEWEBAPI.Controllers.Api
         private readonly UserManager<AppIdentityUser> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHost;
+        private readonly FileHelper _file;
+
 
         public AdministrationApiController(
             RoleManager<IdentityRole> roleManager,
             UserManager<AppIdentityUser> userManager,
             ApplicationDbContext context,
-            IWebHostEnvironment webHost)
+            IWebHostEnvironment webHost,
+            FileHelper file)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _context = context;
             _webHost = webHost;
+            _file = file;
         }
 
         // =========================
@@ -59,8 +64,36 @@ namespace COLLATEWEBAPI.Controllers.Api
         public async Task<IActionResult> GetRole(string roleId)
         {
             var role = await _roleManager.FindByIdAsync(roleId);
-            if (role == null) return NotFound();
-            return Ok(role);
+            if (role == null)
+                return NotFound(); // check first
+
+            var roleClaims = await _roleManager.GetClaimsAsync(role);
+
+            var model = new EditRoleViewModel
+            {
+                Id = role.Id,
+                RoleName = role.Name,
+                Claims = roleClaims.Select(c => $"{c.Type} : {c.Value}").ToList(),
+                Users = new List<RoleUserDto>() 
+            };
+
+            foreach (var user in _userManager.Users)
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    model.Users.Add(new RoleUserDto
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        UserName = user.UserName,
+                        ImageUrl = user.ImageUrl 
+                    });
+                }
+            }
+
+            return Ok(model); 
         }
 
         [HttpPut("roles/{roleId}")]
@@ -108,7 +141,7 @@ namespace COLLATEWEBAPI.Controllers.Api
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                result.Add(new { user.Id, user.UserName, user.Email, Roles = roles });
+                result.Add(new { user.Id, user.UserName, user.Email, Roles = roles, user.ImageUrl, user.FirstName, user.LastName});
             }
 
             return Ok(result);
@@ -148,16 +181,7 @@ namespace COLLATEWEBAPI.Controllers.Api
 
             if (model.CoverImage != null)
             {
-                string uploadsFolder = Path.Combine(_webHost.WebRootPath, "UserImages");
-                string uniqueFileName = Guid.NewGuid() + "_" + model.CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await model.CoverImage.CopyToAsync(stream);
-                }
-
-                user.ImageUrl = uniqueFileName;
+                user.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "UserImages");
             }
 
             var result = await _userManager.UpdateAsync(user);

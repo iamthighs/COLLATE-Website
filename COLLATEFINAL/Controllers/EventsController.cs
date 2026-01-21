@@ -1,19 +1,22 @@
-﻿using COLLATEFINAL.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using COLLATEFINAL.Common;
 using COLLATEFINAL.Data;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using COLLATEFINAL.Data.Migrations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Authorization;
-using COLLATEFINAL.Common;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using COLLATEFINAL.Helpers;
+using COLLATEFINAL.Models;
+using COLLATEFINAL.Repository;
+using COLLATEFINAL.Services;
 using COLLATEFINAL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.IO;
 using System.Linq;
+using System.Security.Claims;
 
 namespace COLLATEFINAL.Controllers
 {
@@ -24,12 +27,23 @@ namespace COLLATEFINAL.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<AppIdentityUser> userManager;
+        private readonly BulkRepository _bulkRepository;
+        private readonly SampleImportService _sampleImportService;
+        private readonly FileHelper _file;
 
-        public EventsController(ApplicationDbContext context, IWebHostEnvironment webHost, UserManager<AppIdentityUser> userManager)
+        public EventsController(ApplicationDbContext context, 
+            IWebHostEnvironment webHost, 
+            UserManager<AppIdentityUser> userManager, 
+            BulkRepository bulkRepository, 
+            SampleImportService sampleImportService,
+            FileHelper file)
         {
             _context = context;
             webHostEnvironment = webHost;
             this.userManager = userManager;
+            _bulkRepository = bulkRepository;
+            _sampleImportService = sampleImportService;
+            _file = file;
         }
 
         [AllowAnonymous]
@@ -139,10 +153,10 @@ namespace COLLATEFINAL.Controllers
             }
             else
             {
-                TempData["error"] = "Error when Registering in an Event";
+                TempData["error"] = "This User already registered for this Event";
                 return RedirectToAction("Details", new { id = eventId });
             }
-
+            TempData["error"] = "Error when Registering in an Event";
             return RedirectToAction("Details", new { id = eventId });
         }
 
@@ -196,56 +210,36 @@ namespace COLLATEFINAL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(EventsModel eventsModel)
+        public async Task<IActionResult> Create(EventsModel eventsModel)
         {
-            
+            if (!ModelState.IsValid)
+                return View(eventsModel);
 
-
-            string uniqueFileName = UploadedFile(eventsModel);
-            eventsModel.ImageUrl = uniqueFileName;
-
-
-            string imgext = Path.GetExtension(eventsModel.CoverImage.FileName);
-            if (imgext == ".jpg" || imgext == ".png")
-
+            if (eventsModel.CoverImage == null || eventsModel.CoverImage.Length == 0)
             {
-
-                _context.Add(eventsModel);
-                _context.SaveChanges();
-                TempData["success"] = "Events created successfully.";
-
-                return RedirectToAction(nameof(List));
-
+                ModelState.AddModelError(nameof(eventsModel.CoverImage), "Cover image is required.");
+                return View(eventsModel);
             }
-            else
+
+            var allowedExtensions = new[] { ".jpg", ".png" };
+            var imgExt = Path.GetExtension(eventsModel.CoverImage.FileName).ToLowerInvariant();
+
+            if (!allowedExtensions.Contains(imgExt))
             {
-                ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-                TempData["error"] = "Uploaded file is not a jpg or png file!";
+                ModelState.AddModelError(nameof(eventsModel.CoverImage), "Uploaded file must be JPG or PNG.");
+                return View(eventsModel);
             }
-            return View();
 
+            eventsModel.ImageUrl = await _file.SaveFileAsync(eventsModel.CoverImage, "Uploads/Events");
+
+            await _context.Events.AddAsync(eventsModel);
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Events created successfully.";
+            return RedirectToAction(nameof(List));
         }
 
-        private string UploadedFile(EventsModel eventsModel)
-        {
-            string uniqueFileName = eventsModel.ImageUrl;
 
-            if (eventsModel.CoverImage != null)
-            {
-
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Uploads/Events");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + eventsModel.CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    eventsModel.CoverImage.CopyTo(fileStream);
-                }
-            }
-            
-            return uniqueFileName;
-        }
-
-        
         [HttpGet]
         // GET: EventsModels/Edit/5
         public IActionResult Edit(int id)
@@ -281,43 +275,43 @@ namespace COLLATEFINAL.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public IActionResult Edit(int id, EventsModel eventsModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, EventsModel eventsModel)
         {
-            
-            if (id == null || _context.Events == null)
-            {
+            if (id != eventsModel.Id)
                 return NotFound();
-            }
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
+                return View(eventsModel);
+
+            var existingEvent = await _context.Events.FindAsync(id);
+            if (existingEvent == null)
+                return NotFound();
+
+            existingEvent.Title = eventsModel.Title;
+            existingEvent.Objectives = eventsModel.Objectives;
+            existingEvent.PostedDate = eventsModel.PostedDate;
+
+            if (eventsModel.CoverImage != null && eventsModel.CoverImage.Length > 0)
             {
+                var allowedExtensions = new[] { ".jpg", ".png" };
+                var imgExt = Path.GetExtension(eventsModel.CoverImage.FileName).ToLowerInvariant();
 
-                string uniqueImg = UploadedFile(eventsModel);
-                eventsModel.ImageUrl = uniqueImg;
-                string imgext = Path.GetExtension(uniqueImg);
-                if (imgext == ".jpg" || imgext == ".png")
-
+                if (!allowedExtensions.Contains(imgExt))
                 {
-
-                    _context.Update(eventsModel);
-                    _context.SaveChanges();
-                    TempData["success"] = "Events updated successfully";
-
-                    return RedirectToAction(nameof(List));
-
+                    ModelState.AddModelError(nameof(eventsModel.CoverImage), "Uploaded file must be JPG or PNG.");
+                    return View(eventsModel);
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-                    TempData["error"] = "Uploaded file is not a jpg or png file!";
-                }
-                
 
-                return RedirectToAction(nameof(Edit));
+                existingEvent.ImageUrl = await _file.SaveFileAsync(eventsModel.CoverImage, "Uploads/Events");
             }
-            ModelState.AddModelError("name", "");
-            TempData["error"] = "Error when updating Events";
-            return View();
+
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Events updated successfully.";
+            return RedirectToAction(nameof(List));
         }
+
 
 
 
@@ -371,6 +365,33 @@ namespace COLLATEFINAL.Controllers
         private bool EventsModelExists(int id)
         {
             return (_context.Events?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpPost]
+        public IActionResult BulkImportSamples(IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                TempData["error"] = "Please select a valid file for import.";
+                return RedirectToAction("List"); 
+            }
+
+            try
+            {
+                // Parse the uploaded file and create a collection of objects.
+                var samples = _sampleImportService.ParseCsvFile<EventsModel, EventCsvMap>(file);
+
+                // Insert the samples into the database.
+                _bulkRepository.BulkInsertEntities(samples);
+
+                TempData["success"] = "Bulk import of events successful.";
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "An error occurred during the bulk import: " + ex.Message;
+            }
+
+            return RedirectToAction("List"); 
         }
     }
 }

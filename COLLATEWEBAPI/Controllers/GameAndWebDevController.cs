@@ -1,7 +1,7 @@
-﻿using COLLATEFINAL.Common;
-using COLLATEFINAL.Data;
-using COLLATEFINAL.Models;
-using COLLATEWEBAPI.Helpers;
+﻿using COLLATE.Helpers.Common;
+using COLLATE.Helpers.Data;
+using COLLATE.Helpers.Models;
+using COLLATE.Helpers.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

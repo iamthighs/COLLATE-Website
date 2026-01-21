@@ -33,12 +33,12 @@ namespace COLLATEFINAL.Models
         [Display(Name = "Game Link")]
         public string GameLink { get; set; }
         
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         [Display(Name = "Cover Image")]
         [NotMapped]
         public IFormFile? CoverImage { get; set; }
-        public List<Like> Likes { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<Like>? Likes { get; set; }
+        public List<Comment>? Comments { get; set; }
 
     }
 

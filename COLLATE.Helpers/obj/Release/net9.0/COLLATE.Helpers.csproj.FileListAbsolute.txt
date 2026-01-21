@@ -1,0 +1,15 @@
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\COLLATE.Helpers.csproj.AssemblyReference.cache
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\COLLATE.Helpers.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\COLLATE.Helpers.AssemblyInfoInputs.cache
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\COLLATE.Helpers.AssemblyInfo.cs
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\COLLATE.Helpers.csproj.CoreCompileInputs.cache
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\COLLATE.Helpers.sourcelink.json
+D:\Projects\COLLATEnew\COLLATE.Helpers\bin\Release\net9.0\COLLATE.Helpers.deps.json
+D:\Projects\COLLATEnew\COLLATE.Helpers\bin\Release\net9.0\COLLATE.Helpers.runtimeconfig.json
+D:\Projects\COLLATEnew\COLLATE.Helpers\bin\Release\net9.0\COLLATE.Helpers.dll
+D:\Projects\COLLATEnew\COLLATE.Helpers\bin\Release\net9.0\COLLATE.Helpers.pdb
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\COLLATE.Helpers.dll
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\refint\COLLATE.Helpers.dll
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\COLLATE.Helpers.pdb
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\COLLATE.Helpers.genruntimeconfig.cache
+D:\Projects\COLLATEnew\COLLATE.Helpers\obj\Release\net9.0\ref\COLLATE.Helpers.dll

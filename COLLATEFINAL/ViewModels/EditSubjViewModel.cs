@@ -15,7 +15,7 @@ namespace COLLATEFINAL.ViewModels
         public string Subject { get; set; }
         public IList<LectureModel> Lectures { get; set; }
         public IList<VideosModel> Videos { get; set; }
-        public IList<EditSubjViewModel> EditSubj { get; set; }
+        public IList<EditSubjViewModel>? EditSubj { get; set; }
         public bool IsSelected { get; set; }
 
     }

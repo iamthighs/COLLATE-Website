@@ -57,44 +57,32 @@
                                 <tr>
                                     <td>
                                         @if (role.Name == "sceneOfficer")
-                                            {
-                                                <div>SCENE Officer</div>
-                                            }
+                                        {
+                                            <div>SCENE Officer</div>
+                                        }
                                         else
-                                            {
-                                                <div>@role.Name</div>
-                                            }
+                                        {
+                                            <div>@role.Name</div>
+                                        }
                                     </td>
                                     <td>
-                                            <a class="btn btn-sm btn-light text-primary" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">
-                                                <i class="me-1" data-feather="user"></i>
-                                                Manage Role
-                                            </a>
-                                            <a  class="btn btn-datatable btn-icon btn-transparent-dark" data-bs-toggle="modal" data-bs-target="#editRoleModal_@role.Id"><i data-feather="edit"></i></a>
-                                            <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal_@role.Id"><i data-feather="trash-2"></i></a>
+                                        <button class="btn btn-sm btn-light text-primary open-modal" data-id="@role.Id">
+                                            <i class="me-1" data-feather="user"></i>
+                                            Manage Role
+                                        </button>
+                                        <button class="btn btn-datatable btn-icon btn-transparent-dark open-edit-role-modal" data-id="@role.Id" data-name="@role.Name">
+                                            <i data-feather="edit"></i>
+                                        </button>
+                                            <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="@role.Id" data-name="@role.Name" data-title="Delete Role" data-action="/Administration/DeleteRole">
+                                            <i data-feather="trash-2"></i>
+                                        </button>
 
                                     </td>
                                 </tr>
-                                <!--Delete Modal -->
-                                <div class="modal fade" id="deleteModal_@role.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalCenterTitle">Delete a Role</h5>
-                                                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">Are you sure you want to delete @role.Name ?</div>
-                                            <div class="modal-footer"><button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                                                <form class="form-inline" asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
 
-                                                    <button type="submit" class="btn btn-primary">Delete</button>
-                                                </form>
-                                            </div>
-            
-                                        </div>
-                                    </div>
-                                </div>
                             }
+
+                                
                         </tbody>
                     </table>
                 </div>
@@ -102,6 +90,8 @@
         </div>
         @await Component.InvokeAsync("CreateRoleModal")
         @await Component.InvokeAsync("EditRoleModal")
+        @await Component.InvokeAsync("ManageRoleModal")
+        @await Component.InvokeAsync("DeleteModal")
     </main>
     <partial name="_NewFooter"/>
 </div>

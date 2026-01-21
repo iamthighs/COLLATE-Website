@@ -1,14 +1,17 @@
-﻿using COLLATEFINAL.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using COLLATEFINAL.Common;
 using COLLATEFINAL.Data;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using COLLATEFINAL.Data.Migrations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using COLLATEFINAL.Helpers;
+using COLLATEFINAL.Models;
+using COLLATEFINAL.Repository;
+using COLLATEFINAL.Services;
 using Microsoft.AspNetCore.Authorization;
-using COLLATEFINAL.Common;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace COLLATEFINAL.Controllers
 {
@@ -18,11 +21,19 @@ namespace COLLATEFINAL.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment webHostEnvironment;
-
-        public GameAndWebDevController(ApplicationDbContext context, IWebHostEnvironment webHost)
+        private readonly BulkRepository _bulkRepository;
+        private readonly SampleImportService _sampleImportService;
+        private readonly FileHelper _file;
+        public GameAndWebDevController(ApplicationDbContext context, 
+            IWebHostEnvironment webHost, BulkRepository bulkRepository, 
+            SampleImportService sampleImportService,
+            FileHelper file)
         {
             _context = context;
             webHostEnvironment = webHost;
+            _bulkRepository = bulkRepository;
+            _sampleImportService = sampleImportService;
+            _file = file;
         }
 
         public IActionResult List()
@@ -63,46 +74,33 @@ namespace COLLATEFINAL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(GameAndWebDevModel gameAndWebDevModel)
+        public async Task<IActionResult> Create(GameAndWebDevModel model)
         {
-            string uniqueFileName = UploadedFile(gameAndWebDevModel);
-            gameAndWebDevModel.ImageUrl = uniqueFileName;
+            if (!ModelState.IsValid)
+                return View(model);
 
-            string imgext = Path.GetExtension(gameAndWebDevModel.CoverImage.FileName);
-            if (imgext == ".jpg" || imgext == ".png")
-
+            if (model.CoverImage == null || model.CoverImage.Length == 0)
             {
-
-                _context.Add(gameAndWebDevModel);
-                _context.SaveChanges();
-                TempData["success"] = "Software Project created successfully.";
-                return RedirectToAction(nameof(List));
-
-            }
-            else
-            {
-                ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-                TempData["error"] = "Uploaded file is not a jpg or png file!";
+                ModelState.AddModelError(nameof(model.CoverImage), "Cover image is required.");
+                return View(model);
             }
 
-            return View();
-        }
+            var allowedExtensions = new[] { ".jpg", ".png" };
+            var imgExt = Path.GetExtension(model.CoverImage.FileName).ToLowerInvariant();
 
-        private string UploadedFile(GameAndWebDevModel gameAndWebDevModel)
-        {
-            string uniqueFileName = gameAndWebDevModel.ImageUrl;
-
-            if (gameAndWebDevModel.CoverImage != null)
+            if (!allowedExtensions.Contains(imgExt))
             {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Uploads/SoftwareProjects");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + gameAndWebDevModel.CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    gameAndWebDevModel.CoverImage.CopyTo(fileStream);
-                }
+                ModelState.AddModelError(nameof(model.CoverImage), "Uploaded file must be JPG or PNG.");
+                return View(model);
             }
-            return uniqueFileName;
+
+            model.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "Uploads/SoftwareProjects");
+
+            await _context.GameAndWebDevelopments.AddAsync(model);
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Software Project created successfully.";
+            return RedirectToAction(nameof(List));
         }
 
         [HttpGet]
@@ -136,42 +134,46 @@ namespace COLLATEFINAL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, GameAndWebDevModel gameAndWebDevModel)
+        public async Task<IActionResult> Edit(int id, GameAndWebDevModel model)
         {
-            if (id == null || _context.GameAndWebDevelopments == null)
-            {
+            if (id != model.Id)
                 return NotFound();
-            }
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var existing = await _context.GameAndWebDevelopments.FindAsync(id);
+            if (existing == null)
+                return NotFound();
+
+            // Update scalar fields only (avoid overposting)
+            existing.Title = model.Title;
+            existing.Description = model.Description;
+            existing.DevelopersName = model.DevelopersName;
+            existing.GameLink= model.GameLink;
+            // add other properties as needed
+
+            // Optional image update
+            if (model.CoverImage != null && model.CoverImage.Length > 0)
             {
-                string uniqueImg = UploadedFile(gameAndWebDevModel);
-                gameAndWebDevModel.ImageUrl = uniqueImg;
+                var allowedExtensions = new[] { ".jpg", ".png" };
+                var imgExt = Path.GetExtension(model.CoverImage.FileName).ToLowerInvariant();
 
-                string imgext = Path.GetExtension(uniqueImg);
-                if (imgext == ".jpg" || imgext == ".png")
-
+                if (!allowedExtensions.Contains(imgExt))
                 {
-
-                    _context.Update(gameAndWebDevModel);
-                    _context.SaveChanges();
-                    TempData["success"] = "Software Project updated successfully";
-
-                    return RedirectToAction(nameof(List));
-
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-                    TempData["error"] = "Uploaded file is not a jpg or png file!";
+                    ModelState.AddModelError(nameof(model.CoverImage), "Uploaded file must be JPG or PNG.");
+                    return View(model);
                 }
 
-
-                return RedirectToAction(nameof(Edit));
+                existing.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "Uploads/SoftwareProjects");
             }
-            ModelState.AddModelError("name", "");
-            TempData["error"] = "Error when updating Software Project";
-            return View();
+
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Software Project updated successfully.";
+            return RedirectToAction(nameof(List));
         }
+
 
 
 
@@ -224,6 +226,32 @@ namespace COLLATEFINAL.Controllers
             return (_context.GameAndWebDevelopments?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        
+        [HttpPost]
+        public IActionResult BulkImportSamples(IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                TempData["error"] = "Please select a valid file for import.";
+                return RedirectToAction("List");
+            }
+
+            try
+            {
+                // Parse the uploaded file and create a collection of objects.
+                var samples = _sampleImportService.ParseCsvFile<GameAndWebDevModel, SoftwareProjectCsvMap>(file);
+
+                // Insert the samples into the database.
+                _bulkRepository.BulkInsertEntities(samples);
+
+                TempData["success"] = "Bulk import of software projects successful.";
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "An error occurred during the bulk import: " + ex.Message;
+            }
+
+            return RedirectToAction("List");
+        }
+
     }
 }

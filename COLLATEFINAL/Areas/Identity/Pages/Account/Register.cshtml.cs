@@ -2,6 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using COLLATEFINAL.Data;
+using COLLATEFINAL.Helpers;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,15 +21,6 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using COLLATEFINAL.Data;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 
 namespace COLLATEFINAL.Areas.Identity.Pages.Account
 {
@@ -33,6 +34,8 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly IWebHostEnvironment _webhost;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly FileHelper _file;
+
 
 
         public RegisterModel(
@@ -42,7 +45,8 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IWebHostEnvironment webhost,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            FileHelper file)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -52,6 +56,7 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _webhost = webhost;
             _roleManager = roleManager;
+            _file = file;
         }
 
         /// <summary>
@@ -130,42 +135,13 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            var saveimg = Path.Combine(_webhost.WebRootPath, "UserImages", ImageUrl.FileName);
-
-
-            if (saveimg == null || saveimg.Length == 0 || ImageUrl.FileName == null || ImageUrl.FileName.Length == 0)
-            {
-
-                ModelState.AddModelError("", "Uploaded file is empty or null.");
-            }
-
-            string imgext = Path.GetExtension(ImageUrl.FileName);
-
-
-
-            if (imgext == ".jpg" || imgext == ".png")
-
-            {
-
-
-                using var uploadimg = new FileStream(saveimg, FileMode.Create);
-
-                await ImageUrl.CopyToAsync(uploadimg);
-               
-
-            }
-            else
-            {
-                ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-            }
-
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
 
                 user.LastName = Input.Last;
                 user.FirstName = Input.First;
-                user.ImageUrl = ImageUrl.FileName;
+                user.ImageUrl = await _file.SaveFileAsync(ImageUrl, "UserImages");
 
 
                 //await _userStore.SetUserNameAsync(user, Input.First, CancellationToken.None);

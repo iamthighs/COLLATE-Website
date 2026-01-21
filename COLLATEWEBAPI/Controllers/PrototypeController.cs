@@ -1,7 +1,7 @@
-﻿using COLLATEFINAL.Common;
-using COLLATEFINAL.Data;
-using COLLATEFINAL.Models;
-using COLLATEWEBAPI.Helpers;
+﻿using COLLATE.Helpers.Common;
+using COLLATE.Helpers.Data;
+using COLLATE.Helpers.Models;
+using COLLATE.Helpers.Helpers;
 using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -40,7 +40,7 @@ namespace COLLATEWEBAPI.Controllers.Api
         [HttpPost("lectures")]
         public async Task<IActionResult> CreateLecture([FromForm] LectureModel model)
         {
-            model.FileUrl = await _file.UploadFileAsync(model.UploadedPDFFile, "PDF/Lectures");
+            model.FileUrl = await _file.SaveFileAsync(model.UploadedPDFFile, "PDF/Lectures");
 
             if (Path.GetExtension(model.FileUrl) != ".pdf")
                 return BadRequest("Only PDF files are allowed");
@@ -61,7 +61,7 @@ namespace COLLATEWEBAPI.Controllers.Api
             if (!await _context.Lectures.AnyAsync(x => x.Id == id))
                 return NotFound();
 
-            model.FileUrl = await _file.UploadFileAsync(model.UploadedPDFFile, "PDF/Lectures");
+            model.FileUrl = await _file.SaveFileAsync(model.UploadedPDFFile, "PDF/Lectures");
 
             _context.Update(model);
             await _context.SaveChangesAsync();

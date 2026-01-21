@@ -1,8 +1,8 @@
-﻿using COLLATEFINAL.Common;
-using COLLATEFINAL.Data;
-using COLLATEFINAL.Models;
-using COLLATEFINAL.ViewModels;
-using COLLATEWEBAPI.Helpers;
+﻿using COLLATE.Helpers.Common;
+using COLLATE.Helpers.Data;
+using COLLATE.Helpers.Models;
+using COLLATE.Helpers.ViewModels;
+using COLLATE.Helpers.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -34,25 +34,49 @@ namespace COLLATEWEBAPI.Controllers.Api
 
         // -------------------- Events --------------------
 
-        // GET: api/events
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var events = await _context.Events
-                .Include(e => e.Attendees)
+                .Select(e => new EventDto
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    Date = e.PostedDate,
+                    Attendees = e.Attendees.Select(a => new AttendeeDto
+                    {
+                        Id = a.Id,
+                        FirstName = a.FirstName,
+                        LastName = a.LastName,
+                        Email = a.Email
+                    }).ToList()
+                })
                 .ToListAsync();
 
             return Ok(events);
         }
 
-        // GET: api/events/{id}
+
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             var ev = await _context.Events
-                .Include(e => e.Attendees)
-                .FirstOrDefaultAsync(e => e.Id == id);
+                .Where(e => e.Id == id)
+                .Select(e => new EventDto
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    Date = e.PostedDate,
+                    Attendees = e.Attendees.Select(a => new AttendeeDto
+                    {
+                        Id = a.Id,
+                        FirstName = a.FirstName,
+                        LastName = a.LastName,
+                        Email = a.Email
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
 
             return ev == null ? NotFound() : Ok(ev);
         }
@@ -138,30 +162,6 @@ namespace COLLATEWEBAPI.Controllers.Api
 
         // -------------------- Registration --------------------
 
-        // POST: api/events/{id}/register
-        [HttpPost("{id:int}/register")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Register(int id)
-        {
-            var ev = await _context.Events
-                .Include(e => e.Attendees)
-                .FirstOrDefaultAsync(e => e.Id == id);
-
-            var userId = _userManager.GetUserId(User);
-            var user = userId == null ? null : await _userManager.FindByIdAsync(userId);
-
-            if (ev == null || user == null)
-                return NotFound();
-
-            if (ev.Attendees.Contains(user))
-                return Conflict("User already registered for this event.");
-
-            ev.Attendees.Add(user);
-            await _context.SaveChangesAsync();
-
-            return Ok("Successfully registered for the event.");
-        }
-
         // POST: api/events/{id}/attendees/{userId}
         [HttpPost("{id:int}/attendees/{userId}")]
         public async Task<IActionResult> AddUser(int id, string userId)
@@ -174,11 +174,15 @@ namespace COLLATEWEBAPI.Controllers.Api
 
             if (ev == null || user == null)
                 return NotFound();
+            if (ev.Attendees.Contains(user))
+                return Conflict("User already registered for this event.");
 
             if (!ev.Attendees.Contains(user))
             {
                 ev.Attendees.Add(user);
                 await _context.SaveChangesAsync();
+                return Ok("Successfully registered for the event.");
+
             }
 
             return NoContent();

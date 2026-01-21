@@ -1,12 +1,12 @@
-﻿using COLLATEFINAL.Common;
-using COLLATEFINAL.Data;
-using COLLATEFINAL.Models;
-using COLLATEFINAL.ViewModels;
+﻿using COLLATE.Helpers.Common;
+using COLLATE.Helpers.Data;
+using COLLATE.Helpers.Models;
+using COLLATE.Helpers.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using COLLATEWEBAPI.Helpers;
+using COLLATE.Helpers.Helpers;
 
 namespace COLLATEWEBAPI.Controllers.Api
 {

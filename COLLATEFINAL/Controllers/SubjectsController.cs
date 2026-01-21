@@ -1,7 +1,8 @@
 ﻿using COLLATEFINAL.Common;
 using COLLATEFINAL.Data;
 using COLLATEFINAL.Data.Migrations;
- using COLLATEFINAL.Models;
+using COLLATEFINAL.Helpers;
+using COLLATEFINAL.Models;
 using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
 using COLLATEFINAL.ViewModels;
@@ -25,13 +26,20 @@ namespace COLLATEFINAL.Controllers
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly BulkRepository _bulkRepository;
         private readonly SampleImportService _sampleImportService;
+        private readonly FileHelper _file;
 
-        public SubjectsController(ApplicationDbContext context, IWebHostEnvironment webHost, BulkRepository bulkRepository, SampleImportService sampleImportService)
+
+        public SubjectsController(ApplicationDbContext context, 
+            IWebHostEnvironment webHost, 
+            BulkRepository bulkRepository, 
+            SampleImportService sampleImportService,
+            FileHelper file)
         {
             _context = context;
             webHostEnvironment = webHost;
             _bulkRepository = bulkRepository;
             _sampleImportService = sampleImportService;
+            _file = file;
         }
 
         [AllowAnonymous]
@@ -63,49 +71,34 @@ namespace COLLATEFINAL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(SubjectModel subjectModel)
+        public async Task<IActionResult> Create(SubjectModel model)
         {
-            string uniqueFileName = UploadedFile(subjectModel);
-            subjectModel.ImageUrl = uniqueFileName;
+            if (!ModelState.IsValid)
+                return View(model);
 
-            string imgext = Path.GetExtension(subjectModel.CoverImage.FileName);
-            if (imgext == ".jpg" || imgext == ".png")
-
+            if (model.CoverImage == null || model.CoverImage.Length == 0)
             {
-
-
-                _context.Add(subjectModel);
-                _context.SaveChanges();
-                TempData["success"] = "Subject created successfully.";
-                return RedirectToAction(nameof(List));
-
+                ModelState.AddModelError(nameof(model.CoverImage), "Cover image is required.");
+                return View(model);
             }
-            else
+
+            var allowedExtensions = new[] { ".jpg", ".png" };
+            var imgExt = Path.GetExtension(model.CoverImage.FileName).ToLowerInvariant();
+
+            if (!allowedExtensions.Contains(imgExt))
             {
-                ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-                TempData["error"] = "Uploaded file is not a jpg or png file!";
+                ModelState.AddModelError(nameof(model.CoverImage), "Uploaded file must be JPG or PNG.");
+                return View(model);
             }
-            return View();
 
+            model.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "Uploads/Subjects");
+
+            await _context.Subjects.AddAsync(model);
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Subject created successfully.";
+            return RedirectToAction(nameof(List));
         }
-
-        private string UploadedFile(SubjectModel subjectModel)
-        {
-            string uniqueFileName = subjectModel.ImageUrl;
-
-            if (subjectModel.CoverImage != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Uploads/Subjects");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + subjectModel.CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    subjectModel.CoverImage.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
-        }
-
 
         [HttpGet]
         public IActionResult Edit(int id)

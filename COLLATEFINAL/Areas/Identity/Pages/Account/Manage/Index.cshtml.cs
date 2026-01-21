@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using COLLATEFINAL.Data;
+using COLLATEFINAL.Helpers;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using COLLATEFINAL.Data;
 
 namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
 {
@@ -18,15 +19,19 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<AppIdentityUser> _userManager;
         private readonly SignInManager<AppIdentityUser> _signInManager;
         private readonly IWebHostEnvironment _webhost;
+        private readonly FileHelper _file;
+
 
         public IndexModel(
             UserManager<AppIdentityUser> userManager,
             SignInManager<AppIdentityUser> signInManager,
-            IWebHostEnvironment webhost)
+            IWebHostEnvironment webhost,
+            FileHelper file)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _webhost = webhost;
+            _file = file;
         }
 
         /// <summary>
@@ -123,11 +128,10 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-            string uniqueImg = UploadedFile(user);
-            user.ImageUrl = uniqueImg;
+            user.ImageUrl = await _file.SaveFileAsync(user.CoverImage, "UserImages");
             user.FirstName = Input.NewFirstName;
             user.LastName = Input.NewLastName;
-            string imgext = Path.GetExtension(uniqueImg);
+            string imgext = Path.GetExtension(user.ImageUrl);
             if (imgext == ".jpg" || imgext == ".png")
 
             {
@@ -150,20 +154,5 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account.Manage
             return RedirectToPage();
         }
 
-        private string UploadedFile(AppIdentityUser user)
-        {
-            string uniqueFileName = user.ImageUrl;
-            if (CoverImage != null)
-            {
-                string uploadsFolder = Path.Combine(_webhost.WebRootPath, "UserImages");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    CoverImage.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
-        }
     }
 }

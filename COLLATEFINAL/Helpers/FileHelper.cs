@@ -1,4 +1,4 @@
-﻿namespace COLLATEWEBAPI.Helpers
+﻿namespace COLLATEFINAL.Helpers
 {
     public class FileHelper
     {
@@ -13,14 +13,6 @@
         {
             var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
             return ext == ".jpg" || ext == ".png";
-        }
-
-        public async Task<string?> UploadFileAsync(IFormFile? file, string folder)
-        {
-            if (file == null)
-                return null;
-
-            return await SaveFileAsync(file, folder);
         }
 
         public async Task<string> SaveFileAsync(IFormFile file, string folder)

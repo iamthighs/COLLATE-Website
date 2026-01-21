@@ -1,6 +1,7 @@
 ﻿using COLLATEFINAL.Common;
 using COLLATEFINAL.Data;
 using COLLATEFINAL.Data.Migrations;
+using COLLATEFINAL.Helpers;
 using COLLATEFINAL.Models;
 using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
@@ -24,16 +25,21 @@ namespace COLLATEFINAL.Controllers
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly BulkRepository _bulkRepository;
         private readonly SampleImportService _sampleImportService;
+        private readonly FileHelper _file;
 
 
 
-        public ResearchPapersController(ApplicationDbContext context, IWebHostEnvironment webHost, BulkRepository bulkRepository, SampleImportService sampleImportService)
+        public ResearchPapersController(ApplicationDbContext context, 
+            IWebHostEnvironment webHost, 
+            BulkRepository bulkRepository, 
+            SampleImportService sampleImportService,
+            FileHelper file)
         {
             _context = context;
             webHostEnvironment = webHost;
             _bulkRepository = bulkRepository;
             _sampleImportService = sampleImportService;
-
+            _file = file;
         }
 
         [AllowAnonymous]
@@ -88,67 +94,49 @@ namespace COLLATEFINAL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ResearchPapersModel researchPaperModel)
+        public async Task<IActionResult> Create(ResearchPapersModel model)
         {
-            string uniqueFileName = UploadedFile(researchPaperModel);
-            string uniqueFilePDF = UploadedPDF(researchPaperModel);
-            researchPaperModel.ImageUrl = uniqueFileName;
-            researchPaperModel.FileUrl = uniqueFilePDF;
+            if (!ModelState.IsValid)
+                return View(model);
 
-            string imgext = Path.GetExtension(researchPaperModel.CoverImage.FileName);
-            string fileext = Path.GetExtension(researchPaperModel.UploadedCoverImage.FileName);
-            if (imgext == ".jpg" || imgext == ".png" && fileext == ".pdf")
-
+            if (model.CoverImage == null || model.CoverImage.Length == 0)
             {
-
-                _context.Add(researchPaperModel);
-                _context.SaveChanges();
-                TempData["success"] = "Research Paper created successfully.";
-                return RedirectToAction(nameof(List));
-
+                ModelState.AddModelError(nameof(model.CoverImage), "Cover image is required.");
+                return View(model);
             }
-            else
+
+            var imageExt = Path.GetExtension(model.CoverImage.FileName).ToLowerInvariant();
+            var allowedImageExt = new[] { ".jpg", ".png" };
+
+            if (!allowedImageExt.Contains(imageExt))
             {
-                ModelState.AddModelError("", "Uploaded file is not recognize. Please upload the correct file type");
-                TempData["error"] = "Uploaded file is not recognize. Please upload the correct file type";
+                ModelState.AddModelError(nameof(model.CoverImage), "Image must be JPG or PNG.");
+                return View(model);
             }
-            return View();
 
+            if (model.UploadedCoverImage == null || model.UploadedCoverImage.Length == 0)
+            {
+                ModelState.AddModelError(nameof(model.UploadedCoverImage), "PDF file is required.");
+                return View(model);
+            }
+
+            var pdfExt = Path.GetExtension(model.UploadedCoverImage.FileName).ToLowerInvariant();
+            if (pdfExt != ".pdf")
+            {
+                ModelState.AddModelError(nameof(model.UploadedCoverImage), "File must be a PDF.");
+                return View(model);
+            }
+
+            model.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "Uploads/ResearchPapers");
+            model.FileUrl = await _file.SaveFileAsync(model.UploadedCoverImage, "PDF/ResearchPapers");
+
+            await _context.ResearchPapers.AddAsync(model);
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Research Paper created successfully.";
+            return RedirectToAction(nameof(List));
         }
 
-        private string UploadedFile(ResearchPapersModel researchPaperModel)
-        {
-            string uniqueFileName = researchPaperModel.ImageUrl;
-
-            if (researchPaperModel.CoverImage != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Uploads/ResearchPapers");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + researchPaperModel.CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    researchPaperModel.CoverImage.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
-        }
-
-        private string UploadedPDF(ResearchPapersModel researchPaperModel)
-        {
-            string uniqueFileName = researchPaperModel.FileUrl;
-
-            if (researchPaperModel.UploadedCoverImage != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "PDF/ResearchPapers");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + researchPaperModel.UploadedCoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    researchPaperModel.UploadedCoverImage.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
-        }
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -193,44 +181,56 @@ namespace COLLATEFINAL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ResearchPapersModel researchPaperModel)
+        public async Task<IActionResult> Edit(int id, ResearchPapersModel model)
         {
-            if (id == null || _context.ResearchPapers == null)
-            {
+            if (id != model.Id)
                 return NotFound();
-            }
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var existing = await _context.ResearchPapers.FindAsync(id);
+            if (existing == null)
+                return NotFound();
+
+            existing.Title = model.Title;
+            existing.Description = model.Description;
+            existing.Authors = model.Authors;
+            existing.PostedDate = model.PostedDate;
+
+            if (model.CoverImage != null && model.CoverImage.Length > 0)
             {
+                var imageExt = Path.GetExtension(model.CoverImage.FileName).ToLowerInvariant();
+                var allowedImageExt = new[] { ".jpg", ".png" };
 
-                string uniqueImg = UploadedFile(researchPaperModel);
-                string uniqueFile = UploadedPDF(researchPaperModel);
-                researchPaperModel.ImageUrl = uniqueImg;
-                researchPaperModel.FileUrl = uniqueFile;
-
-                string imgext = Path.GetExtension(uniqueImg);
-                string fileext = Path.GetExtension(uniqueFile);
-                if (imgext == ".jpg" || imgext == ".png" && fileext == ".pdf")
-
+                if (!allowedImageExt.Contains(imageExt))
                 {
-
-                    _context.Update(researchPaperModel);
-                    _context.SaveChanges();
-                    TempData["success"] = "Research Paper updated successfully";
-
-                    return RedirectToAction(nameof(List));
-
+                    ModelState.AddModelError(nameof(model.CoverImage), "Image must be JPG or PNG.");
+                    return View(model);
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Uploaded file is not recognize. Please upload the correct file type");
-                    TempData["error"] = "Uploaded file is not recognize. Please upload the correct file type";
-                }
-                return RedirectToAction(nameof(Edit));
+
+                existing.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "Uploads/ResearchPapers");
             }
-            ModelState.AddModelError("name", "");
-            TempData["error"] = "Error when updating Research Paper";
-            return View();
+
+            if (model.FileUrl != null && model.FileUrl.Length > 0)
+            {
+                var pdfExt = Path.GetExtension(model.UploadedCoverImage.FileName).ToLowerInvariant();
+
+                if (pdfExt != ".pdf")
+                {
+                    ModelState.AddModelError(nameof(model.UploadedCoverImage), "File must be a PDF.");
+                    return View(model);
+                }
+
+                existing.FileUrl = await _file.SaveFileAsync(model.UploadedCoverImage, "PDF/ResearchPapers");
+            }
+
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Research Paper updated successfully.";
+            return RedirectToAction(nameof(List));
         }
+
 
 
 

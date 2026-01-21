@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using COLLATEWEBAPI.Helpers;
+using COLLATEFINAL.Helpers;
 
 namespace COLLATEWEBAPI.Controllers.Api
 {

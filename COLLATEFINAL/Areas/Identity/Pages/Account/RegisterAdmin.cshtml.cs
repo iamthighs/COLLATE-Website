@@ -2,6 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using COLLATEFINAL.Data;
+using COLLATEFINAL.Helpers;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,15 +21,6 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
-using COLLATEFINAL.Data;
 
 namespace COLLATEFINAL.Areas.Identity.Pages.Account
 {
@@ -33,6 +34,8 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly IWebHostEnvironment _webhost;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly FileHelper _file;
+
 
         public RegisterAdminModel(
             UserManager<AppIdentityUser> userManager,
@@ -41,7 +44,8 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
             ILogger<RegisterAdminModel> logger,
             IEmailSender emailSender,
             IWebHostEnvironment webhost,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            FileHelper file)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -51,6 +55,7 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _webhost = webhost;
             _roleManager = roleManager;
+            _file = file;
         }
 
         /// <summary>
@@ -124,14 +129,13 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
                 var user = CreateUser();
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
-                string uniqueImg = UploadedFile(user);
-                user.ImageUrl = uniqueImg;
+                user.ImageUrl = await _file.SaveFileAsync(user.CoverImage, "UserImages");
                 user.JoinedDate = DateTime.Now;
                 string password = "P@ssw0rd";
                 user.EmailConfirmed = true;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                string imgext = Path.GetExtension(uniqueImg);
+                string imgext = Path.GetExtension(user.ImageUrl);
                 if (imgext == ".jpg" || imgext == ".png")
                 {
                     var result = await _userManager.CreateAsync(user, password);
@@ -160,21 +164,6 @@ namespace COLLATEFINAL.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
-        }
-        private string UploadedFile(AppIdentityUser user)
-        {
-            string uniqueFileName = user.ImageUrl;
-            if (CoverImage != null)
-            {
-                string uploadsFolder = Path.Combine(_webhost.WebRootPath, "UserImages");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    CoverImage.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
         }
 
         private AppIdentityUser CreateUser()

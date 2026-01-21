@@ -1,4 +1,5 @@
 ﻿using COLLATEFINAL.Data;
+using COLLATEFINAL.Helpers;
 using COLLATEFINAL.Models;
 using COLLATEFINAL.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -24,18 +25,21 @@ namespace COLLATEFINAL.Controllers
         private readonly ILogger<AdministrationController> logger;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webhost;
+        private readonly FileHelper _file;
 
         public AdministrationController(RoleManager<IdentityRole> roleManager,
                                         UserManager<AppIdentityUser> userManager,
                                         ILogger<AdministrationController> logger,
                                         ApplicationDbContext context,
-                                        IWebHostEnvironment webhost)
+                                        IWebHostEnvironment webhost,
+                                        FileHelper file)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
             this.logger = logger;
             _context = context;
             _webhost = webhost;
+            _file = file;
         }
 
 
@@ -528,10 +532,9 @@ namespace COLLATEFINAL.Controllers
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
 
-                string uniqueImg = UploadedFile(model);
-                user.ImageUrl = uniqueImg;
+                user.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "UserImages");
 
-                string imgext = Path.GetExtension(uniqueImg);
+                string imgext = Path.GetExtension(user.ImageUrl);
                 if (imgext == ".jpg" || imgext == ".png")
                 {
                     await userManager.UpdateAsync(user);
@@ -552,22 +555,6 @@ namespace COLLATEFINAL.Controllers
 
                 return View(model);
             }
-        }
-
-        private string UploadedFile(EditUserViewModel user)
-        {
-            string uniqueFileName = user.ImageUrl;
-            if (user.CoverImage != null)
-            {
-                string uploadsFolder = Path.Combine(_webhost.WebRootPath, "UserImages");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + user.CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    user.CoverImage.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
         }
 
         [HttpGet]

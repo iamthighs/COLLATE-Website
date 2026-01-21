@@ -1,6 +1,7 @@
 ﻿using COLLATEFINAL.Common;
 using COLLATEFINAL.Data;
 using COLLATEFINAL.Data.Migrations;
+using COLLATEFINAL.Helpers;
 using COLLATEFINAL.Models;
 using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
@@ -23,13 +24,18 @@ namespace COLLATEFINAL.Controllers
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly BulkRepository _bulkRepository;
         private readonly SampleImportService _sampleImportService;
+        private readonly FileHelper _file;
 
-        public PrototypeController(ApplicationDbContext context, IWebHostEnvironment webHost, BulkRepository bulkRepository, SampleImportService sampleImportService)
+        public PrototypeController(ApplicationDbContext context, 
+            IWebHostEnvironment webHost, BulkRepository bulkRepository, 
+            SampleImportService sampleImportService,
+            FileHelper file)
         {
             _context = context;
             webHostEnvironment = webHost;
             _bulkRepository = bulkRepository;
             _sampleImportService = sampleImportService;
+            _file = file;
         }
 
         [AllowAnonymous]
@@ -146,48 +152,38 @@ namespace COLLATEFINAL.Controllers
             return View(videosModel);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(PrototypeModel prototypeModel)
-        {
-            string uniqueFileName = UploadedFile(prototypeModel);
-            string uniqueFilePDF = UploadedPDF(prototypeModel);
-            prototypeModel.ImageUrl = uniqueFileName;
-            prototypeModel.FileUrl = uniqueFilePDF;
-            _context.Add(prototypeModel);
-            _context.SaveChanges();
-            TempData["success"] = "Instructional Material created successfully.";
-            return RedirectToAction(nameof(List));
-
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateLecture(LectureModel lectureModel)
+        public async Task<IActionResult> CreateLecture(LectureModel model)
         {
-            string uniqueFilePDF = UploadedLecturePDF(lectureModel);
-            lectureModel.FileUrl = uniqueFilePDF;
+            if (!ModelState.IsValid)
+                return View(model);
 
-            string imgext = Path.GetExtension(lectureModel.UploadedPDFFile.FileName);
-            if (imgext == ".pdf")
-
+            if (model.UploadedPDFFile == null || model.UploadedPDFFile.Length == 0)
             {
-
-
-                _context.Add(lectureModel);
-                _context.SaveChanges();
-                TempData["success"] = "Lecture created successfully.";
-                return RedirectToAction(nameof(ListLectures));
-
+                ModelState.AddModelError(nameof(model.UploadedPDFFile), "PDF file is required.");
+                return View(model);
             }
-            else
+
+            var allowedExtensions = new[] { ".pdf" };
+            var fileExt = Path.GetExtension(model.UploadedPDFFile.FileName).ToLowerInvariant();
+
+            if (!allowedExtensions.Contains(fileExt))
             {
-                ModelState.AddModelError("", "Uploaded file is not a pdf file!");
-                TempData["error"] = "Uploaded file is not a pdf file!";
+                ModelState.AddModelError(nameof(model.UploadedPDFFile), "Uploaded file must be a PDF.");
+                return View(model);
             }
-            return View();
 
+            model.FileUrl = await _file.SaveFileAsync(model.UploadedPDFFile, "PDF/Lectures");
+
+            await _context.Lectures.AddAsync(model);
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Lecture created successfully.";
+            return RedirectToAction(nameof(ListLectures));
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -201,55 +197,6 @@ namespace COLLATEFINAL.Controllers
 
         }
 
-        private string UploadedFile(PrototypeModel prototypeModel)
-        {
-            string uniqueFileName = prototypeModel.ImageUrl;
-
-            if (prototypeModel.CoverImage != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Uploads");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + prototypeModel.CoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    prototypeModel.CoverImage.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
-        }
-
-        private string UploadedPDF(PrototypeModel prototypeModel)
-        {
-            string uniqueFileName = prototypeModel.FileUrl;
-
-            if (prototypeModel.UploadedCoverImage != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "PDF/Lectures");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + prototypeModel.UploadedCoverImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    prototypeModel.UploadedCoverImage.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
-        }
-        private string UploadedLecturePDF(LectureModel lectureModel)
-        {
-            string uniqueFileName = lectureModel.FileUrl;
-
-            if (lectureModel.UploadedPDFFile != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "PDF/Lectures");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + lectureModel.UploadedPDFFile.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    lectureModel.UploadedPDFFile.CopyTo(fileStream);
-                }
-            }
-            return uniqueFileName;
-        }
         [HttpGet]
         // GET: PrototypeModels/Edit/5
         public IActionResult Edit(int id)
@@ -336,75 +283,48 @@ namespace COLLATEFINAL.Controllers
             return View(videos);
         }
 
-        // POST: PrototypeModels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, PrototypeModel prototypeModel)
-        {
-            if (id == null || _context.Prototypes == null)
-            {
-                return NotFound();
-            }
-            if (ModelState.IsValid)
-            {
 
-                string uniqueImg = UploadedFile(prototypeModel);
-                string uniqueFile = UploadedPDF(prototypeModel);
-                prototypeModel.ImageUrl = uniqueImg;
-                prototypeModel.FileUrl = uniqueFile;
-                _context.Update(prototypeModel);
-                _context.SaveChanges();
-                TempData["success"] = "Instructional Material updated successfully";
-
-                return RedirectToAction(nameof(List));
-            }
-            ModelState.AddModelError("name", "");
-            TempData["error"] = "Error when updating Instructional Material";
-            return View();
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditLecture(int id, LectureModel lectureModel)
+        public async Task<IActionResult> EditLecture(int id, LectureModel model)
         {
-            if (id == null || _context.Lectures == null)
-            {
+            if (id != model.Id)
                 return NotFound();
-            }
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var existingLecture = await _context.Lectures.FindAsync(id);
+            if (existingLecture == null)
+                return NotFound();
+
+            // Update scalar fields only
+            existingLecture.Title = model.Title;
+            existingLecture.Subject = model.Subject;
+            existingLecture.PostedDate = model.PostedDate;
+            // add other properties as needed
+
+            // Optional PDF replacement
+            if (model.UploadedPDFFile != null && model.UploadedPDFFile.Length > 0)
             {
-                string uniqueFile = UploadedLecturePDF(lectureModel);
-                lectureModel.FileUrl = uniqueFile;
+                var fileExt = Path.GetExtension(model.UploadedPDFFile.FileName).ToLowerInvariant();
 
-
-                string imgext = Path.GetExtension(uniqueFile);
-                if (imgext == ".pdf")
-
+                if (fileExt != ".pdf")
                 {
-
-
-                    _context.Update(lectureModel);
-                    _context.SaveChanges();
-                    TempData["success"] = "Lecture updated successfully";
-
-                    return RedirectToAction(nameof(ListLectures));
-
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Uploaded file is not a jpg or png file!");
-                    TempData["error"] = "Uploaded file is not a jpg or png file!";
+                    ModelState.AddModelError(nameof(model.UploadedPDFFile), "Uploaded file must be a PDF.");
+                    return View(model);
                 }
 
-
-                return RedirectToAction(nameof(Edit));
+                existingLecture.FileUrl = await _file.SaveFileAsync(model.UploadedPDFFile, "PDF/Lectures");
             }
-            ModelState.AddModelError("name", "");
-            TempData["error"] = "Error when updating Lecture";
-            return View();
+
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Lecture updated successfully.";
+            return RedirectToAction(nameof(ListLectures));
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

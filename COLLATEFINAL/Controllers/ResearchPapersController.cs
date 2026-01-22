@@ -213,7 +213,7 @@ namespace COLLATEFINAL.Controllers
                 existing.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "Uploads/ResearchPapers");
             }
 
-            if (model.FileUrl != null && model.FileUrl.Length > 0)
+            if (model.UploadedCoverImage != null && model.UploadedCoverImage.Length > 0)
             {
                 var pdfExt = Path.GetExtension(model.UploadedCoverImage.FileName).ToLowerInvariant();
 

@@ -167,14 +167,13 @@ namespace COLLATEFINAL.Controllers
 
 
         [Authorize(Roles = "Administrator,sceneOfficer")]
-        public async Task<IActionResult> List(PaginatedRequest request)
+        public IActionResult List()
         {
 
+            List<EventsModel> eventModels = _context.Events.ToList();
 
-            var eventsModels = await _context.EventsGetPaginated(request.PageNumber, PaginatedRequest.ITEMS_PER_PAGE, request.SearchKeyword ?? string.Empty);
+            return View(eventModels);
 
-            eventsModels.SearchKeyword = request.SearchKeyword;
-            return View(eventsModels);
         }
 
 

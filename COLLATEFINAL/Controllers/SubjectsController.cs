@@ -51,15 +51,13 @@ namespace COLLATEFINAL.Controllers
             return View(subjectModels);
 
         }
-
-        public async Task<IActionResult> List(PaginatedRequest request)
+        public IActionResult List()
         {
 
+            List<SubjectModel> subjectModels = _context.Subjects.ToList();
 
-            var subjectModels = await _context.SubjectsGetPaginated(request.PageNumber, PaginatedRequest.ITEMS_PER_PAGE, request.SearchKeyword ?? string.Empty);
-
-            subjectModels.SearchKeyword = request.SearchKeyword;
             return View(subjectModels);
+
         }
 
         [HttpGet]

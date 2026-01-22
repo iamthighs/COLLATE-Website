@@ -77,26 +77,23 @@ namespace COLLATEFINAL.Controllers
             prototypeModels.SearchKeyword = request.SearchKeyword;
             return View(prototypeModels);
         }
-
-        public async Task<IActionResult> ListLectures(PaginatedRequest request)
+        public IActionResult ListLectures()
         {
 
+            List<LectureModel> lectureModels = _context.Lectures.ToList();
 
-            var lectureModels = await _context.LecturesGetPaginated(request.PageNumber, PaginatedRequest.ITEMS_PER_PAGE, request.SearchKeyword ?? string.Empty);
-
-            lectureModels.SearchKeyword = request.SearchKeyword;
             return View(lectureModels);
-        }
 
-        public async Task<IActionResult> ListVideos(PaginatedRequest request)
+        }
+        public IActionResult ListVideos()
         {
 
+            List<VideosModel> videoModels = _context.Videos.ToList();
 
-            var videosModels = await _context.VideosGetPaginated(request.PageNumber, PaginatedRequest.ITEMS_PER_PAGE, request.SearchKeyword ?? string.Empty);
+            return View(videoModels);
 
-            videosModels.SearchKeyword = request.SearchKeyword;
-            return View(videosModels);
         }
+
 
         [HttpGet]
         public IActionResult Create()

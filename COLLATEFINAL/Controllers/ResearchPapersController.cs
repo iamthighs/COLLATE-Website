@@ -192,8 +192,9 @@ namespace COLLATEFINAL.Controllers
             var existing = await _context.ResearchPapers.FindAsync(id);
             if (existing == null)
                 return NotFound();
-
+            existing.Header = model.Header;
             existing.Title = model.Title;
+            existing.YearSec = model.YearSec;
             existing.Description = model.Description;
             existing.Authors = model.Authors;
             existing.PostedDate = model.PostedDate;

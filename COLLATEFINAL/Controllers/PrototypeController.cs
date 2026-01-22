@@ -325,27 +325,30 @@ namespace COLLATEFINAL.Controllers
             return RedirectToAction(nameof(ListLectures));
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditVideos(int id, VideosModel videosModel)
+        public async Task<IActionResult> EditVideos(int id, VideosModel videosModel)
         {
-            if (id == null || _context.Videos == null)
-            {
+            if (id != videosModel.Id)
                 return NotFound();
-            }
-            if (ModelState.IsValid)
-            {
-                
-                _context.Update(videosModel);
-                _context.SaveChanges();
-                TempData["success"] = "Videos updated successfully";
 
-                return RedirectToAction(nameof(ListVideos));
-            }
-            ModelState.AddModelError("name", "");
-            TempData["error"] = "Error when updating Video";
-            return View();
+            if (!ModelState.IsValid)
+                return View(videosModel);
+
+            var existingLecture = await _context.Videos.FindAsync(id);
+            if (existingLecture == null)
+                return NotFound();
+
+            existingLecture.Title = videosModel.Title;
+            existingLecture.Subject = videosModel.Subject;
+            existingLecture.PostedDate = videosModel.PostedDate;
+            existingLecture.IFrame = videosModel.IFrame;
+
+
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Videos updated successfully";
+            return RedirectToAction(nameof(ListVideos));
         }
 
 

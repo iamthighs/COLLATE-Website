@@ -147,7 +147,11 @@ namespace COLLATEFINAL.Controllers
                 return NotFound();
 
             // Update scalar fields only (avoid overposting)
+            existing.GroupName = model.GroupName;
             existing.Title = model.Title;
+            existing.YearSec = model.YearSec;
+            existing.PostedDate = model.PostedDate;
+            existing.VidLink = model.VidLink;
             existing.Description = model.Description;
             existing.DevelopersName = model.DevelopersName;
             existing.GameLink= model.GameLink;

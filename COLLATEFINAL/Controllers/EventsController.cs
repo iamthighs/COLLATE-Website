@@ -290,6 +290,10 @@ namespace COLLATEFINAL.Controllers
 
             existingEvent.Title = eventsModel.Title;
             existingEvent.Objectives = eventsModel.Objectives;
+            existingEvent.Category = eventsModel.Category;
+            existingEvent.Content = eventsModel.Content;
+            existingEvent.IsDone = eventsModel.IsDone;
+            existingEvent.IFrame = eventsModel.IFrame;
             existingEvent.PostedDate = eventsModel.PostedDate;
 
             if (eventsModel.CoverImage != null && eventsModel.CoverImage.Length > 0)

@@ -69,21 +69,47 @@
                 <div class="card card-scrollable">
                     <div class="card-body" style="max-height:50rem">
                         <table id="datatablesSimple">
+                            @if (Model.TotalCount == 0)
+                            {
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Date Created</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                            }
+                            else
+                            {
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Date Created</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Result)
+                                    {
 
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Date Created</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="subjectsTableBody">
-                                <tr>
-                                    <td colspan="4" class="text-center">Loading...</td>
-                                </tr>
-                            </tbody>
-
+                                        <tr>
+                                            <td>
+                                                <span class="badge bg-blue-soft text-blue">@item.Code</span>
+                                            </td>
+                                            <td>@item.Subject</td>
+                                            <td>@item.PostedDate.ToString("dddd, dd MMMM yyyy")</td>
+                                            <td>
+                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" asp-action="Edit" asp-controller="Subjects" asp-route-id="@item.Id"><i data-feather="edit"></i></a>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="@item.Id" data-name="@item.Code" data-title="Delete Subject" data-action="/Subjects/Delete">
+                                                    <i data-feather="trash-2"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            }
                         </table>
                     </div>
                 </div>
@@ -99,67 +125,5 @@
 
 @section Scripts {
     <script src="~/js/CustomScripts.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 }
 
-<script>
-
-        document.addEventListener("DOMContentLoaded", () => {
-        const tbody = document.getElementById('subjectsTableBody');
-        if (!tbody) {
-            console.error("subjectsTableBody element not found!");
-            return;
-        }
-
-        const apiBase = 'https://collate-web-api/collate/subjects';
-
-        async function loadSubjects() {
-            try {
-                const res = await fetch(`${apiBase}?pageNumber=1&pageSize=100`);
-                if (!res.ok) throw new Error("Failed to fetch subjects");
-                const data = await res.json();
-
-                tbody.innerHTML = ''; // clear table first
-
-                if (!data || data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center">No subjects found</td></tr>';
-                    return;
-                }
-
-                data.forEach(item => {
-                    const tr = document.createElement('tr');
-
-                    tr.innerHTML = `
-                        <td><span class="badge bg-blue-soft text-blue">${item.code}</span></td>
-                        <td>${item.subject}</td>
-                        <td>${new Date(item.postedDate).toLocaleDateString(undefined, {
-                            weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
-                        })}</td>
-                        <td>
-                            <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="/subjects/edit/${item.id}">
-                                <i data-feather="edit"></i>
-                            </a>
-                            <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="${item.id}" data-name="${item.subject}" data-title="Delete Subject" data-action="/Subjects/Delete">
-                                <i data-feather="trash-2"></i>
-                            </button>
-                        </td>
-                    `;
-
-                    // append row
-                    tbody.appendChild(tr);
-
-                });
-
-                feather.replace(); // render icons
-            } catch (err) {
-                console.error(err);
-                toastr.error("Failed to load subjects");
-            }
-        }
-
-        // initial load
-        loadSubjects();
-    });
-
-</script>

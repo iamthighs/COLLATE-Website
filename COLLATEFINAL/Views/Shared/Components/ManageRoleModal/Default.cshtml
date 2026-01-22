@@ -83,7 +83,7 @@
             bootstrapModal.show();
 
             try {
-                const res = await fetch(`https://localhost:7050/collate/admin/roles/${roleId}`);
+                const res = await fetch(`https://localhost:443/collate/admin/roles/${roleId}`);
                 if (!res.ok) throw new Error("Failed to fetch role");
 
                 const role = await res.json();

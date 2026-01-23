@@ -256,6 +256,20 @@ namespace COLLATEFINAL.Controllers
 
             return RedirectToAction("List");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultiple(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var gameAndWebDevs = _context.GameAndWebDevelopments.Where(x => ids.Contains(x.Id));
+
+            _context.GameAndWebDevelopments.RemoveRange(gameAndWebDevs);
+            _context.SaveChanges();
+
+            return Ok();
+        }
 
     }
 }

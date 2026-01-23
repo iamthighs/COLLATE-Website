@@ -317,5 +317,19 @@ namespace COLLATEFINAL.Controllers
 
             return RedirectToAction("List");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultiple(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var researchPapers = _context.ResearchPapers.Where(x => ids.Contains(x.Id));
+
+            _context.ResearchPapers.RemoveRange(researchPapers);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

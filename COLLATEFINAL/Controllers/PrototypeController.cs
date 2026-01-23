@@ -514,5 +514,33 @@ namespace COLLATEFINAL.Controllers
 
             return RedirectToAction(nameof(ListVideos));
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultipleLectures(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var lectures = _context.Lectures.Where(x => ids.Contains(x.Id));
+
+            _context.Lectures.RemoveRange(lectures);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultipleVideos(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var videos = _context.Videos.Where(x => ids.Contains(x.Id));
+
+            _context.Videos.RemoveRange(videos);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

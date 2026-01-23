@@ -675,7 +675,34 @@ namespace COLLATEFINAL.Controllers
 
             return RedirectToAction("EditRole", new { Id = roleId });
         }
-        
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultipleRoles(List<string> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var roles = _context.Roles.Where(x => ids.Contains(x.Id));
+
+            _context.Roles.RemoveRange(roles);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultipleUsers(List<string> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var users = _context.Users.Where(x => ids.Contains(x.Id));
+
+            _context.Users.RemoveRange(users);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

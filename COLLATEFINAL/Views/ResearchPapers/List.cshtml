@@ -41,6 +41,15 @@
             <div class="container-xl px-4">
                 <partial name="_Notification" />
                 <div class="card card-scrollable">
+                    <div class="card-header">
+                        <input type="checkbox" id="selectAll" /> Select All
+                        <button id="btnDeleteSelected"
+                                class="btn btn-datatable btn-icon btn-transparent-dark float-end"
+                                data-delete-url="/ResearchPapers/DeleteMultiple"
+                                disabled>
+                            <i data-feather="trash-2"></i>
+                        </button>
+                    </div>
                     <div class="card-body" style="max-height:50rem">
                         <table id="datatablesSimple">
                             @if (Model.Count() == 0)
@@ -62,8 +71,6 @@
                                     <tr>
                                         <th>Category</th>
                                         <th>Title</th>
-                                        <th>Year & Sec</th>
-                                        <th>Authors</th>
                                         <th>Date Created</th>
                                         <th>Actions</th>
                                     </tr>
@@ -77,14 +84,15 @@
                                                 <span class="badge bg-blue-soft text-blue">@item.Header</span>
                                             </td>
                                             <td>@item.Title</td>
-                                            <td>@item.YearSec</td>
-                                            <td>@item.Authors</td>
                                             <td>@item.PostedDate.ToString("dddd, dd MMMM yyyy")</td>
                                             <td>
                                                 <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" asp-action="Edit" asp-controller="ResearchPapers" asp-route-id="@item.Id"><i data-feather="edit"></i></a>
-                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="@item.Id" data-name="@item.Title" data-title="Delete Research Paper" data-action="/ResearchPapers/Delete">
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal me-2" data-id="@item.Id" data-name="@item.Title" data-title="Delete Research Paper" data-action="/ResearchPapers/Delete">
                                                     <i data-feather="trash-2"></i>
                                                 </button>
+                                                <input id="@item.Title" type="checkbox"
+                                                       class="btn row-checkbox"
+                                                       value="@item.Id" />
                                             </td>
                                         </tr>
                                     }

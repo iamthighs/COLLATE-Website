@@ -403,5 +403,20 @@ namespace COLLATEFINAL.Controllers
 
             return RedirectToAction("List");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultiple(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var subjects = _context.Subjects.Where(x => ids.Contains(x.Id));
+
+            _context.Subjects.RemoveRange(subjects);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

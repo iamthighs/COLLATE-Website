@@ -67,6 +67,15 @@
                 <partial name="_Notification" />
 
                 <div class="card card-scrollable">
+                    <div class="card-header">
+                        <input type="checkbox" id="selectAll" /> Select All
+                        <button id="btnDeleteSelected"
+                                class="btn btn-datatable btn-icon btn-transparent-dark float-end"
+                                data-delete-url="/Subjects/DeleteMultiple"
+                                disabled>
+                            <i data-feather="trash-2"></i>
+                        </button>
+                    </div>
                     <div class="card-body" style="max-height:50rem">
                         <table id="datatablesSimple">
                             @if (Model.Count() == 0)
@@ -102,9 +111,12 @@
                                             <td>@item.PostedDate.ToString("dddd, dd MMMM yyyy")</td>
                                             <td>
                                                 <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" asp-action="Edit" asp-controller="Subjects" asp-route-id="@item.Id"><i data-feather="edit"></i></a>
-                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="@item.Id" data-name="@item.Code" data-title="Delete Subject" data-action="/Subjects/Delete">
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal me-2" data-id="@item.Id" data-name="@item.Code" data-title="Delete Subject" data-action="/Subjects/Delete">
                                                     <i data-feather="trash-2"></i>
                                                 </button>
+                                                <input id="@item.Code" type="checkbox"
+                                                       class="btn row-checkbox"
+                                                       value="@item.Id" />
                                             </td>
                                         </tr>
                                     }

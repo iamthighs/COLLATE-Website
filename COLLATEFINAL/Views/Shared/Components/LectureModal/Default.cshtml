@@ -1,0 +1,112 @@
+﻿<div class="modal fade" id="lectureModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="lectureModalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-progress">
+                    <div class="card-body" style="height: 500px; overflow-y: auto;" id="pdfContainer">
+                        <!-- PDF pages will be appended here -->
+                    </div>
+                    <div class="progress rounded-0">
+                        <div class="progress-bar bg-success" role="progressbar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="pdfReadTime" class="text-muted small">Estimating read time…</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = new bootstrap.Modal(document.getElementById("lectureModal"));
+        const modalTitle = document.getElementById("lectureModalTitle");
+        const pdfContainer = document.getElementById("pdfContainer");
+        const progressBar = document.querySelector(".card-progress .progress-bar");
+        const readTimeEl = document.getElementById("pdfReadTime");
+
+        const AVG_WORDS_PER_MIN = 200;
+
+        document.body.addEventListener("click", async (e) => {
+            const button = e.target.closest(".open-lecture-modal");
+            if (!button) return;
+
+            const { title, src } = button.dataset;
+            modalTitle.textContent = title;
+
+            pdfContainer.innerHTML = ""; // Clear previous
+            progressBar.style.width = "0%";
+            progressBar.setAttribute("aria-valuenow", 0);
+            readTimeEl.textContent = "Estimating read time…";
+
+            modal.show();
+
+            // Load PDF
+            const pdf = await pdfjsLib.getDocument(src).promise;
+            const totalPages = pdf.numPages;
+
+            // Calculate read time
+            let totalWords = 0;
+            const pagePromises = [];
+            for (let i = 1; i <= totalPages; i++) {
+                pagePromises.push(pdf.getPage(i));
+            }
+
+            const pages = await Promise.all(pagePromises);
+
+            for (let page of pages) {
+                const content = await page.getTextContent();
+                const text = content.items.map(item => item.str).join(" ");
+                totalWords += text.split(/\s+/).length;
+            }
+
+            const minutes = Math.max(1, Math.ceil(totalWords / AVG_WORDS_PER_MIN));
+            readTimeEl.textContent = `Estimated reading time: ${minutes} min (${totalPages} pages)`;
+
+            // Render each page as canvas inside container
+            for (let page of pages) {
+                const viewport = page.getViewport({ scale: 1.2 });
+                const canvas = document.createElement("canvas");
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                canvas.style.display = "block";
+                canvas.style.marginBottom = "10px";
+
+                pdfContainer.appendChild(canvas);
+                const ctx = canvas.getContext("2d");
+                await page.render({ canvasContext: ctx, viewport }).promise;
+            }
+
+            // Scroll-based progress
+            function updateProgress() {
+                const scrollTop = pdfContainer.scrollTop;
+                const scrollHeight = pdfContainer.scrollHeight - pdfContainer.clientHeight;
+                const percent = scrollHeight > 0 ? Math.round((scrollTop / scrollHeight) * 100) : 0;
+                progressBar.style.width = percent + "%";
+                progressBar.setAttribute("aria-valuenow", percent);
+            }
+
+            pdfContainer.addEventListener("scroll", updateProgress);
+        });
+
+        // Clear modal on close
+        document.getElementById("lectureModal").addEventListener("hidden.bs.modal", () => {
+            console.log("clear modal on close")
+            pdfContainer.innerHTML = "";
+            pdfContainer.scrollTop = 0;
+            progressBar.style.width = "0%";
+            progressBar.setAttribute("aria-valuenow", 0);
+            readTimeEl.textContent = "";
+        });
+    });
+
+</script>
+

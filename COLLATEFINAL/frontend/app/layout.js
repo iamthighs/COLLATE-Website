@@ -3,7 +3,7 @@ import FeatherInitializer from '../components/FeatherInitializer'
 import SidebarToggleInitializer from '../components/SidebarToggleInitializer'
 
 export const metadata = {
-  title: 'COLLATE - Home Page'
+  title: 'COLLATE'
 }
 
 export default function RootLayout({ children }) {

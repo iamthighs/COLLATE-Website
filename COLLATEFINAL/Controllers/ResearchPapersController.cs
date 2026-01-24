@@ -1,8 +1,8 @@
-﻿using COLLATEFINAL.Common;
-using COLLATEFINAL.Data;
+﻿using COLLATE.Helpers.Common;
+using COLLATE.Helpers.Data;
 using COLLATEFINAL.Data.Migrations;
-using COLLATEFINAL.Helpers;
-using COLLATEFINAL.Models;
+using COLLATE.Helpers.Helpers;
+using COLLATE.Helpers.Models;
 using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -192,8 +192,9 @@ namespace COLLATEFINAL.Controllers
             var existing = await _context.ResearchPapers.FindAsync(id);
             if (existing == null)
                 return NotFound();
-
+            existing.Header = model.Header;
             existing.Title = model.Title;
+            existing.YearSec = model.YearSec;
             existing.Description = model.Description;
             existing.Authors = model.Authors;
             existing.PostedDate = model.PostedDate;
@@ -212,7 +213,7 @@ namespace COLLATEFINAL.Controllers
                 existing.ImageUrl = await _file.SaveFileAsync(model.CoverImage, "Uploads/ResearchPapers");
             }
 
-            if (model.FileUrl != null && model.FileUrl.Length > 0)
+            if (model.UploadedCoverImage != null && model.UploadedCoverImage.Length > 0)
             {
                 var pdfExt = Path.GetExtension(model.UploadedCoverImage.FileName).ToLowerInvariant();
 
@@ -315,6 +316,20 @@ namespace COLLATEFINAL.Controllers
             }
 
             return RedirectToAction("List");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultiple(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var researchPapers = _context.ResearchPapers.Where(x => ids.Contains(x.Id));
+
+            _context.ResearchPapers.RemoveRange(researchPapers);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

@@ -5,7 +5,7 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using COLLATEFINAL.Data;
+using COLLATE.Helpers.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

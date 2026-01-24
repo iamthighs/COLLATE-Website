@@ -1,4 +1,4 @@
-﻿@model List<COLLATEFINAL.ViewModels.UserWithRolesViewModel>
+﻿@model List<COLLATE.Helpers.ViewModels.UserWithRolesViewModel>
 
 @{
     ViewData["Title"] = "All Users";
@@ -42,6 +42,15 @@
             <!-- Main page content-->
             <div class="container-fluid px-4">
                 <div class="card card-scrollable">
+                    <div class="card-header">
+                        <input type="checkbox" id="selectAll" /> <label for="selectAll">Select All</label>
+                        <button id="btnDeleteSelected"
+                                class="btn btn-datatable btn-icon btn-transparent-dark float-end"
+                                data-delete-url="/Administration/DeleteMultipleUsers"
+                                disabled>
+                            <i data-feather="trash-2"></i>
+                        </button>
+                    </div>
                     <div class="card-body" style="max-height:50rem">
                         <table id="datatablesSimple">
                             @if (Model.Count() == 0)
@@ -107,9 +116,12 @@
                                             <td>@user.User.JoinedDate.ToString("dddd, dd MMMM yyyy")</td>
                                             <td>
                                                 <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" asp-action="EditUser" asp-controller="Administration" asp-route-id="@user.User.Id"><i data-feather="edit"></i></a>
-                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="@user.User.Id" data-name="@user.User.UserName" data-title="Delete User" data-action="/Administration/DeleteUser">
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal me-2" data-id="@user.User.Id" data-name="@user.User.UserName" data-title="Delete User" data-action="/Administration/DeleteUser">
                                                     <i data-feather="trash-2"></i>
                                                 </button>
+                                                <input id="@user.User.UserName" type="checkbox"
+                                                       class="btn row-checkbox"
+                                                       value="@user.User.Id" />
                                             </td>
                                         </tr>
                                     }

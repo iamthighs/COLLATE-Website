@@ -1,8 +1,8 @@
-﻿using COLLATEFINAL.Common;
-using COLLATEFINAL.Data;
+﻿using COLLATE.Helpers.Common;
+using COLLATE.Helpers.Data;
 using COLLATEFINAL.Data.Migrations;
-using COLLATEFINAL.Helpers;
-using COLLATEFINAL.Models;
+using COLLATE.Helpers.Helpers;
+using COLLATE.Helpers.Models;
 using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -147,7 +147,11 @@ namespace COLLATEFINAL.Controllers
                 return NotFound();
 
             // Update scalar fields only (avoid overposting)
+            existing.GroupName = model.GroupName;
             existing.Title = model.Title;
+            existing.YearSec = model.YearSec;
+            existing.PostedDate = model.PostedDate;
+            existing.VidLink = model.VidLink;
             existing.Description = model.Description;
             existing.DevelopersName = model.DevelopersName;
             existing.GameLink= model.GameLink;
@@ -251,6 +255,20 @@ namespace COLLATEFINAL.Controllers
             }
 
             return RedirectToAction("List");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultiple(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var gameAndWebDevs = _context.GameAndWebDevelopments.Where(x => ids.Contains(x.Id));
+
+            _context.GameAndWebDevelopments.RemoveRange(gameAndWebDevs);
+            _context.SaveChanges();
+
+            return Ok();
         }
 
     }

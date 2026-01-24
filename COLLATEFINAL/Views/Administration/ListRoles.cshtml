@@ -42,6 +42,15 @@
         <!-- Main page content-->
         <div class="container-fluid px-4">
             <div class="card card-scrollable">
+                <div class="card-header">
+                    <input type="checkbox" id="selectAll" /> <label for="selectAll">Select All</label>
+                    <button id="btnDeleteSelected"
+                            class="btn btn-datatable btn-icon btn-transparent-dark float-end"
+                            data-delete-url="/Administration/DeleteMultipleRoles"
+                            disabled>
+                        <i data-feather="trash-2"></i>
+                    </button>
+                </div>
                 <div class="card-body" style="max-height:50rem">
                     <table id="datatablesSimple">
                         <thead class="text-center">
@@ -66,17 +75,19 @@
                                         }
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-light text-primary open-modal" data-id="@role.Id">
+                                        <button class="btn btn-sm btn-light text-primary open-modal me-2" data-id="@role.Id">
                                             <i class="me-1" data-feather="user"></i>
                                             Manage Role
                                         </button>
-                                        <button class="btn btn-datatable btn-icon btn-transparent-dark open-edit-role-modal" data-id="@role.Id" data-name="@role.Name">
+                                        <button class="btn btn-datatable btn-icon btn-transparent-dark open-edit-role-modal me-2" data-id="@role.Id" data-name="@role.Name">
                                             <i data-feather="edit"></i>
                                         </button>
-                                            <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="@role.Id" data-name="@role.Name" data-title="Delete Role" data-action="/Administration/DeleteRole">
+                                            <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal me-2" data-id="@role.Id" data-name="@role.Name" data-title="Delete Role" data-action="/Administration/DeleteRole">
                                             <i data-feather="trash-2"></i>
                                         </button>
-
+                                        <input id="@role.Name" type="checkbox"
+                                                class="btn row-checkbox"
+                                                value="@role.Id" />
                                     </td>
                                 </tr>
 

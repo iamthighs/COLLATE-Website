@@ -2,11 +2,11 @@
 using Azure.Security.KeyVault.Secrets;
 using COLLATEFINAL.Controllers;
 using COLLATEFINAL.Data;
-using COLLATEFINAL.Helpers;
-using COLLATEFINAL.Models;
+using COLLATE.Helpers.Helpers;
+using COLLATE.Helpers.Models;
 using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
-using COLLATEFINAL.ViewModels;
+using COLLATE.Helpers.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
 using System.Configuration;
+using COLLATE.Helpers.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 /*

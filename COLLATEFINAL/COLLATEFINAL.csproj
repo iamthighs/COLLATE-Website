@@ -31,4 +31,8 @@
     <Folder Include="wwwroot\Uploads\Subjects\" />
   </ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\COLLATE.Helpers\COLLATE.Helpers.csproj" />
+	</ItemGroup>
+
 </Project>

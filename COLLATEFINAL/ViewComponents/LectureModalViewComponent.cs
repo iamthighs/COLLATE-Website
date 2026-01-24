@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace COLLATEFINAL.ViewComponents
 {
-    public class ManageRoleModalViewComponent : ViewComponent
+    public class LectureModalViewComponent : ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {

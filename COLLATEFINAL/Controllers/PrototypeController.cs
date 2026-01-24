@@ -1,11 +1,11 @@
-﻿using COLLATEFINAL.Common;
-using COLLATEFINAL.Data;
+﻿using COLLATE.Helpers.Common;
+using COLLATE.Helpers.Data;
 using COLLATEFINAL.Data.Migrations;
-using COLLATEFINAL.Helpers;
-using COLLATEFINAL.Models;
+using COLLATE.Helpers.Helpers;
+using COLLATE.Helpers.Models;
 using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
-using COLLATEFINAL.ViewModels;
+using COLLATE.Helpers.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -77,26 +77,23 @@ namespace COLLATEFINAL.Controllers
             prototypeModels.SearchKeyword = request.SearchKeyword;
             return View(prototypeModels);
         }
-
-        public async Task<IActionResult> ListLectures(PaginatedRequest request)
+        public IActionResult ListLectures()
         {
 
+            List<LectureModel> lectureModels = _context.Lectures.ToList();
 
-            var lectureModels = await _context.LecturesGetPaginated(request.PageNumber, PaginatedRequest.ITEMS_PER_PAGE, request.SearchKeyword ?? string.Empty);
-
-            lectureModels.SearchKeyword = request.SearchKeyword;
             return View(lectureModels);
-        }
 
-        public async Task<IActionResult> ListVideos(PaginatedRequest request)
+        }
+        public IActionResult ListVideos()
         {
 
+            List<VideosModel> videoModels = _context.Videos.ToList();
 
-            var videosModels = await _context.VideosGetPaginated(request.PageNumber, PaginatedRequest.ITEMS_PER_PAGE, request.SearchKeyword ?? string.Empty);
+            return View(videoModels);
 
-            videosModels.SearchKeyword = request.SearchKeyword;
-            return View(videosModels);
         }
+
 
         [HttpGet]
         public IActionResult Create()
@@ -325,27 +322,30 @@ namespace COLLATEFINAL.Controllers
             return RedirectToAction(nameof(ListLectures));
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditVideos(int id, VideosModel videosModel)
+        public async Task<IActionResult> EditVideos(int id, VideosModel videosModel)
         {
-            if (id == null || _context.Videos == null)
-            {
+            if (id != videosModel.Id)
                 return NotFound();
-            }
-            if (ModelState.IsValid)
-            {
-                
-                _context.Update(videosModel);
-                _context.SaveChanges();
-                TempData["success"] = "Videos updated successfully";
 
-                return RedirectToAction(nameof(ListVideos));
-            }
-            ModelState.AddModelError("name", "");
-            TempData["error"] = "Error when updating Video";
-            return View();
+            if (!ModelState.IsValid)
+                return View(videosModel);
+
+            var existingLecture = await _context.Videos.FindAsync(id);
+            if (existingLecture == null)
+                return NotFound();
+
+            existingLecture.Title = videosModel.Title;
+            existingLecture.Subject = videosModel.Subject;
+            existingLecture.PostedDate = videosModel.PostedDate;
+            existingLecture.IFrame = videosModel.IFrame;
+
+
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Videos updated successfully";
+            return RedirectToAction(nameof(ListVideos));
         }
 
 
@@ -513,6 +513,34 @@ namespace COLLATEFINAL.Controllers
             }
 
             return RedirectToAction(nameof(ListVideos));
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultipleLectures(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var lectures = _context.Lectures.Where(x => ids.Contains(x.Id));
+
+            _context.Lectures.RemoveRange(lectures);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultipleVideos(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var videos = _context.Videos.Where(x => ids.Contains(x.Id));
+
+            _context.Videos.RemoveRange(videos);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

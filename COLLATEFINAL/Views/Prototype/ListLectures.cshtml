@@ -1,4 +1,4 @@
-﻿@model LecturesPaginatedResult<LectureModel>
+﻿@model IEnumerable<LectureModel>
 
 @{
     ViewData["Title"] = "List";
@@ -48,9 +48,18 @@
             <div class="container-xl px-4">
                 <partial name="_Notification" />
                 <div class="card card-scrollable">
+                    <div class="card-header">
+                        <input type="checkbox" id="selectAll" /> <label for="selectAll">Select All</label>
+                        <button id="btnDeleteSelected"
+                                class="btn btn-datatable btn-icon btn-transparent-dark float-end"
+                                data-delete-url="/Prototype/DeleteMultipleLectures"
+                                disabled>
+                            <i data-feather="trash-2"></i>
+                        </button>
+                    </div>
                     <div class="card-body" style="max-height:50rem">
                         <table id="datatablesSimple">
-                            @if (Model.TotalCount == 0)
+                            @if (Model.Count() == 0)
                             {
                                 <thead>
                                     <tr>
@@ -72,7 +81,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model.Result)
+                                    @foreach (var item in Model)
                                     {
 
                                         <tr>
@@ -83,9 +92,12 @@
                                             <td>@item.PostedDate.ToString("dddd, dd MMMM yyyy")</td>
                                             <td>
                                                 <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" asp-action="EditLecture" asp-controller="Prototype" asp-route-id="@item.Id"><i data-feather="edit"></i></a>
-                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal" data-id="@item.Id" data-name="@item.Title" data-title="Delete Lecture" data-action="/Prototype/DeleteConfirmedLecture">
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark open-delete-modal me-2" data-id="@item.Id" data-name="@item.Title" data-title="Delete Lecture" data-action="/Prototype/DeleteConfirmedLecture">
                                                     <i data-feather="trash-2"></i>
                                                 </button>
+                                                <input id="@item.Title" type="checkbox"
+                                                       class="btn row-checkbox"
+                                                       value="@item.Id" />
                                             </td>
                                         </tr>
                                     }

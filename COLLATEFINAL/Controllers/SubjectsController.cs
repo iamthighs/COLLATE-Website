@@ -1,11 +1,11 @@
-﻿using COLLATEFINAL.Common;
-using COLLATEFINAL.Data;
+﻿using COLLATE.Helpers.Common;
+using COLLATE.Helpers.Data;
 using COLLATEFINAL.Data.Migrations;
-using COLLATEFINAL.Helpers;
-using COLLATEFINAL.Models;
+using COLLATE.Helpers.Helpers;
+using COLLATE.Helpers.Models;
 using COLLATEFINAL.Repository;
 using COLLATEFINAL.Services;
-using COLLATEFINAL.ViewModels;
+using COLLATE.Helpers.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -51,15 +51,13 @@ namespace COLLATEFINAL.Controllers
             return View(subjectModels);
 
         }
-
-        public async Task<IActionResult> List(PaginatedRequest request)
+        public IActionResult List()
         {
 
+            List<SubjectModel> subjectModels = _context.Subjects.ToList();
 
-            var subjectModels = await _context.SubjectsGetPaginated(request.PageNumber, PaginatedRequest.ITEMS_PER_PAGE, request.SearchKeyword ?? string.Empty);
-
-            subjectModels.SearchKeyword = request.SearchKeyword;
             return View(subjectModels);
+
         }
 
         [HttpGet]
@@ -404,6 +402,21 @@ namespace COLLATEFINAL.Controllers
             }
 
             return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMultiple(List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest();
+
+            var subjects = _context.Subjects.Where(x => ids.Contains(x.Id));
+
+            _context.Subjects.RemoveRange(subjects);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

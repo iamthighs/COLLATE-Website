@@ -1,4 +1,4 @@
-﻿@model COLLATEFINAL.ViewModels.EditSubjViewModel
+﻿@model EditSubjViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,11 +11,12 @@
     <partial name="_NewSidenav" />
     <div id="layoutSidenav_content">
         <main>
-            <header class="py-10 mb-4 bg-green">
+            <header class="py-10 mb-4 bg-img-cover mySlides overlay overlay-50 overlay-success" style="background-image: url('/COLLATE.png')">
                 <div class="container-xl px-4">
-                    <div class="text-center">
-                        <h1 class="text-white">Collection of Latest Laboratory Activities, Trainings & Engagements</h1>
-                        <p class="lead mb-0 text-white-50">A project website of SCENE organization designed to provide secure and efficient data management for Computer Engineering students.</p>
+                    <div class="text-center z-1">
+                        <img src="~/Logo PNG1.png" style="height:100px" />
+                        <h1 class="text-white fw-bolder">Collection of Latest Laboratory Activities, Trainings & Engagements</h1>
+                        <p class="lead mb-0 text-white">A project website of SCENE organization designed to provide secure and efficient data management for Computer Engineering students.</p>
                     </div>
                 </div>
             </header>
@@ -39,35 +40,78 @@
 
 
                             </div>
+                            <div class="card shadow mb-4">
+                                <div class="card-header text-dark small d-flex justify-content-between align-items-center">
+                                    @Model.Subject • Total : @Model.Lectures.Count() lectures
 
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="progress">
+                                        <div id="lectureProgress"
+                                             class="progress-bar bg-primary"
+                                             role="progressbar"
+                                             style="width: 0%"
+                                             aria-valuemin="0"
+                                             aria-valuemax="100"
+                                             aria-valuenow="0">
+                                            0%
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
 
                             <div class="row">
-                                @foreach (var user in Model.Lectures)
+                                @for (int i = 0; i < Model.Lectures.Count; i++)
                                 {
+                                    var user = Model.Lectures[i];
+
                                     <div class="col-lg-12">
-                                        <div class="card lift mb-2">
-                                            <div class="card-header small">
-                                                @user.Title
+                                        <div class="card lift mb-2 lecture-card"
+                                             data-index="@i"
+                                             data-lecture-id="@user.Id">
+
+                                            <div class="card-header text-dark small d-flex justify-content-between align-items-center">
+                                                <span>@user.Title</span>
+
+                                                <label class="form-check mb-0">
+                                                    <input type="checkbox"
+                                                           class="form-check-input lecture-checkbox" />
+                                                    <span class="small text-dark">Done</span>
+                                                </label>
                                             </div>
-                                            <div class="card-body">
-                                                <iframe class="col-sm-12" src="@Url.Content($"~/PDF/Lectures/{@user.FileUrl}")" height="250" allow="autoplay" allowFullScreen="true" frameborder="1">
-                                                </iframe>
+
+                                            <div class="card-body lecture-content">
+                                                <div class="d-flex justify-content-center">
+                                                    <button type="submit" class="btn btn-success-soft text-success open-lecture-modal" data-title="@user.Title" data-src="@Url.Content($"~/PDF/Lectures/{user.FileUrl}")">
+                                                        Start grinding
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body lecture-completed d-none text-center bg-light">
+                                                <div class="py-4">
+                                                    <i class="feather-check-circle text-success mb-2"></i>
+                                                    <h6 class="mb-1 text-success">Lecture Completed</h6>
+                                                    <small class="text-muted">You can revisit this lecture anytime.</small>
+                                                </div>
                                             </div>
                                             <div class="card-footer">
-                                                <a href="@Url.Content($"~/PDF/Lectures/{@user.FileUrl}")" class="btn btn-primary" download>
-                                                    Download
-                                                </a>
                                                 <p class="float-right small">
                                                     @user.PostedDate.ToString("MMM dd, yyyy")
                                                 </p>
+                                                
+
                                             </div>
 
-
                                         </div>
-
                                     </div>
                                 }
                             </div>
+
+
 
                         </div>
 
@@ -129,8 +173,126 @@
                 </div>
 
             </div>
-
+            @await Component.InvokeAsync("LectureModal")
         </main>
         <partial name="_NewFooter" />
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            const $cards = $('.lecture-card');
+            const $progressBar = $('#lectureProgress');
+
+            /* --------------------------------
+               CORE UPDATE (single source)
+            -------------------------------- */
+            function updateUI() {
+
+                let allowNext = true;
+                let completedCount = 0;
+
+                $cards.each(function () {
+                    const $card = $(this);
+                    const $checkbox = $card.find('.lecture-checkbox');
+
+                    const $contentBody = $card.find('.lecture-content');
+                    const $completedBody = $card.find('.lecture-completed');
+
+                    if (allowNext) {
+                        $checkbox.prop('disabled', false);
+
+                        if ($checkbox.is(':checked')) {
+                            // Completed state
+                            $contentBody.addClass('d-none');
+                            $completedBody.removeClass('d-none');
+                            completedCount++;
+                        } else {
+                            // Active but not completed
+                            $contentBody.removeClass('d-none');
+                            $completedBody.addClass('d-none');
+                        }
+
+                    } else {
+                        // Locked state
+                        $checkbox.prop({
+                            checked: false,
+                            disabled: true
+                        });
+
+                        $contentBody.addClass('d-none');
+                        $completedBody.addClass('d-none');
+                    }
+
+                    allowNext = $checkbox.is(':checked');
+                });
+
+                updateProgress(completedCount);
+                persistProgress();
+            }
+
+
+            /* --------------------------------
+               PROGRESS BAR
+            -------------------------------- */
+            function updateProgress(completed) {
+                const total = $cards.length;
+                const percent = total === 0
+                    ? 0
+                    : Math.round((completed / total) * 100);
+
+                $progressBar
+                    .css('width', percent + '%')
+                    .attr('aria-valuenow', percent)
+                    .text(percent + '%');
+            }
+
+            /* --------------------------------
+               EVENTS
+            -------------------------------- */
+            $(document).on('change', '.lecture-checkbox', updateUI);
+
+            /* --------------------------------
+               PERSISTENCE (OPTIONAL)
+            -------------------------------- */
+            function persistProgress() {
+                const completedIds = $cards
+                    .filter(function () {
+                        return $(this).find('.lecture-checkbox').is(':checked');
+                    })
+                    .map(function () {
+                        return $(this).data('lecture-id');
+                    })
+                    .get();
+
+                localStorage.setItem('lectureProgress', JSON.stringify(completedIds));
+            }
+
+            function restoreProgress() {
+                const stored = localStorage.getItem('lectureProgress');
+                if (!stored) return;
+
+                const completedIds = JSON.parse(stored);
+
+                $cards.each(function () {
+                    const id = $(this).data('lecture-id');
+                    if (completedIds.includes(id)) {
+                        $(this).find('.lecture-checkbox').prop('checked', true);
+                    }
+                });
+            }
+
+            /* --------------------------------
+               INIT
+            -------------------------------- */
+            restoreProgress();
+            updateUI();
+
+        });
+    </script>
+    
+
+}
+

@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { SidebarNavClass, Pages } from '../utils/manageSidebar'
+import { SidebarNavClass, Pages } from '../../utils/manageSidebar'
 import { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabaseClient'
+import { supabase } from '../../lib/supabase/supabaseClient'
 
 export default function Sidenav(){
   const pathname = usePathname()

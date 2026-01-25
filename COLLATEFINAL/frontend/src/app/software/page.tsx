@@ -1,10 +1,10 @@
-import Navbar from '../../components/Navbar'
-import Sidenav from '../../components/Sidenav'
-import Footer from '../../components/Footer'
+import Navbar from '../../components/layout/Navbar'
+import Sidenav from '../../components/layout/Sidenav'
+import Footer from '../../components/layout/Footer'
 export const metadata = {
-  title: 'COLLATE - Subjects'
+  title: 'COLLATE - Software Projects'
 }
-export default function SubjectsPage(){
+export default function SoftwarePage(){
   return (
     <>
       <style>{`.img-smlogo-modal{height:5rem;width:5rem;}`}</style>

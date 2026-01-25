@@ -11,14 +11,11 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [profileFile, setProfileFile] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
-    // Prevent multiple submissions
     if (loading) return;
     setError(null);
 
@@ -34,50 +31,28 @@ export default function RegisterPage() {
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
-        email_confirm: true
       });
-      console.log(signUpError)
+      console.log("signUpError", signUpError);
       if (signUpError) throw signUpError;
 
       const userId = data.user.id;
-
-      // 2️⃣ Upload profile picture
-      let profileUrl = null;
-      if (profileFile) {
-        const ext = profileFile.name.split(".").pop();
-        // Use timestamp to avoid conflicts
-        const fileName = `${userId}_${Date.now()}.${ext}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from("profiles")
-          .upload(fileName, profileFile, { cacheControl: "3600", upsert: false });
-        console.log(uploadError)
-        if (uploadError) throw uploadError;
-
-        const { data: publicUrlData } = supabase.storage
-          .from("profiles")
-          .getPublicUrl(fileName);
-
-        profileUrl = publicUrlData.publicUrl;
-      }
-
-      // 3️⃣ Insert user profile
+      console.log(userId)
+      // 2️⃣ Insert user profile (without image)
       const { error: profileError } = await supabase.from("profiles").insert([
         {
           id: userId,
           first_name: firstName,
           last_name: lastName,
           email,
-          avatar_url: profileUrl,
+          avatar_url: null, // no image upload
         },
       ]);
-      console.log(profileError)
+      console.log("profileError", profileError);
       if (profileError) throw profileError;
 
-      // 4️⃣ Redirect to login
+      // 3️⃣ Redirect to login
       router.push("/login");
     } catch (err) {
-      console.log(err.message)
       setError(err.message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -122,7 +97,7 @@ export default function RegisterPage() {
                     <div className="card-body p-5">
                       <div className="text-center small text-muted mb-4">...or enter your information below.</div>
 
-                      <form encType="multipart/form-data" onSubmit={handleRegister}>
+                      <form onSubmit={handleRegister}>
                         {/* Name row */}
                         <div className="row gx-3">
                           <div className="col-md-6">
@@ -193,31 +168,6 @@ export default function RegisterPage() {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Profile upload */}
-                        <div className="row gx-3">
-                          <div className="col-md-6">
-                            <div className="mb-3 text-center">
-                              <img
-                                className="img-account-profile rounded-circle"
-                                src={profileFile ? URL.createObjectURL(profileFile) : "/new/assets/img/demo/user-placeholder.svg"}
-                                alt="Profile preview"
-                              />
-                            </div>
-                          </div>
-
-                          <div className="col-md-6 my-5">
-                            <div className="mb-3">
-                              <label className="text-gray-600 small">Upload Profile Picture</label>
-                              <input
-                                className="form-control text-center"
-                                type="file"
-                                accept="image/png, image/jpeg"
-                                onChange={(e) => setProfileFile(e.target.files[0])}
                               />
                             </div>
                           </div>

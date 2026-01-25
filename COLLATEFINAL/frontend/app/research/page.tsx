@@ -8,7 +8,6 @@ export default function ResearchPage(){
   return (
     <>
       <style>{`.img-smlogo-modal{height:5rem;width:5rem;}`}</style>
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
       <Navbar />
       <div id="layoutSidenav">
         <Sidenav />

@@ -2,13 +2,12 @@ import Navbar from '../../components/Navbar'
 import Sidenav from '../../components/Sidenav'
 import Footer from '../../components/Footer'
 export const metadata = {
-  title: 'COLLATE - Software Projects'
+  title: 'COLLATE - Subjects'
 }
-export default function SoftwarePage(){
+export default function SubjectsPage(){
   return (
     <>
       <style>{`.img-smlogo-modal{height:5rem;width:5rem;}`}</style>
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
       <Navbar />
       <div id="layoutSidenav">
         <Sidenav />

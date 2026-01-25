@@ -1,6 +1,6 @@
 import Script from 'next/script'
-import FeatherInitializer from '../components/FeatherInitializer'
-import SidebarToggleInitializer from '../components/SidebarToggleInitializer'
+import FeatherInitializer from '../components/client/FeatherInitializer'
+import SidebarToggleInitializer from '../components/client/SidebarToggleInitializer'
 
 export const metadata = {
   title: 'COLLATE'

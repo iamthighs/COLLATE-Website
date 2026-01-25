@@ -9,7 +9,6 @@ export default function AboutPage(){
   return (
     <>
       <style>{`.img-smlogo-modal{height:5rem;width:5rem;}`}</style>
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
       <Navbar />
       <div id="layoutSidenav">
         <Sidenav />
@@ -91,8 +90,15 @@ export default function AboutPage(){
         </div>
       </div>
 
-      {/* Feedback Modal */}
-      <div className="modal fade" id="feedbackModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div
+        className="modal fade"
+        id="feedbackModal"
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -110,7 +116,7 @@ export default function AboutPage(){
                     <input name="FullName" className="form-control mb-2" placeholder="Enter your Name" />
                   </div>
                   <div className="col-12">
-                    <textarea name="Feedback" className="form-control" rows="4" placeholder="Type your suggestions here..."></textarea>
+                    <textarea name="Feedback" className="form-control" rows={4} placeholder="Type your suggestions here..."></textarea>
                   </div>
                 </div>
               </div>

@@ -155,7 +155,7 @@ export default function LoginPage() {
                     {/* Footer */}
                     <div className="card-body px-5 py-4">
                       <div className="small text-center">
-                        New user? <a href="/register">Create an account!</a>
+                        New user? <a href="/auth/register">Create an account!</a>
                       </div>
                     </div>
                   </div>

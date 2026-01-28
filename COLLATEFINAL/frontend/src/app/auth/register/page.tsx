@@ -51,7 +51,7 @@ export default function RegisterPage() {
       if (profileError) throw profileError;
 
       // 3️⃣ Redirect to login
-      router.push("/login");
+      router.push("/auth/login");
     } catch (err) {
       setError(err.message || "Something went wrong. Please try again.");
     } finally {
@@ -197,7 +197,7 @@ export default function RegisterPage() {
                     {/* Footer */}
                     <div className="card-body px-5 py-4">
                       <div className="small text-center">
-                        Have an account? <a href="/login">Sign in!</a>
+                        Have an account? <a href="/auth/login">Sign in!</a>
                       </div>
                     </div>
                   </div>

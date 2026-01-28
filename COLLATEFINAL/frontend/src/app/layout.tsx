@@ -1,6 +1,7 @@
 import Script from 'next/script'
 import FeatherInitializer from '../components/client/FeatherInitializer'
 import SidebarToggleInitializer from '../components/client/SidebarToggleInitializer'
+import { AuthProvider } from "../context/AuthContext";
 
 export const metadata = {
   title: 'COLLATE'
@@ -18,7 +19,9 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
       </head>
       <body className="nav-fixed">
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
         <FeatherInitializer />
         <SidebarToggleInitializer />
 

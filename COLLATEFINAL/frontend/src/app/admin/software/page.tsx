@@ -3,9 +3,9 @@ import Sidenav from '../../../components/layout/Sidenav'
 import Footer from '../../../components/layout/Footer'
 import MainHeader from '../../../components/layout/MainHeader'
 export const metadata = {
-  title: 'COLLATE - Research Papers'
+  title: 'COLLATE - List Software Projects'
 }
-export default function ResearchPage(){
+export default function ListSoftwareProjectsPage(){
   return (
     <>
       <style>{`.img-smlogo-modal{height:5rem;width:5rem;}`}</style>
@@ -14,7 +14,7 @@ export default function ResearchPage(){
         <Sidenav />
         <div id="layoutSidenav_content">
           <main>
-              <MainHeader/>
+            <MainHeader/>
           </main>
           <Footer />
         </div>

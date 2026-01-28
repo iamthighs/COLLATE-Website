@@ -17,28 +17,57 @@ export const Pages = {
   Projects: 'Projects'
 }
 
-// Derive a logical active page name from the current pathname.
-export function getActivePageFromPath(pathname){
-  if(!pathname) return Pages.Home
-  if(pathname === '/' || pathname === '') return Pages.Home
-  const seg = pathname.split('/').filter(Boolean)[0] || ''
-  const map = {
-    '': Pages.Home,
-    'about': Pages.About,
-    'subjects': Pages.Subjects,
-    'projects': Pages.Projects,
-    'dashboard': Pages.Dashboard,
-    'prototype': Pages.Prototype,
-    'software': Pages.GameAndWebDev,
-    'research': Pages.ResearchPapers,
-    'events': Pages.Events,
-    'admin': Pages.Administration,
-    'administration': Pages.Administration
+export function getActivePageFromPath(pathname: string) {
+  if (!pathname || pathname === '/') return Pages.Home
+
+  const segments = pathname.split('/').filter(Boolean)
+  const [root, sub] = segments
+
+  if (root === 'category') {
+    switch (sub) {
+      case 'subjects':
+        return Pages.Subjects
+      case 'software':
+        return Pages.GameAndWebDev
+      case 'research':
+        return Pages.ResearchPapers
+      case 'events':
+        return Pages.Events
+      default:
+        return Pages.Home
+    }
   }
-  return map[seg] || (seg.charAt(0).toUpperCase() + seg.slice(1))
+
+  if (root === 'admin') {
+    switch (sub) {
+      case 'subjects':
+        return Pages.CMSPrototype
+      case 'software':
+        return Pages.CMSGameAndWebDev
+      case 'research':
+        return Pages.CMSResearchPapers
+      case 'events':
+        return Pages.CMSEvents
+      case 'users':
+        return Pages.ListUsers
+      case 'roles':
+        return Pages.ListRoles
+      default:
+        return Pages.Home
+    }
+  }
+
+  const map: Record<string, string> = {
+    about: Pages.About,
+    dashboard: Pages.Dashboard,
+    privacy: Pages.Home,
+    terms: Pages.Home,
+  }
+
+  return map[root] ?? Pages.Home
 }
 
-// Mirror the ASP.NET helper: returns 'active' when page matches the active page.
+
 export function SidebarNavClass(pathname, page){
   const activePage = getActivePageFromPath(pathname)
   return String(activePage).toLowerCase() === String(page).toLowerCase() ? 'active' : ''

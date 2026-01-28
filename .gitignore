@@ -1,0 +1,65 @@
+# --------------------
+# Global ignores
+# --------------------
+.DS_Store
+*.log
+*.user
+*.suo
+*.cache
+.vscode/
+.idea/
+.vs/
+# --------------------
+# Node / Next.js (COLLATEFINAL/frontend)
+# --------------------
+COLLATEFINAL/frontend/node_modules/
+COLLATEFINAL/frontend/.next/
+COLLATEFINAL/frontend/out/
+COLLATEFINAL/frontend/dist/
+COLLATEFINAL/frontend/.env
+COLLATEFINAL/frontend/.env.local
+COLLATEFINAL/frontend/.env.development.local
+COLLATEFINAL/frontend/.env.test.local
+COLLATEFINAL/frontend/.env.production.local
+COLLATEFINAL/frontend/npm-debug.log*
+COLLATEFINAL/frontend/yarn-debug.log*
+COLLATEFINAL/frontend/yarn-error.log*
+
+# Tailwind build output (optional)
+COLLATEFINAL/frontend/*.css.map
+
+# --------------------
+# ASP.NET Core / .NET (COLLATEWEBAPI & COLLATE.Helpers)
+# --------------------
+# Build folders
+COLLATEFINAL/bin/
+COLLATEFINAL/obj/
+COLLATEWEBAPI/bin/
+COLLATEWEBAPI/obj/
+COLLATE.Helpers/bin/
+COLLATE.Helpers/obj/
+
+# Publish output
+COLLATEWEBAPI/Publish/
+
+# User/IDE files
+COLLATEWEBAPI/*.user
+COLLATEWEBAPI/*.suo
+COLLATEWEBAPI/.vs/
+COLLATE.Helpers/*.user
+COLLATE.Helpers/.vs/
+_ReSharper*/
+*.DotSettings.user
+*.dotCover
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Ignore local secrets
+COLLATEWEBAPI/appsettings.Local.json
+COLLATEWEBAPI/appsettings.Development.json
+COLLATE.Helpers/appsettings.Local.json
+
+# Rider IDE
+.idea/

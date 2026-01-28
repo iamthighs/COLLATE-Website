@@ -1,4 +1,5 @@
 import Script from 'next/script'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import FeatherInitializer from '../components/client/FeatherInitializer'
 import SidebarToggleInitializer from '../components/client/SidebarToggleInitializer'
 import { AuthProvider } from "../context/AuthContext";
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           {children}
         </AuthProvider>
+        <SpeedInsights />
         <FeatherInitializer />
         <SidebarToggleInitializer />
 

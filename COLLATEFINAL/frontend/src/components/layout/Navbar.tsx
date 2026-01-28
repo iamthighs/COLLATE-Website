@@ -16,6 +16,25 @@ export default function Navbar() {
 
   if (loading) return null;
 
+  function getInitials(firstName: string, lastName: string) {
+    const f = firstName?.[0] || "";
+    const l = lastName?.[0] || "";
+    return (f + l).toUpperCase();
+  }
+
+  function getInitialAvatar(firstName: string, lastName: string) {
+    const initials = getInitials(firstName, lastName);
+    const bgColor = "#1dac6b"; 
+    const textColor = "#ffffff";
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+      <rect width="100" height="100" fill="${bgColor}"/>
+      <text x="50%" y="50%" dy=".35em" font-family="Arial" font-size="40" fill="${textColor}" text-anchor="middle">${initials}</text>
+    </svg>`;
+
+    return `data:image/svg+xml;base64,${btoa(svg)}`;
+  }
+
   return (
     <nav className="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white">
       <button className="btn btn-icon btn-transparent-dark me-2" id="sidebarToggle">
@@ -40,7 +59,7 @@ export default function Navbar() {
             >
               <img
                 className="img-fluid"
-                src={profile.avatar_url || "/default-user.png"}
+                src={profile.avatar_url || getInitialAvatar(profile.first_name, profile.last_name)}
                 alt="User"
               />
             </button>
@@ -53,7 +72,7 @@ export default function Navbar() {
               <h6 className="dropdown-header d-flex align-items-center">
                 <img
                   className="dropdown-user-img"
-                  src={profile.avatar_url || "/default-user.png"}
+                  src={profile.avatar_url || getInitialAvatar(profile.first_name, profile.last_name)}
                   alt="User"
                 />
                 <div className="dropdown-user-details">

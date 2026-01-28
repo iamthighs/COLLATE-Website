@@ -17,5 +17,7 @@ declare global {
       info?: (msg: string, title?: string) => void
       warning?: (msg: string, title?: string) => void
     }
+
+    simpleDatatables: any;
   }
 }

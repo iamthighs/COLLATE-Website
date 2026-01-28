@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
         <Script src="/new/js/datatables/datatables-simple-demo.js" strategy="afterInteractive" />
 
         {/* Optional libraries loaded from CDN or local public files */}
-        <Script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" strategy="afterInteractive" />
+        <Script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" strategy="beforeInteractive" />
         <Script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" strategy="afterInteractive" />
 
       </body>

@@ -9,7 +9,7 @@ export const metadata = {
 export default function PrivacyPage(){
   return (
     <>
-      <style>{`.img-smlogo-modal{height:5rem;width:5rem;}`}</style>
+      
       <Navbar />
       <div id="layoutSidenav">
         <Sidenav />

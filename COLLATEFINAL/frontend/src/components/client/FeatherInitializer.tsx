@@ -1,34 +1,25 @@
-"use client"
-import { useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+"use client";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
-export default function FeatherInitializer(){
-  const pathname = usePathname()
+export default function FeatherInitializer() {
+  const pathname = usePathname();
 
-  useEffect(()=>{
-    function replaceOnce(){
-      try{
-        if(typeof window !== 'undefined' && window.feather && typeof window.feather.replace === 'function'){
-          window.feather.replace()
-        }
-      }catch(e){/* ignore */}
-    }
+  useEffect(() => {
+    if (!window.feather) return;
 
-    // If feather is already loaded, run immediately; otherwise poll briefly until available.
-    if(typeof window !== 'undefined'){
-      if(window.feather && typeof window.feather.replace === 'function'){
-        replaceOnce()
-      }else{
-        const id = setInterval(()=>{
-          if(window.feather && typeof window.feather.replace === 'function'){
-            replaceOnce()
-            clearInterval(id)
-          }
-        }, 50)
-        return ()=>clearInterval(id)
+
+    const interval = setInterval(() => {
+      const icons = document.querySelectorAll("i[data-feather]");
+
+      if (icons.length > 0) {
+        window.feather.replace();
+        clearInterval(interval);
       }
-    }
-  }, [pathname])
+    }, 50); 
 
-  return null
+    return () => clearInterval(interval);
+  }, [pathname]);
+
+  return null;
 }

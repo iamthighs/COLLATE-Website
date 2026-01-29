@@ -4,14 +4,23 @@ import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "../../lib/supabase/supabaseClient";
 import { useAuth } from "../../context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { user, profile, loading } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
+    const router = useRouter();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Logout failed:", error);
+      return;
+    }
+
+    router.replace("/auth/login");
   };
 
   if (loading) return null;

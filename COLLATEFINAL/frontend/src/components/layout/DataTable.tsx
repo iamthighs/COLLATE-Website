@@ -39,6 +39,19 @@ export default function DataTable<T extends { id: string }>({
   return (
     <>
       <div className="card card-scrollable">
+          <div className="card-header">
+          <input className="form-check-input me-1" type="checkbox" id="selectAll" />
+          <label htmlFor="selectAll">Select All</label>
+
+          <button
+            id="btnDeleteSelected"
+            className="btn btn-datatable btn-icon btn-transparent-dark float-end"
+            data-delete-url="/Subjects/DeleteMultiple"
+            disabled
+          >
+            <i data-feather="trash-2" />
+          </button>
+        </div>
         <div className="card-body" style={{ maxHeight: "50rem" }}>
           <table className="table" id="datatablesSimple">
             <thead>

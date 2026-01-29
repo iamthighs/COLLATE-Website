@@ -4,13 +4,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { SidebarNavClass, Pages } from '../../utils/manageSidebar'
 import { useAuth } from "../../context/AuthContext";
+import SidenavSkeleton from './SidenavSkeleton';
 
 export default function Sidenav(){
   
   const pathname = usePathname()
   const { user, profile, loading } = useAuth()
 
-  if (loading) return null
+    if (loading) return <SidenavSkeleton />;
 
   return (
     <div id="layoutSidenav_nav">

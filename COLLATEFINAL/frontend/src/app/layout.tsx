@@ -2,7 +2,7 @@ import Script from 'next/script'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import FeatherInitializer from '../components/client/FeatherInitializer'
 import SidebarToggleInitializer from '../components/client/SidebarToggleInitializer'
-import { AuthProvider } from "../context/AuthContext";
+import { AuthProvider, useAuth } from "../context/AuthContext";
 
 export const metadata = {
   title: 'COLLATE'
@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
         <Script src="https://code.jquery.com/jquery-3.7.1.min.js" strategy="beforeInteractive" />
         <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" strategy="beforeInteractive" />
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" strategy="afterInteractive" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" strategy="afterInteractive" />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" strategy="beforeInteractive" />
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" strategy="afterInteractive" />
 
         {/* Local theme scripts copied from the ASP.NET app */}

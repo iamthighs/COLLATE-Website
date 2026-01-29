@@ -1,16 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
-import { supabase } from "../../lib/supabase/supabaseClient";
+import { useEffect, useState, useRef, useMemo } from "react";
+import { supabase } from "../../lib/supabase/client";
 import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/navigation";
+import NavbarSkeleton from "./NavbarSkeleton";
 
 export default function Navbar() {
   const { user, profile, loading } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
     const router = useRouter();
+
+
+    const avatarSrc = useMemo(() => {
+    if (!profile) return null;
+    return profile.avatar_url;
+  }, [profile]);
+
+    if (loading) return <NavbarSkeleton />;
 
   const handleLogout = async () => {
 
@@ -23,7 +32,6 @@ export default function Navbar() {
     router.replace("/auth/login");
   };
 
-  if (loading) return null;
 
   function getInitials(firstName: string, lastName: string) {
     const f = firstName?.[0] || "";

@@ -1,25 +1,29 @@
 "use client";
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
 
 export default function FeatherInitializer() {
-  const pathname = usePathname();
-
   useEffect(() => {
     if (!window.feather) return;
 
+    // Replace any existing icons immediately
+    window.feather.replace();
 
-    const interval = setInterval(() => {
-      const icons = document.querySelectorAll("i[data-feather]");
-
-      if (icons.length > 0) {
-        window.feather.replace();
-        clearInterval(interval);
+    // Observe DOM changes
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.addedNodes.length > 0) {
+          window.feather.replace();
+        }
       }
-    }, 50); 
+    });
 
-    return () => clearInterval(interval);
-  }, [pathname]);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return null;
 }

@@ -2,7 +2,8 @@ type Loader = () => Promise<unknown>;
 
 export async function loadWithProgress(
   loaders: Loader[],
-  onProgress: (p: number) => void
+  onProgress: (p: number) => void,
+  overallTimeoutMs: number = 5000 // max 20s for all loaders
 ) {
   const total = loaders.length;
   let done = 0;
@@ -17,29 +18,39 @@ export async function loadWithProgress(
     onProgress(progress);
   };
 
-  await Promise.all(
-    loaders.map(async (loader, index) => {
+  // Wrap all loaders with individual timeouts
+  const wrappedLoaders = loaders.map((loader, index) =>
+    (async () => {
       try {
         console.log(`[AppBootstrap] Loader ${index + 1} started`);
-        // add a timeout fail-safe of 10s per loader
+
         await Promise.race([
           loader(),
-          new Promise<void>((resolve) =>
-            setTimeout(() => {
-              console.warn(`[AppBootstrap] Loader ${index + 1} timed out`);
-              resolve();
-            }, 10000)
-          ),
+          new Promise<void>((resolve) => setTimeout(() => {
+            console.warn(`[AppBootstrap] Loader ${index + 1} timed out`);
+            resolve();
+          }, 10000)) // 10s per loader
         ]);
+
         console.log(`[AppBootstrap] Loader ${index + 1} finished`);
       } catch (err) {
         console.error(`[AppBootstrap] Loader ${index + 1} failed`, err);
       } finally {
         tick();
       }
-    })
+    })()
   );
 
-  console.log("[AppBootstrap] All loaders resolved");
+  // Overall timeout for all loaders
+  await Promise.race([
+    Promise.all(wrappedLoaders),
+    new Promise<void>((resolve) => setTimeout(() => {
+      console.warn("[AppBootstrap] Overall loader timeout reached");
+      onProgress(100); // force progress to 100%
+      resolve();
+    }, overallTimeoutMs))
+  ]);
+
+  console.log("[AppBootstrap] All loaders resolved or timed out");
   console.groupEnd();
 }

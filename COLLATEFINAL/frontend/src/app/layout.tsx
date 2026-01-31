@@ -3,6 +3,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import FeatherInitializer from '../components/client/FeatherInitializer'
 import SidebarToggleInitializer from '../components/client/SidebarToggleInitializer'
 import { AuthProvider, useAuth } from "../context/AuthContext";
+import AppBootstrap from '../components/client/AppBootstrap';
 
 export const metadata = {
   title: 'COLLATE'
@@ -21,7 +22,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="nav-fixed">
         <AuthProvider>
-          {children}
+          <AppBootstrap>{children}</AppBootstrap>
         </AuthProvider>
         <SpeedInsights />
         <FeatherInitializer />
